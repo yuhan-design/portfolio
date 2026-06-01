@@ -25,7 +25,12 @@
 	var offcanvasMenu = function() {
 
 		$('#page').prepend('<div id="fh5co-offcanvas" />');
-		$('#page').prepend('<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle fh5co-nav-white"><i></i></a>');
+		if (!$('.js-fh5co-nav-toggle').length) {
+			var $toggle = $('<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" aria-label="開啟選單"><i></i></a>');
+			$('.fh5co-nav .container').first().append($toggle);
+		} else {
+			$('.js-fh5co-nav-toggle').appendTo($('.fh5co-nav .container').first());
+		}
 		var clone1 = $('.menu-1 > ul').clone();
 		$('#fh5co-offcanvas').append(clone1);
 		var clone2 = $('.menu-2 > ul').clone();
@@ -171,17 +176,55 @@
 
 	//  Category
 	
-    $('.toggles button').click(function(){
+    function setActiveFilterChip($btn) {
+      $('.pf-filter-bar .pf-chip')
+        .removeClass('is-active')
+        .attr({ 'aria-pressed': 'false', 'aria-selected': 'false' });
+      $btn.addClass('is-active').attr({ 'aria-pressed': 'true', 'aria-selected': 'true' });
+    }
+
+    function updateFilterCounts() {
+      var $posts = $('.posts .post');
+      if (!$posts.length || !$('.pf-filter-bar').length) {
+        return;
+      }
+
+      var $showAll = $('#showall');
+      if ($showAll.length) {
+        $showAll.find('.pf-chip-count').text($posts.length);
+        $showAll.attr('aria-label', 'Show All，' + $posts.length + ' 件作品');
+      }
+
+      $('.pf-filter-bar .pf-chip').not('#showall').each(function () {
+        var id = this.id;
+        var count = $('.posts .post.' + id).length;
+        var $chip = $(this);
+        $chip.find('.pf-chip-count').text(count);
+        var label = $chip.find('.pf-chip-label').text();
+        $chip.attr('aria-label', label + '，' + count + ' 件作品');
+      });
+    }
+
+    updateFilterCounts();
+
+    var $filterChips = $('.pf-filter-bar .pf-chip');
+    if ($filterChips.length) {
+      $filterChips.filter('#showall').addClass('is-active').attr('aria-pressed', 'true');
+    }
+
+    $('.pf-filter-bar .pf-chip').click(function(){
       var get_id = this.id;
-      var get_current = $('.posts .' + get_id);
-  
-        $('.post').not( get_current ).hide(500);
-        get_current.show(500);
-    });
-    
-    
-    $('#showall').click(function() {
+      var $btn = $(this);
+      setActiveFilterChip($btn);
+
+      if (get_id === 'showall') {
         $('.post').show(500);
+        return;
+      }
+
+      var get_current = $('.posts .' + get_id);
+      $('.post').not(get_current).hide(500);
+      get_current.show(500);
     });
 
 

@@ -1,0 +1,1037 @@
+/**
+ * Portfolio redesign — minimal tech UI
+ * Uses CSS variables from css/themes/theme-*.css
+ */
+
+:root {
+  --pf-font: "Inter", "Noto Sans TC", "Microsoft JhengHei", 微軟正黑體, sans-serif;
+  --pf-font-mono: "Inter", ui-monospace, monospace;
+  --pf-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --pf-nav-height: 72px;
+}
+
+/* —— Animated site background —— */
+.pf-site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--pf-bg);
+}
+
+.pf-site-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 42% at 0% 0%, var(--pf-glow-warm, rgba(254, 243, 199, 0.4)), transparent 58%),
+    radial-gradient(ellipse 50% 38% at 100% 0%, var(--pf-glow-cool, rgba(241, 245, 249, 0.9)), transparent 55%),
+    radial-gradient(ellipse 45% 35% at 50% 100%, rgba(241, 245, 249, 0.5), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, var(--pf-bg) 42%, var(--pf-bg-alt) 100%);
+  animation: pf-bg-shift 24s ease-in-out infinite alternate;
+}
+
+.pf-site-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--pf-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--pf-grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 55% at 50% 30%, black 8%, transparent 72%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@keyframes pf-bg-shift {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.92;
+    transform: scale(1.02);
+  }
+}
+
+/* —— Base typography —— */
+body.pf-body {
+  font-family: var(--pf-font);
+  font-weight: 400;
+  color: var(--pf-text-muted);
+  background: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pf-body h1,
+.pf-body h2,
+.pf-body h3,
+.pf-body h4,
+.pf-body h5,
+.pf-body h6,
+.pf-body figure {
+  color: var(--pf-text-heading);
+  font-family: var(--pf-font);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.pf-body p {
+  color: var(--pf-text-muted);
+  line-height: 1.75;
+}
+
+.pf-body a {
+  color: var(--pf-accent);
+  transition: color var(--pf-transition), opacity var(--pf-transition);
+}
+
+.pf-body a:hover,
+.pf-body a:focus {
+  color: var(--pf-accent-hover);
+  text-decoration: none;
+}
+
+.pf-body ::selection {
+  color: #fff;
+  background: var(--pf-selection-bg);
+}
+
+/* —— Layout —— */
+.pf-body #page {
+  padding-top: var(--pf-nav-height) !important;
+  background: transparent;
+}
+
+/* —— Navigation —— */
+.pf-body .fh5co-nav {
+  background: var(--pf-nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--pf-nav-border);
+  box-shadow: var(--pf-shadow);
+  padding: 12px 0;
+  z-index: 1000;
+}
+
+.pf-body .fh5co-nav .container {
+  position: relative;
+}
+
+.pf-body .fh5co-nav ul li a {
+  color: var(--pf-text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  padding: 24px 14px;
+  transition: color var(--pf-transition);
+}
+
+.pf-body .fh5co-nav ul li a:hover,
+.pf-body .fh5co-nav ul li a:focus,
+.pf-body .fh5co-nav ul li a:active {
+  color: var(--pf-accent-hover);
+}
+
+.pf-body .fh5co-nav ul li.active > a {
+  color: var(--pf-accent) !important;
+}
+
+.pf-body .fh5co-nav ul li.has-dropdown .dropdown {
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  box-shadow: var(--pf-shadow-hover);
+  border-radius: var(--pf-radius);
+  padding: 12px 16px;
+}
+
+.pf-body .fh5co-nav ul li.has-dropdown .dropdown:before {
+  border-bottom-color: var(--pf-surface);
+}
+
+.pf-body .fh5co-nav ul li.has-dropdown .dropdown li a {
+  color: var(--pf-text-muted);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.pf-body .fh5co-nav ul li.has-dropdown .dropdown li a:hover {
+  color: var(--pf-accent-hover);
+}
+
+.pf-body #fh5co-logo img {
+  max-height: 36px;
+  width: auto;
+  filter: none;
+  opacity: 0.92;
+}
+
+/* —— Hero KV（淡色光暈 · 白灰系） —— */
+.pf-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pf-hero__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pf-hero__glow::before,
+.pf-hero__glow::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  opacity: 0.85;
+  animation: pf-hero-glow-drift 20s ease-in-out infinite alternate;
+}
+
+.pf-hero__glow::before {
+  width: min(520px, 70vw);
+  height: min(380px, 50vh);
+  top: -12%;
+  left: -8%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--pf-glow-warm, rgba(254, 243, 199, 0.7)) 0%,
+    rgba(255, 255, 255, 0.2) 45%,
+    transparent 72%
+  );
+}
+
+.pf-hero__glow::after {
+  width: min(480px, 65vw);
+  height: min(360px, 48vh);
+  top: -8%;
+  right: -10%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--pf-glow-cool, rgba(241, 245, 249, 0.95)) 0%,
+    rgba(226, 232, 240, 0.35) 40%,
+    transparent 70%
+  );
+  animation-delay: -10s;
+}
+
+.pf-hero__glow-bloom {
+  position: absolute;
+  width: min(640px, 90vw);
+  height: min(280px, 40vh);
+  left: 50%;
+  bottom: -5%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(248, 250, 252, 0.5) 50%,
+    transparent 75%
+  );
+  filter: blur(40px);
+  opacity: 0.9;
+}
+
+@keyframes pf-hero-glow-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(2%, 3%) scale(1.05);
+  }
+}
+
+.pf-hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.pf-hero-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pf-text-muted);
+  margin-bottom: 1rem;
+}
+
+.pf-hero-title {
+  font-size: clamp(2.25rem, 5.5vw, 3.25rem);
+  font-weight: 700;
+  color: var(--pf-text-heading);
+  margin-bottom: 1rem;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.pf-hero-desc {
+  font-size: 1.05rem;
+  max-width: 520px;
+  margin: 0 auto 2rem;
+  color: var(--pf-text-muted);
+  line-height: 1.75;
+}
+
+.pf-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.pf-stat {
+  text-align: center;
+  padding: 1rem 1.25rem;
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius);
+  box-shadow: var(--pf-shadow);
+  min-width: 120px;
+  transition: transform var(--pf-transition), box-shadow var(--pf-transition);
+}
+
+.pf-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--pf-shadow-hover);
+}
+
+.pf-stat-num {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--pf-text-heading);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.pf-stat-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pf-accent-soft);
+  margin-top: 0.35rem;
+}
+
+.pf-hero-actions {
+  margin-top: 1.75rem;
+}
+
+.pf-hero-actions .btn {
+  background: transparent !important;
+  border-color: var(--pf-border) !important;
+  color: var(--pf-text-muted) !important;
+  box-shadow: none !important;
+  font-size: 12px;
+}
+
+.pf-hero-actions .btn:hover {
+  background: var(--pf-surface) !important;
+  border-color: var(--pf-accent-soft) !important;
+  color: var(--pf-text-heading) !important;
+}
+
+/* —— Section headings —— */
+.pf-body .gtco-heading.intro h2,
+.pf-body .fh5co-heading h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--pf-text-heading);
+  position: relative;
+  display: inline-block;
+}
+
+.pf-body .top-line {
+  margin-bottom: 2rem;
+}
+
+/* —— Work cards：圖文分離（參考 Casper 圖鑑 card 結構） —— */
+.pf-body a.work.pf-work-card,
+.pf-body a.work:has(.pf-work-enhanced) {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  height: 100%;
+}
+
+.pf-body .work .work-grid.pf-work-enhanced {
+  display: flex;
+  flex-direction: column;
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--pf-shadow);
+  height: auto !important;
+  aspect-ratio: unset;
+  transition: transform var(--pf-transition), box-shadow var(--pf-transition);
+}
+
+.pf-body a.work.pf-work-card:hover .work-grid.pf-work-enhanced,
+.pf-body a.work.pf-work-card:focus .work-grid.pf-work-enhanced {
+  transform: translateY(-4px);
+  box-shadow: var(--pf-shadow-hover);
+}
+
+.pf-body .pf-work-thumb {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: var(--pf-bg-alt);
+  flex-shrink: 0;
+}
+
+.pf-body .pf-work-thumb.banner-height {
+  aspect-ratio: 16 / 9;
+}
+
+.pf-body .pf-work-thumb.edm-height {
+  aspect-ratio: 3 / 4;
+}
+
+.pf-body .pf-work-thumb.edm-height2 {
+  aspect-ratio: 4 / 5;
+}
+
+.pf-body .pf-work-meta {
+  padding: 16px 18px 18px;
+  text-align: left;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pf-body .pf-work-meta h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--pf-text-heading);
+  line-height: 1.4;
+  text-transform: none;
+}
+
+.pf-body .pf-work-meta .cat {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--pf-text-muted);
+  background: var(--pf-bg-alt);
+  border-radius: 6px;
+  padding: 3px 8px;
+  width: fit-content;
+}
+
+/* 增強前 fallback：仍隱藏 hover 遮罩 */
+.pf-body .work .work-grid:not(.pf-work-enhanced) .inner {
+  display: none;
+}
+
+.pf-body .work .work-grid:not(.pf-work-enhanced) {
+  border-radius: var(--pf-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--pf-shadow);
+  border: 1px solid var(--pf-border);
+  aspect-ratio: 4 / 3;
+  height: auto !important;
+  background-position: center center;
+  background-size: cover;
+}
+
+.pf-body .web-height:not(.pf-work-thumb),
+.pf-body .banner-height:not(.pf-work-thumb),
+.pf-body .edm-height:not(.pf-work-thumb),
+.pf-body .edm-height2:not(.pf-work-thumb) {
+  height: auto !important;
+  min-height: 0;
+}
+
+/* —— Filter chips（參考 casper.tw 設計風格圖鑑 filter-bar） —— */
+.pf-filter-section {
+  position: sticky;
+  top: var(--pf-nav-height);
+  z-index: 9;
+  margin-bottom: 1.5rem;
+  padding: 16px 0;
+  background: transparent;
+}
+
+.pf-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.pf-filter-bar .pf-chip {
+  appearance: none;
+  font-family: var(--pf-font);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--pf-text);
+  cursor: pointer;
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  margin: 0;
+  min-width: 0;
+  width: auto;
+  box-shadow: none;
+  transition:
+    background var(--pf-transition),
+    border-color var(--pf-transition),
+    color var(--pf-transition),
+    transform var(--pf-transition);
+}
+
+.pf-filter-bar .pf-chip-label {
+  line-height: 1.2;
+}
+
+.pf-filter-bar .pf-chip-count {
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  color: inherit;
+  background: color-mix(in srgb, var(--pf-accent) 12%, var(--pf-bg-alt));
+  border-radius: 999px;
+  padding: 2px 7px;
+  min-width: 1.25em;
+  text-align: center;
+}
+
+.pf-filter-bar .pf-chip.is-active .pf-chip-count {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.pf-filter-bar .pf-chip:hover {
+  border-color: color-mix(in srgb, var(--pf-accent) 40%, var(--pf-border));
+  color: var(--pf-text-heading);
+  transform: none;
+  background: var(--pf-surface);
+}
+
+.pf-filter-bar .pf-chip.is-active {
+  color: #fff;
+  background: var(--pf-accent);
+  border-color: var(--pf-accent);
+  box-shadow: 0 2px 8px var(--pf-accent-glow);
+}
+
+.pf-filter-bar .pf-chip:focus-visible {
+  outline: 2px solid var(--pf-accent-soft);
+  outline-offset: 2px;
+}
+
+/* 舊 .toggles 容器對齊 */
+.pf-body .toggles:not(.pf-filter-bar) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* —— Buttons —— */
+.pf-body .btn {
+  font-family: var(--pf-font);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  border-radius: var(--pf-radius-btn) !important;
+  transition:
+    background var(--pf-transition),
+    color var(--pf-transition),
+    border-color var(--pf-transition),
+    transform var(--pf-transition),
+    box-shadow var(--pf-transition) !important;
+}
+
+.pf-body .btn-primary {
+  background: var(--pf-accent) !important;
+  border: 1px solid var(--pf-accent) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px var(--pf-accent-glow);
+}
+
+.pf-body .btn-primary:hover,
+.pf-body .btn-primary:focus,
+.pf-body .btn-primary:active {
+  background: var(--pf-accent-hover) !important;
+  border-color: var(--pf-accent-hover) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: var(--pf-shadow-hover);
+}
+
+.pf-body .btn-primary.btn-outline {
+  background: transparent !important;
+  color: var(--pf-accent) !important;
+  border: 1px solid var(--pf-accent) !important;
+  box-shadow: none;
+}
+
+.pf-body .btn-primary.btn-outline:hover,
+.pf-body .btn-primary.btn-outline:focus,
+.pf-body .btn-primary.btn-outline:active {
+  background: var(--pf-accent) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px var(--pf-accent-glow);
+}
+
+/* —— About / author —— */
+.pf-body #fh5co-author,
+.pf-body #fh5co-work,
+.pf-body #fh5co-about,
+.pf-body #fh5co-contact {
+  padding: 4em 0;
+  background: transparent;
+}
+
+.pf-body .author-inner {
+  border-radius: var(--pf-radius-lg);
+  box-shadow: var(--pf-shadow);
+  border: 1px solid var(--pf-border);
+}
+
+.pf-body .author .desc span {
+  color: var(--pf-accent-soft);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pf-body .author .desc h3 {
+  font-size: 1.75rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.pf-body .author .desc .fh5co-social-icons li,
+.pf-body .author .desc .fh5co-social-icons li i {
+  color: var(--pf-accent);
+}
+
+.pf-body .author .desc .fh5co-social-icons li i {
+  padding-right: 10px;
+}
+
+.pf-body .skills-bottom .title,
+.pf-body h3.title {
+  font-size: 1.1rem;
+  color: var(--pf-text-heading);
+  border-bottom: 1px solid var(--pf-border);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.pf-skills-box {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0 0 2rem;
+  box-shadow: none;
+  margin-bottom: 0.5rem;
+}
+
+.pf-skills-box p {
+  margin: 0;
+  color: var(--pf-text-muted);
+  line-height: 1.75;
+}
+
+/* —— About：My Work 清淡卡片 —— */
+.pf-work-types {
+  margin-top: 0.5rem;
+}
+
+.pf-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  margin-bottom: 1.5rem;
+  padding: 0 0 1.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: opacity var(--pf-transition);
+}
+
+.pf-type-card:hover {
+  transform: none;
+  box-shadow: none;
+  opacity: 0.88;
+}
+
+.pf-type-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 1rem;
+  background: #ffffff;
+  border: 1px solid var(--pf-border);
+  border-radius: 50%;
+  box-shadow: var(--pf-shadow);
+  color: var(--pf-accent);
+}
+
+.pf-type-card__icon i {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.pf-type-card__title {
+  margin: 0 0 0.5rem;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--pf-text-heading);
+  text-transform: none;
+}
+
+.pf-type-card__desc {
+  flex: 1;
+  margin: 0 0 1.25rem;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--pf-text-muted);
+}
+
+.pf-type-card .btn {
+  margin-top: auto;
+  font-size: 12px;
+  padding: 8px 16px !important;
+}
+
+@media screen and (max-width: 768px) {
+  .pf-type-card {
+    align-items: center;
+    text-align: center;
+  }
+
+  .pf-type-card__icon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* —— Detail pages —— */
+.pf-body .img-responsive {
+  border-radius: var(--pf-radius-lg);
+  border: 1px solid var(--pf-border);
+  box-shadow: var(--pf-shadow);
+}
+
+.pf-body .portfolio-navigation {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--pf-border);
+}
+
+.pf-body .fh5co-heading p {
+  color: var(--pf-text-muted);
+}
+
+/* —— Global footer —— */
+.pf-footer-slot {
+  margin: 0;
+  padding: 0;
+  height: auto !important;
+  background: transparent;
+}
+
+.pf-footer {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  background: #e2e8f0;
+  border-top: 1px solid #cbd5e1;
+}
+
+.pf-footer__inner {
+  text-align: center;
+}
+
+.pf-footer__lead,
+.pf-footer__line {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.75;
+  color: #64748b;
+  letter-spacing: 0.02em;
+}
+
+.pf-footer__lead {
+  margin-bottom: 0.35rem;
+  color: #475569;
+}
+
+.pf-footer__line a {
+  color: #64748b;
+}
+
+.pf-footer__line a:hover {
+  color: var(--pf-accent-hover);
+}
+
+@media screen and (max-width: 768px) {
+  .pf-footer {
+    padding: 1.5rem 0;
+  }
+}
+
+/* —— Footer slot legacy & gototop —— */
+.pf-body #fh5co-footer,
+.pf-body .pf-footer-slot {
+  border-top: none;
+  background: transparent;
+}
+
+.pf-body .gototop a {
+  background: var(--pf-accent) !important;
+  border-radius: var(--pf-radius-btn);
+  box-shadow: var(--pf-shadow);
+  transition: transform var(--pf-transition), background var(--pf-transition);
+}
+
+.pf-body .gototop a:hover {
+  background: var(--pf-accent-hover) !important;
+  transform: translateY(-3px);
+}
+
+/* —— Loader —— */
+.pf-body .fh5co-loader {
+  background: var(--pf-bg);
+}
+
+/* —— Theme switcher (floating) —— */
+.pf-theme-switcher {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.pf-theme-switcher__label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pf-text-muted);
+  background: var(--pf-surface);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--pf-border);
+  box-shadow: var(--pf-shadow);
+}
+
+.pf-theme-switcher__btns {
+  display: flex;
+  gap: 6px;
+  background: var(--pf-surface);
+  padding: 8px;
+  border-radius: var(--pf-radius);
+  border: 1px solid var(--pf-border);
+  box-shadow: var(--pf-shadow-hover);
+}
+
+.pf-theme-switcher__btns button {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform var(--pf-transition), border-color var(--pf-transition);
+}
+
+.pf-theme-switcher__btns button:hover {
+  transform: scale(1.1);
+}
+
+.pf-theme-switcher__btns button.is-active {
+  border-color: var(--pf-text-heading);
+  transform: scale(1.15);
+}
+
+.pf-theme-switcher__btns button[data-pf-theme="apex"] {
+  background: linear-gradient(135deg, #4a5568, #94a3b8);
+}
+
+.pf-theme-switcher__btns button[data-pf-theme="arctic"] {
+  background: linear-gradient(135deg, #0369a1, #7dd3fc);
+}
+
+.pf-theme-switcher__btns button[data-pf-theme="quartz"] {
+  background: linear-gradient(135deg, #52525b, #d1d5db);
+}
+
+/* —— Mobile nav：僅 logo + 漢堡，選單文字在 offcanvas —— */
+@media screen and (max-width: 768px) {
+  .pf-body .fh5co-nav .fh5co-top-menu.menu-1,
+  .pf-body .fh5co-nav .menu-2 {
+    display: none !important;
+  }
+
+  .pf-body .fh5co-nav .fh5co-top-logo {
+    width: auto;
+    float: left;
+  }
+
+  .pf-body .fh5co-nav .fh5co-top-menu {
+    width: 0;
+    overflow: hidden;
+  }
+
+  .pf-body .fh5co-nav .container {
+    min-height: 48px;
+    padding-right: 52px;
+  }
+
+  .pf-body .fh5co-nav .fh5co-nav-toggle,
+  .pf-body #page > .fh5co-nav-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    position: absolute !important;
+    top: 50% !important;
+    right: 0 !important;
+    left: auto !important;
+    margin: 0 !important;
+    transform: translateY(-50%) !important;
+    width: 44px;
+    height: 44px;
+    z-index: 1001;
+  }
+
+  .pf-body.offcanvas .fh5co-nav .fh5co-top-menu.menu-1,
+  .pf-body.offcanvas .fh5co-nav .menu-2 {
+    display: none !important;
+  }
+
+  .pf-hero {
+    padding: 2.5rem 0 1.5rem;
+  }
+
+  .pf-hero__glow::before,
+  .pf-hero__glow::after {
+    filter: blur(56px);
+    opacity: 0.75;
+  }
+
+  .pf-stats {
+    gap: 0.75rem;
+  }
+
+  .pf-stat {
+    min-width: 100px;
+    padding: 0.75rem;
+  }
+
+  .pf-theme-switcher {
+    bottom: 4.5rem;
+    right: 0.75rem;
+  }
+}
+
+/* Offcanvas 側欄 — Apex 淺色 */
+.pf-body #fh5co-offcanvas {
+  background: var(--pf-surface);
+  border-left: 1px solid var(--pf-border);
+  box-shadow: -12px 0 40px rgba(15, 23, 42, 0.12);
+}
+
+.pf-body #fh5co-offcanvas a {
+  color: var(--pf-text-muted);
+}
+
+.pf-body #fh5co-offcanvas a:hover,
+.pf-body #fh5co-offcanvas a:focus {
+  color: var(--pf-accent-hover);
+}
+
+.pf-body #fh5co-offcanvas ul li a {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 0;
+  display: block;
+  border-bottom: 1px solid var(--pf-border);
+}
+
+.pf-body #fh5co-offcanvas ul li.has-dropdown > a,
+.pf-body #fh5co-offcanvas .offcanvas-has-dropdown > a {
+  font-weight: 600;
+  color: var(--pf-text-heading);
+}
+
+.pf-body #fh5co-offcanvas .dropdown {
+  position: static;
+  visibility: visible;
+  opacity: 1;
+  background: var(--pf-bg-alt);
+  border: none;
+  box-shadow: none;
+  padding: 0 0 8px 12px;
+  display: none;
+}
+
+.pf-body #fh5co-offcanvas .offcanvas-has-dropdown.active .dropdown {
+  display: block;
+}
+
+.pf-body #fh5co-offcanvas .dropdown li a {
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  padding: 10px 0;
+  border-bottom: none;
+}
+
+.pf-body .fh5co-nav-toggle {
+  display: none;
+}
+
+.pf-body .fh5co-nav-toggle i,
+.pf-body .fh5co-nav-toggle i::before,
+.pf-body .fh5co-nav-toggle i::after {
+  background: var(--pf-text-heading);
+}
+
+.pf-body .fh5co-nav-toggle.fh5co-nav-white > i,
+.pf-body .fh5co-nav-toggle.fh5co-nav-white > i::before,
+.pf-body .fh5co-nav-toggle.fh5co-nav-white > i::after {
+  background: var(--pf-text-heading);
+}
+
+.pf-body .fh5co-nav-toggle.active i::before,
+.pf-body .fh5co-nav-toggle.active i::after {
+  background: var(--pf-text-heading);
+}

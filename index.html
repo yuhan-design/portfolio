@@ -32,12 +32,19 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/themes/theme-apex.css" id="pf-theme-css">
+	<link rel="stylesheet" href="css/portfolio-redesign.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 
 	</head>
-	<body>
+	<body class="pf-body">
+	<div class="pf-site-bg" aria-hidden="true"></div>
+
 		
 	<div class="fh5co-loader"></div>
 	
@@ -64,6 +71,34 @@
 			</div>
 		</div>
 	</nav>
+
+	<section class="pf-hero">
+		<div class="pf-hero__glow" aria-hidden="true"><span class="pf-hero__glow-bloom"></span></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1 text-center animate-box">
+					<p class="pf-hero-label">Portfolio · UI/UX · Web Design</p>
+					<h1 class="pf-hero-title">Yuhan Lin</h1>
+					<p class="pf-hero-desc">以數據與使用者洞察驅動設計決策，打造兼具精密質感與可用性的數位體驗。</p>
+					<div class="pf-stats">
+						<div class="pf-stat">
+							<span class="pf-stat-num">6+</span>
+							<span class="pf-stat-label">年設計經驗</span>
+						</div>
+						<div class="pf-stat">
+							<span class="pf-stat-num">UI/UX</span>
+							<span class="pf-stat-label">產品與流程</span>
+						</div>
+						<div class="pf-stat">
+							<span class="pf-stat-num">RWD</span>
+							<span class="pf-stat-label">網頁實作</span>
+						</div>
+					</div>
+					<p class="pf-hero-actions"><a href="theme-preview.html" class="btn btn-primary btn-outline">比較三種視覺風格</a></p>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<div id="fh5co-work">
 		<div class="container">
@@ -542,6 +577,7 @@
 	<!-- Waypoints -->
 	<script src="js/jquery.waypoints.min.js"></script>
 	<!-- Main -->
+	<script src="js/theme.js"></script>
 	<script src="js/main.js"></script>
 
 	</body>

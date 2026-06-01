@@ -1,0 +1,35 @@
+/**
+ * Theme A — Apex Slate
+ * 對齊參考圖：霧面銀、灰藍按鈕、冷靜專業
+ */
+html[data-theme="apex"],
+html:not([data-theme]) {
+  --pf-bg: #f8fafc;
+  --pf-bg-alt: #f1f5f9;
+  --pf-surface: #ffffff;
+  --pf-nav-bg: rgba(255, 255, 255, 0.88);
+  --pf-nav-border: rgba(148, 163, 184, 0.2);
+  --pf-text: #1e293b;
+  --pf-text-heading: #0f172a;
+  --pf-text-muted: #64748b;
+  --pf-accent: #4a5568;
+  --pf-accent-hover: #2d3748;
+  --pf-accent-soft: #94a3b8;
+  --pf-accent-glow: rgba(148, 163, 184, 0.1);
+  --pf-cyan: #e2e8f0;
+  --pf-cyan-soft: rgba(255, 255, 255, 0.85);
+  --pf-glow-warm: rgba(254, 243, 199, 0.55);
+  --pf-glow-cool: rgba(226, 232, 240, 0.65);
+  --pf-border: rgba(148, 163, 184, 0.22);
+  --pf-shadow: 0 8px 32px rgba(15, 23, 42, 0.04);
+  --pf-shadow-hover: 0 16px 48px rgba(15, 23, 42, 0.08);
+  --pf-overlay: rgba(255, 255, 255, 0.96);
+  --pf-grid-line: rgba(148, 163, 184, 0.08);
+  --pf-gradient-1: #ffffff;
+  --pf-gradient-2: #f8fafc;
+  --pf-gradient-3: #f1f5f9;
+  --pf-selection-bg: #4a5568;
+  --pf-radius: 12px;
+  --pf-radius-lg: 16px;
+  --pf-radius-btn: 10px;
+}
