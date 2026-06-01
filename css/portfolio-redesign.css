@@ -1,6 +1,6 @@
 /**
- * Portfolio redesign — minimal tech UI
- * Uses CSS variables from css/themes/theme-*.css
+ * Portfolio redesign — Apex Slate minimal tech UI
+ * Theme tokens: css/themes/theme-apex.css
  */
 
 :root {
@@ -318,24 +318,6 @@ body.pf-body {
   text-transform: uppercase;
   color: var(--pf-accent-soft);
   margin-top: 0.35rem;
-}
-
-.pf-hero-actions {
-  margin-top: 1.75rem;
-}
-
-.pf-hero-actions .btn {
-  background: transparent !important;
-  border-color: var(--pf-border) !important;
-  color: var(--pf-text-muted) !important;
-  box-shadow: none !important;
-  font-size: 12px;
-}
-
-.pf-hero-actions .btn:hover {
-  background: var(--pf-surface) !important;
-  border-color: var(--pf-accent-soft) !important;
-  color: var(--pf-text-heading) !important;
 }
 
 /* —— Section headings —— */
@@ -826,73 +808,6 @@ body.pf-body {
   background: var(--pf-bg);
 }
 
-/* —— Theme switcher (floating) —— */
-.pf-theme-switcher {
-  position: fixed;
-  bottom: 1.25rem;
-  right: 1.25rem;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-end;
-}
-
-.pf-theme-switcher__label {
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--pf-text-muted);
-  background: var(--pf-surface);
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid var(--pf-border);
-  box-shadow: var(--pf-shadow);
-}
-
-.pf-theme-switcher__btns {
-  display: flex;
-  gap: 6px;
-  background: var(--pf-surface);
-  padding: 8px;
-  border-radius: var(--pf-radius);
-  border: 1px solid var(--pf-border);
-  box-shadow: var(--pf-shadow-hover);
-}
-
-.pf-theme-switcher__btns button {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  padding: 0;
-  margin: 0;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: transform var(--pf-transition), border-color var(--pf-transition);
-}
-
-.pf-theme-switcher__btns button:hover {
-  transform: scale(1.1);
-}
-
-.pf-theme-switcher__btns button.is-active {
-  border-color: var(--pf-text-heading);
-  transform: scale(1.15);
-}
-
-.pf-theme-switcher__btns button[data-pf-theme="apex"] {
-  background: linear-gradient(135deg, #4a5568, #94a3b8);
-}
-
-.pf-theme-switcher__btns button[data-pf-theme="arctic"] {
-  background: linear-gradient(135deg, #0369a1, #7dd3fc);
-}
-
-.pf-theme-switcher__btns button[data-pf-theme="quartz"] {
-  background: linear-gradient(135deg, #52525b, #d1d5db);
-}
-
 /* —— Mobile nav：僅 logo + 漢堡，選單文字在 offcanvas —— */
 @media screen and (max-width: 768px) {
   .pf-body .fh5co-nav .fh5co-top-menu.menu-1,
@@ -953,11 +868,6 @@ body.pf-body {
   .pf-stat {
     min-width: 100px;
     padding: 0.75rem;
-  }
-
-  .pf-theme-switcher {
-    bottom: 4.5rem;
-    right: 0.75rem;
   }
 }
 
