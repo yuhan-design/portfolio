@@ -241,7 +241,35 @@
 		});
 	};
 
-	
+	var rotatingAboutLabel = function() {
+		var words = ['design', 'thinking'];
+		var $pill = $('.fi-about-rotating-pill');
+		var $current = $pill.find('.fi-about-rotating-text--current');
+		var $next = $pill.find('.fi-about-rotating-text--next');
+		if (!$pill.length || !$current.length || !$next.length) {
+			return;
+		}
+		var index = 0;
+		$current.text(words[index]);
+		$next.text(words[(index + 1) % words.length]);
+
+		setInterval(function() {
+			var nextIndex = (index + 1) % words.length;
+			$next.text(words[nextIndex]).removeClass('fi-about-rotating-text--out').addClass('fi-about-rotating-text--next');
+			requestAnimationFrame(function() {
+				$current.removeClass('fi-about-rotating-text--current').addClass('fi-about-rotating-text--out');
+				$next.removeClass('fi-about-rotating-text--next').addClass('fi-about-rotating-text--current');
+			});
+			setTimeout(function() {
+				$current.removeClass('fi-about-rotating-text--out');
+				var temp = $current;
+				$current = $next;
+				$next = temp.addClass('fi-about-rotating-text--next').removeClass('fi-about-rotating-text--current');
+				index = nextIndex;
+			}, 360);
+		}, 2000);
+	};
+
 	$(function(){
 		mobileMenuOutsideClick();
 		offcanvasMenu();
@@ -250,8 +278,7 @@
 		dropdown();
 		goToTop();
 		loaderPage();
+		rotatingAboutLabel();
 	});
-
-
 
 }());
