@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html lang="zh-tw" data-theme="apex">
 	<head>
 	<meta charset="utf-8">
@@ -34,16 +34,22 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/themes/theme-apex.css" id="pf-theme-css">
 	<link rel="stylesheet" href="css/portfolio-redesign.css">
+	<link rel="stylesheet" href="css/fresh-glass.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 
 	</head>
 	<body class="pf-body">
-	<div class="pf-site-bg" aria-hidden="true"></div>
+	<div class="pf-site-bg" aria-hidden="true">
+		<div class="fg-blob fg-blob-a"></div>
+		<div class="fg-blob fg-blob-b"></div>
+		<div class="fg-blob fg-blob-c"></div>
+	</div>
+	<div class="fg-grain" aria-hidden="true"></div>
 
 		
 	<div class="fh5co-loader"></div>
@@ -51,23 +57,26 @@
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
 		<div class="container">
-			<div class="fh5co-top-logo">
-				<div id="fh5co-logo"><a href="index.html"><img src="images/logo.png"></a></div>
-			</div>
-			<div class="fh5co-top-menu menu-1 text-center">
-				<ul>
-					<li><a href="index.html">Web Design</a></li>
+			<div class="fg-nav-inner">
+				<a class="fg-logo" href="index.html">
+					<div class="fg-logo-mark">Y</div>
+					<span class="fg-logo-text">YUHAN</span>
+				</a>
+				<ul class="fg-nav-links">
+					<li><a href="index.html">Work</a></li>
 					<li><a href="uiux.html">UI/UX</a></li>
 					<li class="has-dropdown">
 						<a href="#">More</a>
 						<ul class="dropdown">
 							<li><a href="banner.html">Banner</a></li>
-							<li><a href="edm.html">EDM</a></li>
 							<li><a href="graphic.html">Graphic Design</a></li>
 						</ul>
 					</li>
-					<li><a href="about.html">About</a></li>
+					<li><a href="about.html" class="fg-active">About</a></li>
 				</ul>
+				<div class="fg-nav-right">
+					<a href="about.html" class="fg-nav-avatar">Y</a>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -132,14 +141,6 @@
 						</div>
 						<div class="col-md-4 col-sm-6">
 							<article class="pf-type-card animate-box" data-animate-effect="fadeIn">
-								<span class="pf-type-card__icon" aria-hidden="true"><i class="icon-mail"></i></span>
-								<h3 class="pf-type-card__title">EDM</h3>
-								<p class="pf-type-card__desc">針對不同活動與訴求，設計企業活動電子報</p>
-								<a href="edm.html" class="btn btn-primary btn-outline">Learn More</a>
-							</article>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<article class="pf-type-card animate-box" data-animate-effect="fadeIn">
 								<span class="pf-type-card__icon" aria-hidden="true"><i class="icon-book"></i></span>
 								<h3 class="pf-type-card__title">Graphic Design</h3>
 								<p class="pf-type-card__desc">活動相關視覺、插畫、書籍設計、海報、CIS</p>
@@ -152,7 +153,54 @@
 		</div>
 	</div>
 
-	<footer id="fh5co-footer"></footer>
+	<footer id="fh5co-footer">
+		<div class="fg-footer">
+			<div class="fg-footer-inner">
+				<div class="fg-footer-cta-row">
+					<div>
+						<div class="fg-footer-cta-label">Let's work together</div>
+						<h2 class="fg-footer-cta-heading">Have a project in <em>mind?</em></h2>
+					</div>
+					<a href="mailto:sky13146@gmail.com" class="fg-footer-email-btn">sky13146@gmail.com &nbsp;→</a>
+				</div>
+				<div class="fg-footer-grid">
+					<div class="fg-footer-brand">
+						<div class="fg-footer-brand-logo">
+							<div class="fg-footer-logo-mark">Y</div>
+							<span class="fg-footer-brand-name">YUHAN</span>
+						</div>
+						<p>Product designer crafting calm, structured digital experiences from Taipei.</p>
+					</div>
+					<div class="fg-footer-col">
+						<div class="fg-footer-col-title">Work</div>
+						<ul>
+							<li><a href="index.html">Web Design</a></li>
+							<li><a href="uiux.html">UI/UX</a></li>
+							<li><a href="graphic.html">Graphic Design</a></li>
+							<li><a href="about.html">About</a></li>
+						</ul>
+					</div>
+					<div class="fg-footer-col">
+						<div class="fg-footer-col-title">More</div>
+						<ul>
+							<li><a href="banner.html">Banner</a></li>
+						</ul>
+					</div>
+					<div class="fg-footer-col">
+						<div class="fg-footer-col-title">Status</div>
+						<div class="fg-footer-status-badge">
+							<div class="fg-footer-status-dot"></div>
+							<span>Available 2026</span>
+						</div>
+					</div>
+				</div>
+				<div class="fg-footer-bottom">
+					<span>© 2026 YUHAN · All rights reserved</span>
+					<span>Fresh Glass Design System</span>
+				</div>
+			</div>
+		</div>
+	</footer>
 	
 	</div>
 

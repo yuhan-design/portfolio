@@ -1,583 +1,366 @@
 <!DOCTYPE HTML>
-<html lang="zh-tw" data-theme="apex">
+<html lang="zh-tw">
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Portfolio of Yuhan</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- common meta -->
+
 	<meta name="author" content="Yuhan">
 	<meta property="fb:app_id" content="1590515954569893">
 	<meta property="og:site_name" content="Portfolio of Yuhan">
 	<meta property="og:type" content="article">
 	<link href="https://yuahan.github.io/design/images/favicon.ico" rel="shortcut icon" type="image/png" />
 	<meta property="og:url" content="https://yuahan.github.io/design/" />
+	<meta name="title" content="Portfolio of Yuhan" />
+	<meta property="og:title" content="Portfolio of Yuhan" />
+	<meta itemprop="name" content="Portfolio of Yuhan" />
+	<meta name="description" content="網頁設計、UI/UX、廣告設計、各式平面排版作品集" />
+	<meta property="og:description" content="網頁設計、UI/UX、廣告設計、各式平面排版作品集" />
+	<meta itemprop="description" content="網頁設計、UI/UX、廣告設計、各式平面排版作品集" />
 
-	<!-- title -->
-    <meta name="title" content="Portfolio of Yuhan" />
-    <meta property="og:title" content="Portfolio of Yuhan" />
-    <meta itemprop="name" content="Portfolio of Yuhan" />
-
-  	<!-- description -->
-    <meta name="description" content="網頁設計、UI/UX、廣告設計、各式平面排版作品集" />
-  	<meta property="og:description" content="網頁設計、UI/UX、廣告設計、各式平面排版作品集" />
-  	<meta itemprop="description" content="網頁設計、UI/UX、廣告設計、各式平面排版作品集" />
-
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/themes/theme-apex.css" id="pf-theme-css">
-	<link rel="stylesheet" href="css/portfolio-redesign.css">
-
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/figma-index.css">
 	</head>
-	<body class="pf-body">
-	<div class="pf-site-bg" aria-hidden="true"></div>
+	<body class="fi-page">
 
-		
-	<div class="fh5co-loader"></div>
-	
-	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="fh5co-top-logo">
-				<div id="fh5co-logo"><a href="index.html"><img src="images/logo.png"></a></div>
+	<!-- ============ NAV ============ -->
+	<nav class="fi-nav" id="fi-nav">
+		<div class="fi-container fi-nav-inner">
+			<a href="index.html" class="fi-logo">
+				<div class="fi-logo-mark">YH</div>
+				<span class="fi-logo-text">YUHAN</span>
+			</a>
+
+			<div class="fi-nav-links">
+				<button class="fi-nav-link" data-scroll="hero">首頁</button>
+				<a href="uiux.html" class="fi-nav-link">UI/UX</a>
+				<button class="fi-nav-link" data-scroll="works">作品</button>
+				<a href="about.html" class="fi-nav-link">關於我</a>
+				<a href="mailto:sky13146@gmail.com" class="fi-nav-cta">聯絡我</a>
 			</div>
-			<div class="fh5co-top-menu menu-1 text-center">
-				<ul>
-					<li><a href="index.html">Web Design</a></li>
-					<li><a href="uiux.html">UI/UX</a></li>
-					<li class="has-dropdown">
-						<a href="#">More</a>
-						<ul class="dropdown">
-							<li><a href="banner.html">Banner</a></li>
-							<li><a href="edm.html">EDM</a></li>
-							<li><a href="graphic.html">Graphic Design</a></li>
-						</ul>
-					</li>
-					<li><a href="about.html">About</a></li>
-				</ul>
+
+			<button class="fi-mobile-btn" id="fi-mobile-btn">
+				<span></span><span></span><span></span>
+			</button>
+		</div>
+
+		<div class="fi-drawer" id="fi-drawer">
+			<div class="fi-drawer-inner">
+				<button class="fi-nav-link" data-scroll="hero">首頁</button>
+				<a href="uiux.html" class="fi-nav-link">UI/UX</a>
+				<button class="fi-nav-link" data-scroll="works">作品</button>
+				<a href="about.html" class="fi-nav-link">關於我</a>
 			</div>
 		</div>
 	</nav>
 
-	<section class="pf-hero">
-		<div class="pf-hero__glow" aria-hidden="true"><span class="pf-hero__glow-bloom"></span></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1 text-center animate-box">
-					<p class="pf-hero-label">Portfolio · UI/UX · Web Design</p>
-					<h1 class="pf-hero-title">Yuhan Lin</h1>
-					<p class="pf-hero-desc">以數據與使用者洞察驅動設計決策，打造兼具精密質感與可用性的數位體驗。</p>
-					<div class="pf-stats">
-						<div class="pf-stat">
-							<span class="pf-stat-num">6+</span>
-							<span class="pf-stat-label">年設計經驗</span>
-						</div>
-						<div class="pf-stat">
-							<span class="pf-stat-num">UI/UX</span>
-							<span class="pf-stat-label">產品與流程</span>
-						</div>
-						<div class="pf-stat">
-							<span class="pf-stat-num">RWD</span>
-							<span class="pf-stat-label">網頁實作</span>
-						</div>
+	<!-- ============ HERO ============ -->
+	<section id="hero" class="fi-hero">
+		<div class="fi-container fi-hero-inner">
+			<div class="fi-hero-text">
+				<div class="fi-pill">
+					<span class="fi-dot"></span>
+					Available for work
+				</div>
+
+				<div>
+					<h1 class="fi-hero-title">YU<span class="fi-hero-h">H</span>AN</h1>
+					<div class="fi-hero-role">
+						<hr class="fi-role-line">
+						<span class="fi-role-text">UI / UX Designer</span>
 					</div>
+				</div>
+
+				<p class="fi-hero-desc">打造清晰、有結構、有溫度的數位體驗。<br>以數據與使用者洞察驅動設計決策的台灣設計師。</p>
+
+				<div class="fi-actions">
+					<a href="#works" class="fi-btn-dark">查看作品 →</a>
+					<a href="about.html" class="fi-btn-ghost">關於我</a>
+				</div>
+			</div>
+
+			<div class="fi-hero-visual">
+				<div class="fi-thumb fi-thumb-a"><img src="images/web/web33.jpg" alt="DT網站內頁設計"></div>
+				<div class="fi-thumb fi-thumb-b"><img src="images/web/web32.jpg" alt="植感生活節"></div>
+				<div class="fi-thumb fi-thumb-c"><img src="images/web/web35.jpg" alt="台灣美食特產"></div>
+
+				<div class="fi-geo-sq"></div>
+				<div class="fi-geo-ci"></div>
+				<div class="fi-geo-sm"></div>
+
+				<div class="fi-hero-chip">
+					<span class="fi-chip-num">6+</span>
+					<span class="fi-chip-lbl">年設計經驗</span>
+				</div>
+				<div class="fi-hero-tag">Web Design ✦</div>
+			</div>
+		</div>
+
+		<div class="fi-marquee">
+			<div class="fi-marquee-track" id="fi-marquee-track"></div>
+		</div>
+	</section>
+
+	<!-- ============ WORKS ============ -->
+	<section id="works" class="fi-works">
+		<div class="fi-container">
+			<div class="fi-section-top">
+				<div>
+					<span class="fi-eyebrow">Portfolio</span>
+					<h2 class="fi-h2">精選作品</h2>
+				</div>
+				<p class="fi-section-desc">每個專案都有清晰的設計思考，從研究到視覺完整呈現。</p>
+			</div>
+
+			<div class="fi-grid">
+
+				<a class="fi-card fi-card--wide" href="detailpages/web_detail35.html" style="background:#eef2fb">
+					<div class="fi-card-badge">
+						<span class="fi-card-id" style="color:#1c2a44">01</span>
+						<span class="fi-card-cat" style="background:#c9ddf7;color:#1c2a44">RWD · Web Design</span>
+					</div>
+					<div class="fi-card-img"><img src="images/web/web35.jpg" alt="台灣美食特產"></div>
+					<div class="fi-card-hover">
+						<div>
+							<h3 class="fi-hover-title">台灣美食特產</h3>
+							<p class="fi-hover-desc">結合台灣在地食材特色，設計清新活潑的美食特產購物網站，突顯產品特色與信任感。</p>
+						</div>
+						<div class="fi-arrow-filled">↗</div>
+					</div>
+					<div class="fi-card-foot">
+						<span class="fi-foot-title">台灣美食特產</span>
+						<div class="fi-arrow-outline">↗</div>
+					</div>
+				</a>
+
+				<a class="fi-card" href="detailpages/web_detail34.html" style="background:#f7f1d8">
+					<div class="fi-card-badge">
+						<span class="fi-card-id" style="color:#5b5535">02</span>
+						<span class="fi-card-cat" style="background:#f2d96b;color:#5b5535">RWD · Web Design</span>
+					</div>
+					<div class="fi-card-img"><img src="images/web/web34.jpg" alt="富邦-新戶安心限定禮"></div>
+					<div class="fi-card-hover">
+						<div>
+							<h3 class="fi-hover-title">富邦-新戶安心限定禮</h3>
+							<p class="fi-hover-desc">為富邦金融新戶打造的活動登陸頁，以清晰的資訊架構引導用戶完成活動流程。</p>
+						</div>
+						<div class="fi-arrow-filled">↗</div>
+					</div>
+					<div class="fi-card-foot">
+						<span class="fi-foot-title">富邦-新戶安心限定禮</span>
+						<div class="fi-arrow-outline">↗</div>
+					</div>
+				</a>
+
+				<a class="fi-card" href="detailpages/web_detail33.html" style="background:#d8ecdf">
+					<div class="fi-card-badge">
+						<span class="fi-card-id" style="color:#2c4d3a">03</span>
+						<span class="fi-card-cat" style="background:#6fae8a;color:#2c4d3a">設計稿 · Web Design</span>
+					</div>
+					<div class="fi-card-img"><img src="images/web/web33.jpg" alt="DT網站內頁設計"></div>
+					<div class="fi-card-hover">
+						<div>
+							<h3 class="fi-hover-title">DT網站內頁設計</h3>
+							<p class="fi-hover-desc">數位科技公司的網站內頁設計稿，以簡潔現代的視覺風格呈現品牌科技感。</p>
+						</div>
+						<div class="fi-arrow-filled">↗</div>
+					</div>
+					<div class="fi-card-foot">
+						<span class="fi-foot-title">DT網站內頁設計</span>
+						<div class="fi-arrow-outline">↗</div>
+					</div>
+				</a>
+
+				<a class="fi-card" href="detailpages/web_detail32.html" style="background:#eef2fb">
+					<div class="fi-card-badge">
+						<span class="fi-card-id" style="color:#1c2a44">04</span>
+						<span class="fi-card-cat" style="background:#aec8f3;color:#1c2a44">RWD · Web Design</span>
+					</div>
+					<div class="fi-card-img"><img src="images/web/web32.jpg" alt="植感生活節"></div>
+					<div class="fi-card-hover">
+						<div>
+							<h3 class="fi-hover-title">植感生活節</h3>
+							<p class="fi-hover-desc">以植物為主題的生活節活動網站，用自然系色彩與有機形狀打造沉浸感體驗。</p>
+						</div>
+						<div class="fi-arrow-filled">↗</div>
+					</div>
+					<div class="fi-card-foot">
+						<span class="fi-foot-title">植感生活節</span>
+						<div class="fi-arrow-outline">↗</div>
+					</div>
+				</a>
+
+				<a class="fi-card fi-card--full" href="detailpages/web_detail31.html" style="background:#ede8f5">
+					<div class="fi-card-badge">
+						<span class="fi-card-id" style="color:#3f3460">05</span>
+						<span class="fi-card-cat" style="background:#c9b8e8;color:#3f3460">RWD · Web Design</span>
+					</div>
+					<div class="fi-card-img"><img src="images/web/web31.jpg" alt="揪愛寵媽節"></div>
+					<div class="fi-card-hover">
+						<div>
+							<h3 class="fi-hover-title">揪愛寵媽節</h3>
+							<p class="fi-hover-desc">母親節電商活動網頁設計，以溫暖的粉色系與情感化內容強化節慶氛圍。</p>
+						</div>
+						<div class="fi-arrow-filled">↗</div>
+					</div>
+					<div class="fi-card-foot">
+						<span class="fi-foot-title">揪愛寵媽節</span>
+						<div class="fi-arrow-outline">↗</div>
+					</div>
+				</a>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- ============ ABOUT ============ -->
+	<section id="about" class="fi-about">
+		<div class="fi-container fi-about-inner">
+			<div class="fi-about-vis">
+				<div class="fi-about-box">
+					<div class="fi-blob-a"></div>
+					<div class="fi-blob-b"></div>
+					<div class="fi-about-box-inner">
+						<div class="fi-yh">YH</div>
+						<div class="fi-shapes">
+							<div class="fi-sh-circle"></div>
+							<div class="fi-sh-square"></div>
+							<div class="fi-sh-ring"></div>
+						</div>
+						<p class="fi-about-caption">Designing with purpose</p>
+					</div>
+				</div>
+				<div class="fi-about-badge">✦</div>
+			</div>
+
+			<div class="fi-about-body">
+				<div>
+					<span class="fi-eyebrow">About</span>
+					<h2 class="fi-h2" style="margin-bottom:24px">關於我</h2>
+					<div class="fi-bio">
+						<p>Hi，我是 <strong>YUHAN</strong>，擁有六年以上 UI/UX 與網頁設計經驗，優化過各式網站和 app 流程與畫面，也參與產品從零到一上線的過程，打造出具有美感與功能性的介面。</p>
+						<p>擅長從使用者研究出發，透過問卷訪談深入了解使用者需求與反饋，將這些資訊轉化為實際的設計改進，也熟悉商業策略研究，能以更全面的角度思考設計，與商業目標相結合。</p>
+						<p>除了 UI/UX 設計，也具備一定的 HTML/CSS 切版能力，讓我在團隊合作中能更順暢地與開發人員協作。目前正在尋求全職設計職位或合作機會，歡迎聯絡！</p>
+					</div>
+				</div>
+
+				<div class="fi-skills">
+					<div>
+						<div class="fi-skill-row"><span class="fi-skill-name">UI Design</span><span class="fi-skill-pct">95%</span></div>
+						<div class="fi-skill-bar"><div class="fi-skill-fill" style="width:95%"></div></div>
+					</div>
+					<div>
+						<div class="fi-skill-row"><span class="fi-skill-name">UX Research</span><span class="fi-skill-pct">88%</span></div>
+						<div class="fi-skill-bar"><div class="fi-skill-fill" style="width:88%"></div></div>
+					</div>
+					<div>
+						<div class="fi-skill-row"><span class="fi-skill-name">Prototyping</span><span class="fi-skill-pct">90%</span></div>
+						<div class="fi-skill-bar"><div class="fi-skill-fill" style="width:90%"></div></div>
+					</div>
+					<div>
+						<div class="fi-skill-row"><span class="fi-skill-name">HTML / CSS</span><span class="fi-skill-pct">85%</span></div>
+						<div class="fi-skill-bar"><div class="fi-skill-fill" style="width:85%"></div></div>
+					</div>
+				</div>
+
+				<div class="fi-tags">
+					<span class="fi-tag">Figma</span>
+					<span class="fi-tag">Adobe XD</span>
+					<span class="fi-tag">Photoshop</span>
+					<span class="fi-tag">Illustrator</span>
+					<span class="fi-tag">HTML / CSS</span>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<div id="fh5co-work">
-		<div class="container">
-			<div class="row top-line animate-box">
-				<div class="col-md-8 col-md-offset-2 gtco-heading text-center intro">
-					<h2>Web Design</h2>
-				</div>				
-			</div>
-			<div class="row">
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail35.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web35.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>台灣美食特產</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
+	<!-- ============ FOOTER ============ -->
+	<footer class="fi-footer">
+		<div class="fi-container fi-footer-inner">
+			<div class="fi-footer-grid">
+				<div>
+					<div class="fi-f-logo">
+						<div class="fi-f-logo-mark">YH</div>
+						<span class="fi-f-logo-text">YUHAN</span>
+					</div>
+					<p class="fi-f-desc">UI/UX Designer based in Taiwan.<br>打造有溫度的數位體驗。</p>
 				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail34.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web34.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>富邦-新戶安心限定禮</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
+
+				<div>
+					<span class="fi-f-col-title">Navigation</span>
+					<div class="fi-f-links">
+						<a href="index.html" class="fi-f-link">Web Design</a>
+						<a href="uiux.html" class="fi-f-link">UI/UX</a>
+						<a href="banner.html" class="fi-f-link">Banner</a>
+						<a href="graphic.html" class="fi-f-link">Graphic Design</a>
+						<a href="about.html" class="fi-f-link">About</a>
+					</div>
 				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail33.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web33.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>DT網站內頁設計</h3>
-									<span class="cat">設計稿</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail32.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web32.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>植感生活節</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail31.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web31.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>揪愛寵媽節</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail30.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web30.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>大陰盜百貨聯名貼圖活動</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail29.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web29.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>2021雙11電商活動</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail28.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web28.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>2020雙11電商活動</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail27.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web27.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>第三屆酒食節</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail26.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web26.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>618狂享年中慶</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail25.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web25.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>台灣在地農產</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail24.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web24.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>宅配美食不夜城</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail23.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web23.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>年中購爽節</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail22.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web22.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>11週年慶</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail21.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web21.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>SH+振興券活動頁</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail20.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web20.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>買張機票去你的旅行</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail19.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web19.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>與你童樂</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail18.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web18.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>火烤大賽</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail17.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web17.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>春季美饌大賞</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail16.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web16.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>中秋好時節</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail15.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web15.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>朝Buy女王節</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail14.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web14.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>2021 happy 牛 year</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail13.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web13.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>2019酒食節</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail12.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web12.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>萊爾富專案</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail11.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web11.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>渣打太空理財之旅</h3>
-									<span class="cat">設計稿</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail10.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web10.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>菁英-雅思6.5追分計畫活動</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail9.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web9.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>2018夏日活動專案</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail8.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web8.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>嬌生LABOLABO新品搶先報</h3>
-									<span class="cat">一頁式品牌產品介紹</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail07.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web7.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>女神保養季</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail6.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web6.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>FG部落客招募</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail5.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web5.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>2017夯什麼回顧</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail4.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web4.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>每月大調查</h3>
-									<span class="cat">RWD</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail3.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web3.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>活動合作案-obike&shopback</h3>
-									<span class="cat">Mobile一頁式品牌產品介紹</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail2.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web2.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-									<h3>電商&內容合作夥伴集合頁</h3>
-									<span class="cat">PC視覺稿</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<a class="work" href="detailpages/web_detail1.html">
-						<div class="work-grid web-height" style="background-image:url(images/web/web1.jpg);">
-							<div class="inner web-height">
-								<div class="desc">
-								<h3>UDN 預約活動</h3>
-								<span class="cat">RWD</span>
-							</div>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div id="fh5co-author" class="fh5co-bg-section">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>about me</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<div class="author">
-						<div class="author-inner animate-box" style="background-image: url(images/person.jpg);">
-						</div>
-						<div class="desc animate-box">
-							<span>UI/UX Designer、Web Designer</span>
-							<h3>Yuhan, Lin</h3>
-							<p>六年以上 UIUX 與網頁設計經驗，優化過各式網站和 app 流程與畫面，也參與產品從零到一上線的過程，打造出具有美感與功能性的介面，在過去工作中，使用問券訪談深入了解使用者需求與反饋，將這些資訊轉化為實際的設計改進，也熟悉商業策略研究，深入了解產品與市場之間的關係，能夠更全面的角度思考設計，與商業目標相結合，確保設計方案不僅滿足用戶需求，同時也有助於實現業務目標。<br>除了 UI/UX 設計，也具備一定的 HTML/CSS 切版能力，這讓我在團隊合作中能更順暢的與開發人員合作，實現設計到產品的無縫過渡。</p>
-							<p><a href="about.html" class="btn btn-primary btn-outline">Learn More</a></p>
-							<ul class="fh5co-social-icons">
-								<li><i class="icon-mail"></i>sky13146@gmail.com</li>
-							</ul>
-						</div>
+
+				<div>
+					<span class="fi-f-col-title">Contact</span>
+					<div class="fi-f-links">
+						<a href="mailto:sky13146@gmail.com" class="fi-f-link">sky13146@gmail.com</a>
 					</div>
 				</div>
 			</div>
+
+			<div class="fi-footer-bottom">
+				<span class="fi-f-copy">© 2026 YUHAN. All rights reserved.</span>
+				<div class="fi-f-status">
+					<span class="fi-dot"></span>
+					Available for work
+				</div>
+			</div>
 		</div>
-	</div>
+	</footer>
 
-	<footer id="fh5co-footer"></footer>
+	<script>
+		(function () {
+			var nav = document.getElementById('fi-nav');
+			window.addEventListener('scroll', function () {
+				if (window.scrollY > 32) nav.classList.add('scrolled');
+				else nav.classList.remove('scrolled');
+			}, { passive: true });
 
-	</div>
+			var btn = document.getElementById('fi-mobile-btn');
+			var drawer = document.getElementById('fi-drawer');
+			btn.addEventListener('click', function () {
+				btn.classList.toggle('open');
+				drawer.classList.toggle('open');
+			});
 
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-	
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<script src="js/theme.js"></script>
-	<script src="js/main.js"></script>
+			function scrollToId(id) {
+				var el = document.getElementById(id);
+				if (el) el.scrollIntoView({ behavior: 'smooth' });
+				btn.classList.remove('open');
+				drawer.classList.remove('open');
+			}
+			document.querySelectorAll('[data-scroll]').forEach(function (el) {
+				el.addEventListener('click', function () { scrollToId(el.getAttribute('data-scroll')); });
+			});
+			document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+				a.addEventListener('click', function (e) {
+					var id = a.getAttribute('href').slice(1);
+					var target = document.getElementById(id);
+					if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+				});
+			});
+
+			var skills = ["UI Design", "UX Research", "Prototyping", "Web Design", "Figma", "RWD", "Branding"];
+			var track = document.getElementById('fi-marquee-track');
+			var html = '';
+			for (var s = 0; s < 2; s++) {
+				for (var i = 0; i < skills.length; i++) {
+					html += '<span class="fi-marquee-item">' + skills[i] + '<span class="fi-marquee-sep">◆</span></span>';
+				}
+			}
+			track.innerHTML = html;
+		})();
+	</script>
 
 	</body>
 </html>
-
