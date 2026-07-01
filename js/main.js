@@ -281,4 +281,64 @@
 		rotatingAboutLabel();
 	});
 
+	// Replace footer logo <img> with an inline, white-tinted SVG (does not overwrite original file)
+	function replaceFooterLogoWithInlineWhite() {
+		var img = document.querySelector('.fi-footer .fi-f-logo-icon-img');
+		if (!img) return;
+		var src = img.getAttribute('src');
+		if (!src) return;
+		fetch(src).then(function(res){ return res.text(); }).then(function(text){
+			var parser = new DOMParser();
+			var doc = parser.parseFromString(text, 'image/svg+xml');
+			var svg = doc.querySelector('svg');
+			if (!svg) return;
+			svg.removeAttribute('width'); svg.removeAttribute('height');
+			// Only replace occurrences of the specific dark color #15171E (or equivalent rgb) with white.
+			function isTargetColor(val) {
+				if (!val) return false;
+				var v = val.trim().toLowerCase();
+				if (v === 'none') return false;
+				// normalize rgb spacing
+				v = v.replace(/\s+/g, '');
+				return v === '#15171e' || v === 'rgb(21,23,30)' || v === 'rgba(21,23,30,1)';
+			}
+
+			svg.querySelectorAll('[fill]').forEach(function(el){
+				var f = el.getAttribute('fill');
+				if (isTargetColor(f)) el.setAttribute('fill', 'white');
+				// also handle inline style e.g. style="fill:#15171E;"
+				var style = el.getAttribute('style');
+				if (style && /fill\s*:\s*#?15171e/i.test(style)) {
+					var newStyle = style.replace(/(fill\s*:\s*)#?15171e/ig, '$1white');
+					el.setAttribute('style', newStyle);
+				}
+			});
+			svg.querySelectorAll('[stroke]').forEach(function(el){
+				var s = el.getAttribute('stroke');
+				if (isTargetColor(s)) el.setAttribute('stroke', 'white');
+				var style = el.getAttribute('style');
+				if (style && /stroke\s*:\s*#?15171e/i.test(style)) {
+					var newStyle = style.replace(/(stroke\s*:\s*)#?15171e/ig, '$1white');
+					el.setAttribute('style', newStyle);
+				}
+			});
+			// handle gradient stops
+			svg.querySelectorAll('stop').forEach(function(stop){
+				var sc = stop.getAttribute('stop-color');
+				if (isTargetColor(sc)) stop.setAttribute('stop-color', 'white');
+				var style = stop.getAttribute('style');
+				if (style && /stop-color\s*:\s*#?15171e/i.test(style)) {
+					var newStyle = style.replace(/(stop-color\s*:\s*)#?15171e/ig, '$1white');
+					stop.setAttribute('style', newStyle);
+				}
+			});
+			// preserve sizing class so CSS still applies
+			svg.classList.add('fi-f-logo-icon-img');
+			img.parentNode.replaceChild(svg, img);
+		}).catch(function(err){ console.error('Failed to load footer SVG', err); });
+	}
+
+	// Run after DOM ready
+	document.addEventListener('DOMContentLoaded', replaceFooterLogoWithInlineWhite);
+
 }());

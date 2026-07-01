@@ -120,6 +120,12 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 
 /* ── HERO ──────────────────────────────────── */
 .fi-hero { position: relative; min-height: 100vh; padding-top: 60px; display: flex; flex-direction: column; overflow: hidden; }
+.fi-hero::after {
+  content: ''; pointer-events: none;
+  position: absolute; left: 0; right: 0; bottom: 0; height: 55%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(180,210,245,.18) 45%, rgba(108,149,228,.32) 100%);
+  z-index: 1;
+}
 
 .fi-hero-gradient {
   position: absolute; inset: 0;
@@ -165,7 +171,7 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
   gap: 40px; align-items: center; padding-top: 80px; padding-bottom: 80px;
 }
 @media (max-width: 1024px) {
-  .fi-hero-inner { grid-template-columns: 1fr 320px; gap: 24px; }
+  .fi-hero-inner { grid-template-columns: 1fr 450px; gap: 24px; }
   .fi-hero-visual { height: 380px; transform: scale(.86); transform-origin: top right; }
 }
 @media (max-width: 900px) {
@@ -248,21 +254,78 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 
 /* Hero visual */
 .fi-hero-visual { position: relative; height: 460px; }
-.fi-thumb {
-  position: absolute; border-radius: 20px; overflow: hidden;
-  box-shadow: 0 8px 40px rgba(21,23,30,.12); transition: transform .5s ease;
-}
-.fi-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.fi-thumb-a { width: 240px; height: 160px; top: 0; right: 0; transform: rotate(2deg); }
-.fi-thumb-a:hover { transform: rotate(-1deg); }
-.fi-thumb-b { width: 216px; height: 150px; top: 112px; left: -20px; transform: rotate(-2deg); }
-.fi-thumb-b:hover { transform: rotate(0deg); }
-.fi-thumb-c { width: 224px; height: 144px; bottom: 40px; right: 16px; transform: rotate(1deg); }
-.fi-thumb-c:hover { transform: rotate(3deg); }
 
-.fi-geo-sq { position: absolute; top: 64px; right: 208px; width: 40px; height: 40px; border: 3px solid var(--fi-yellow); transform: rotate(45deg); }
-.fi-geo-ci { position: absolute; bottom: 112px; left: 144px; width: 28px; height: 28px; border-radius: 50%; background: var(--fi-sky); }
-.fi-geo-sm { position: absolute; top: 24px; left: 64px; width: 14px; height: 14px; border-radius: 3px; background: #aec8f3; transform: rotate(12deg); }
+/* ── Sticky-note / pinboard cards ── */
+.fi-thumb {
+  position: absolute;
+  border-radius: 16px;
+  padding: 8px;
+  border: 1px solid rgba(21,23,30,.06);
+  box-shadow: 0 8px 30px rgba(21,23,30,.13), 0 2px 8px rgba(21,23,30,.07);
+  transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease;
+  cursor: default; z-index: 1;
+}
+.fi-thumb:hover { z-index: 10; box-shadow: 0 22px 52px rgba(21,23,30,.20); }
+
+/* Pin needle */
+.fi-thumb::after {
+  content: '';
+  position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
+  width: 5px; height: 12px; border-radius: 0 0 3px 3px;
+  background: rgba(21,23,30,.18); z-index: 2;
+}
+/* Pin head — overridden per card */
+.fi-thumb::before {
+  content: '';
+  position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+  width: 16px; height: 16px; border-radius: 50%; z-index: 3;
+}
+
+.fi-thumb-img { overflow: hidden; border-radius: 9px; }
+.fi-thumb-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
+.fi-thumb-lbl { display: none; }
+
+/* Card A — cream, red pin, top-left */
+.fi-thumb-a {
+  background: #fffcf0; width: 248px; top: 16px; left: 0;
+  transform: rotate(-5deg);
+}
+.fi-thumb-a::before {
+  background: radial-gradient(circle at 38% 35%, #ff9087, #e84040);
+  box-shadow: 0 3px 8px rgba(232,64,64,.45), inset 0 1px 2px rgba(255,255,255,.4);
+}
+.fi-thumb-a .fi-thumb-img { height: 152px; }
+.fi-thumb-a:hover { transform: rotate(-2deg) translateY(-12px) scale(1.04); }
+
+/* Card B — light blue, blue pin, top-right */
+.fi-thumb-b {
+  background: #eef7f1; width: 232px; top: 98px; right: 0;
+  transform: rotate(4deg);
+}
+.fi-thumb-b::before {
+  background: radial-gradient(circle at 38% 35%, #83bbf8, #4a80d0);
+  box-shadow: 0 3px 8px rgba(74,128,208,.45), inset 0 1px 2px rgba(255,255,255,.4);
+}
+.fi-thumb-b .fi-thumb-img { height: 142px; }
+.fi-thumb-b:hover { transform: rotate(1deg) translateY(-12px) scale(1.04); }
+
+/* Card C — lavender, purple pin, bottom-center */
+.fi-thumb-c {
+  background: #eef4fe; width: 244px; bottom: 16px; left: 28px;
+  transform: rotate(-3deg);
+}
+.fi-thumb-c::before {
+  background: radial-gradient(circle at 38% 35%, #bba8f4, #8a72e8);
+  box-shadow: 0 3px 8px rgba(138,114,232,.45), inset 0 1px 2px rgba(255,255,255,.4);
+}
+.fi-thumb-c .fi-thumb-img { height: 148px; }
+.fi-thumb-c:hover { transform: rotate(0deg) translateY(-12px) scale(1.04); }
+
+.fi-hero-arcs { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.fi-geo-sq { position: absolute; top: 52px; right: 12px; width: 12px; height: 12px; background: #b8a8f4; transform: rotate(45deg); border-radius: 2px; }
+.fi-geo-ci { position: absolute; bottom: 100px; left: 8px; width: 10px; height: 10px; border-radius: 50%; background: #e84040; opacity: .55; }
+.fi-geo-sm { position: absolute; top: 20px; right: 48px; width: 8px; height: 8px; background: #4a80d0; transform: rotate(12deg); border-radius: 2px; opacity: .65; }
 
 .fi-hero-chip {
   position: absolute; bottom: 8px; left: 0;
@@ -273,6 +336,7 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
   min-width: 156px;
   justify-content: center;
   transition: all .3s ease;
+  z-index: 30;
 }
 
 .fi-hero-chip:hover {
@@ -340,27 +404,12 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
   animation: text-rotate-out .4s ease-in;
 }
 
-.fi-hero-tag {
-  position: absolute; top: 20px; left: 16px;
-  padding: 6px 14px; border-radius: 999px;
-  background: var(--fi-yellow); color: #5b5535;
-  font-size: 12px; font-weight: 600;
-  animation: float-badge 3s ease-in-out infinite, glow-yellow 2.5s ease-in-out infinite;
-  transform-origin: center;
-  transition: all .3s ease;
-}
-
-.fi-hero-tag:hover {
-  transform: translateY(-2px) scale(1.05);
-  background: #f0d158;
-  box-shadow: 0 0 20px rgba(242,217,107,.8), 0 6px 20px rgba(21,23,30,.15) !important;
-}
-
 /* ── MARQUEE ───────────────────────────────── */
 .fi-marquee {
-  position: relative; z-index: 1;
-  border-top: 1px solid var(--fi-border-s);
-  border-bottom: 1px solid var(--fi-border-s);
+  position: relative; z-index: 2;
+  background: rgba(108,149,228,.13);
+  border-top: 1px solid rgba(108,149,228,.22);
+  border-bottom: 1px solid rgba(108,149,228,.22);
   overflow: hidden; padding: 14px 0;
 }
 .fi-marquee-track {
@@ -376,9 +425,9 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 .fi-marquee-item {
   flex-shrink: 0; padding: 0 6px;
   font-size: 12px; font-weight: 500; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--fi-300);
+  text-transform: uppercase; color: #2a3f6e;
 }
-.fi-marquee-sep { color: var(--fi-yellow); margin: 0 12px; }
+.fi-marquee-sep { color: #7aaee8; margin: 0 12px; }
 @media (max-width: 480px) {
   .fi-marquee-item { font-size: 11px; letter-spacing: .08em; }
   .fi-marquee-sep { margin: 0 8px; }
