@@ -313,7 +313,7 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 /* Card C — lavender, purple pin, bottom-center */
 .fi-thumb-c {
   background: #eef4fe; width: 244px; bottom: 16px; left: 28px;
-  transform: rotate(-3deg);
+  transform: rotate(12deg);
 }
 .fi-thumb-c::before {
   background: radial-gradient(circle at 38% 35%, #bba8f4, #8a72e8);
@@ -322,9 +322,9 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 .fi-thumb-c .fi-thumb-img { height: 148px; }
 .fi-thumb-c:hover { transform: rotate(0deg) translateY(-12px) scale(1.04); }
 
-.fi-hero-arcs { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.fi-hero-arcs { position: absolute; top: 0; right: 0; bottom: 0; left: -100px; width: calc(100% + 100px); height: 100%; pointer-events: none; z-index: 0; }
 .fi-geo-sq { position: absolute; top: 52px; right: 12px; width: 12px; height: 12px; background: #b8a8f4; transform: rotate(45deg); border-radius: 2px; }
-.fi-geo-ci { position: absolute; bottom: 100px; left: 8px; width: 10px; height: 10px; border-radius: 50%; background: #e84040; opacity: .55; }
+.fi-geo-ci { position: absolute; bottom: 100px; left: -12px; width: 10px; height: 10px; border-radius: 50%; background: #e84040; opacity: .55; }
 .fi-geo-sm { position: absolute; top: 20px; right: 48px; width: 8px; height: 8px; background: #4a80d0; transform: rotate(12deg); border-radius: 2px; opacity: .65; }
 
 .fi-hero-chip {
