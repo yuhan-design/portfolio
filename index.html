@@ -388,17 +388,17 @@
 
 			var skills = ["UI Design", "UX Research", "Prototyping", "Web Design", "Figma", "RWD", "Branding"];
 			var track = document.getElementById('fi-marquee-track');
-			var html = '';
-			for (var s = 0; s < 2; s++) {
+			if (track) {
+				var setHtml = '';
 				for (var i = 0; i < skills.length; i++) {
-					html += '<span class="fi-marquee-item">' + skills[i] + '<span class="fi-marquee-sep">◆</span></span>';
+					setHtml += '<span class="fi-marquee-item">' + skills[i] + '<span class="fi-marquee-sep">◆</span></span>';
 				}
+				track.innerHTML =
+					'<span class="fi-marquee-set">' + setHtml + '</span>' +
+					'<span class="fi-marquee-set" aria-hidden="true">' + setHtml + '</span>' +
+					'<span class="fi-marquee-set" aria-hidden="true">' + setHtml + '</span>' +
+					'<span class="fi-marquee-set" aria-hidden="true">' + setHtml + '</span>';
 			}
-			track.innerHTML = html;
-			requestAnimationFrame(function() {
-				var shift = track.offsetWidth / 2;
-				track.style.setProperty('--fi-marquee-shift', shift + 'px');
-			});
 		})();
 	</script>
 	<script src="js/jquery.min.js"></script>
