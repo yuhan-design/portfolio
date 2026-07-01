@@ -1,0 +1,527 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Works — Portfolio of Yuhan</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Yuhan">
+	<meta name="description" content="YUHAN 設計作品集 — UI/UX、網頁設計、廣宣設計全覽">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/figma-index.css">
+
+	<style>
+		/* ── WORKS PAGE ──────────────────────────────────────────── */
+
+		/* Hero */
+		.wk-hero { padding: 136px 0 52px; }
+		.wk-hero h1 {
+			font-family: 'Hanken Grotesk', sans-serif;
+			font-size: clamp(2.5rem, 7vw, 6rem);
+			font-weight: 900; line-height: 0.92;
+			letter-spacing: -0.03em; color: var(--fi-ink); margin-top: 8px;
+		}
+		.wk-hero-desc {
+			font-family: 'Hanken Grotesk', sans-serif;
+			font-size: 15px; line-height: 1.7;
+			color: var(--fi-400); max-width: 420px; margin-top: 16px;
+		}
+
+		/* Filter bar */
+		.wk-filter-wrap { padding-bottom: 40px; }
+		.wk-filter-row { display: flex; flex-wrap: wrap; gap: 10px; }
+		.wk-fb {
+			display: inline-flex; align-items: center; gap: 8px;
+			padding: 8px 16px; border-radius: 999px;
+			border: 1px solid var(--fi-border-s);
+			font-family: 'Hanken Grotesk', sans-serif;
+			font-size: 13px; font-weight: 500; cursor: pointer;
+			background: #fbfcfe; color: var(--fi-400);
+			transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+		}
+		.wk-fb:hover:not(.active) { border-color: var(--fi-ink); color: var(--fi-ink); }
+		.wk-fb.active {
+			background: var(--fi-ink); color: #fbfcfe;
+			border-color: var(--fi-ink);
+			box-shadow: 0 2px 12px rgba(21,23,30,0.18);
+		}
+		.wk-count {
+			font-size: 11px; font-weight: 700;
+			padding: 2px 6px; border-radius: 6px;
+			background: #eef2fb; color: var(--fi-300);
+		}
+		.wk-fb.active .wk-count { background: rgba(242,217,107,0.22); color: #f2d96b; }
+
+		/* Status line */
+		.wk-status {
+			margin-top: 20px; padding-top: 20px;
+			border-top: 1px solid #e6e9f0;
+			font-family: 'Hanken Grotesk', sans-serif;
+			font-size: 12.5px; color: var(--fi-300);
+		}
+		.wk-status strong { color: var(--fi-ink); font-weight: 600; }
+
+		/* Grid */
+		.wk-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 20px; padding-bottom: 96px;
+		}
+		@media (max-width: 900px) { .wk-grid { grid-template-columns: repeat(2, 1fr); } }
+		@media (max-width: 560px) { .wk-grid { grid-template-columns: 1fr; } }
+
+		/* Card */
+		.wk-card {
+			display: block; border-radius: 18px; overflow: hidden;
+			border: 1px solid #e6e9f0; background: #fbfcfe;
+			text-decoration: none; cursor: pointer;
+			box-shadow: 0 2px 10px rgba(21,23,30,0.05);
+			opacity: 0; transform: translateY(24px);
+			transition: opacity 0.45s ease, transform 0.45s ease,
+			            box-shadow 0.3s, border-color 0.3s;
+		}
+		.wk-card.in { opacity: 1; transform: translateY(0); }
+		.wk-card:hover { box-shadow: 0 12px 40px rgba(21,23,30,0.11); border-color: #d8e0f0; }
+
+		/* Card image */
+		.wk-card-img { position: relative; height: 220px; overflow: hidden; }
+		.wk-card-img img {
+			width: 100%; height: 100%;
+			object-fit: cover; object-position: top;
+			display: block;
+			transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+		.wk-card:hover .wk-card-img img { transform: scale(1.05); }
+
+		/* Hover overlay */
+		.wk-overlay {
+			position: absolute; inset: 0;
+			background: rgba(21,23,30,0.30);
+			display: flex; align-items: center; justify-content: center;
+			opacity: 0; transition: opacity 0.3s;
+		}
+		.wk-card:hover .wk-overlay { opacity: 1; }
+		.wk-overlay-arrow {
+			width: 44px; height: 44px; border-radius: 50%;
+			border: 2px solid rgba(255,255,255,0.9);
+			display: flex; align-items: center; justify-content: center;
+			color: white; font-size: 18px;
+		}
+
+		/* Card info */
+		.wk-card-info { padding: 16px 20px 18px; }
+		.wk-card-title {
+			font-family: 'Hanken Grotesk', sans-serif;
+			font-size: 15px; font-weight: 700; letter-spacing: -0.01em;
+			color: var(--fi-ink); margin-bottom: 8px;
+			white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+		}
+		.wk-pill {
+			display: inline-block; font-family: 'Hanken Grotesk', sans-serif;
+			font-size: 11px; font-weight: 600;
+			padding: 4px 10px; border-radius: 999px;
+		}
+
+		/* Page transition */
+		body { animation: wk-fadein 0.4s ease both; }
+		@keyframes wk-fadein { from { opacity: 0; } to { opacity: 1; } }
+	</style>
+</head>
+<body class="fi-page">
+
+<!-- ============ NAV ============ -->
+<nav class="fi-nav" id="fi-nav">
+	<div class="fi-container fi-nav-inner">
+		<a href="index.html" class="fi-logo">
+			<img src="images/logo-yuhan.svg" alt="YUHAN" class="fi-logo-img">
+		</a>
+		<div class="fi-nav-links">
+			<a href="works.html" class="fi-nav-link" id="nav-works-link">Works</a>
+			<a href="about.html" class="fi-nav-link">About</a>
+			<a href="mailto:sky13146@gmail.com" class="fi-nav-cta">Contact</a>
+		</div>
+		<button class="fi-mobile-btn" id="fi-mobile-btn">
+			<span></span><span></span><span></span>
+		</button>
+	</div>
+	<div class="fi-drawer" id="fi-drawer">
+		<div class="fi-drawer-inner">
+			<a href="works.html" class="fi-nav-link">Works</a>
+			<a href="about.html" class="fi-nav-link">About</a>
+			<a href="mailto:sky13146@gmail.com" class="fi-nav-link">Contact</a>
+		</div>
+	</div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="wk-hero">
+	<div class="fi-container">
+		<span class="fi-eyebrow">Works</span>
+		<h1>作品集</h1>
+		<p class="wk-hero-desc">涵蓋 UI/UX 設計、網頁設計，以及廣宣與品牌設計。</p>
+	</div>
+</section>
+
+<!-- ============ FILTERS ============ -->
+<div class="wk-filter-wrap">
+	<div class="fi-container">
+		<div class="wk-filter-row" role="group" aria-label="作品分類篩選">
+			<button class="wk-fb active" data-filter="all">All <span class="wk-count">21</span></button>
+			<button class="wk-fb" data-filter="uiux">UI/UX <span class="wk-count">7</span></button>
+			<button class="wk-fb" data-filter="web">Web Design <span class="wk-count">8</span></button>
+			<button class="wk-fb" data-filter="graphic">廣宣設計 <span class="wk-count">6</span></button>
+		</div>
+		<p class="wk-status">顯示 <strong id="wk-visible">21</strong> 件作品</p>
+	</div>
+</div>
+
+<!-- ============ GRID ============ -->
+<section>
+	<div class="fi-container">
+		<div class="wk-grid" id="wk-grid">
+
+			<!-- ── UI/UX ── -->
+			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail07.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/uiux/ui7.jpg" alt="痞客邦app-優化" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">痞客邦app-優化</div>
+					<span class="wk-pill" style="background:#c9ddf7;color:#1c2a44">UI/UX</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail06.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/uiux/ui6.jpg" alt="痞客邦web-官網優化" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">痞客邦web-官網優化</div>
+					<span class="wk-pill" style="background:#f2d96b;color:#5b5535">UI/UX</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail05.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/uiux/ui5.jpg" alt="叩叩 APP-0到1的完整規劃" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">叩叩 APP-0到1的完整規劃</div>
+					<span class="wk-pill" style="background:#6fae8a;color:#2c4d3a">UI/UX</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail04.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/uiux/ui4.jpg" alt="敦謙集團官網設計、商務中心設計" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">敦謙集團官網設計、商務中心設計</div>
+					<span class="wk-pill" style="background:#aec8f3;color:#1c2a44">UI/UX</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail03.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/uiux/ui3.jpg" alt="雀客-品牌形象網站Ｘ自助機台畫面" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">雀客-品牌形象網站Ｘ自助機台畫面</div>
+					<span class="wk-pill" style="background:#c9b8e8;color:#3f3460">UI/UX</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail02.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/uiux/ui2.jpg" alt="保險 APP-排行與規劃功能" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">保險 APP-排行與規劃功能</div>
+					<span class="wk-pill" style="background:#c9ddf7;color:#1c2a44">UI/UX</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail01.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/uiux/ui1.jpg" alt="DCARD APP-我的畫面redesign" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">DCARD APP-我的畫面redesign</div>
+					<span class="wk-pill" style="background:#f2d96b;color:#5b5535">UI/UX</span>
+				</div>
+			</a>
+
+			<!-- ── Web Design ── -->
+			<a class="wk-card" data-cat="web" href="detailpages/web_detail1.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/web/web1.jpg" alt="UDN 預約活動" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">UDN 預約活動</div>
+					<span class="wk-pill" style="background:#d8ecdf;color:#2c4d3a">Web Design</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="web" href="detailpages/web_detail2.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/web/web2.jpg" alt="電商&內容合作夥伴集合頁" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">電商&內容合作夥伴集合頁</div>
+					<span class="wk-pill" style="background:#d8ecdf;color:#2c4d3a">Web Design</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="web" href="detailpages/web_detail3.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/web/web3.jpg" alt="活動合作案-obike&shopback" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">活動合作案-obike&shopback</div>
+					<span class="wk-pill" style="background:#d8ecdf;color:#2c4d3a">Web Design</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="web" href="detailpages/web_detail4.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/web/web4.jpg" alt="每月大調查" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">每月大調查</div>
+					<span class="wk-pill" style="background:#d8ecdf;color:#2c4d3a">Web Design</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="web" href="detailpages/web_detail5.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/web/web5.jpg" alt="2017夯什麼回顧" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">2017夯什麼回顧</div>
+					<span class="wk-pill" style="background:#d8ecdf;color:#2c4d3a">Web Design</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="web" href="detailpages/web_detail6.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/web/web6.jpg" alt="FG部落客招募" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">FG部落客招募</div>
+					<span class="wk-pill" style="background:#d8ecdf;color:#2c4d3a">Web Design</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="web" href="detailpages/web_detail7.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/web/web7.jpg" alt="女神保養季" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">女神保養季</div>
+					<span class="wk-pill" style="background:#d8ecdf;color:#2c4d3a">Web Design</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="web" href="detailpages/web_detail8.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/web/web8.jpg" alt="嬌生LABOLABO新品搶先報" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">嬌生LABOLABO新品搶先報</div>
+					<span class="wk-pill" style="background:#d8ecdf;color:#2c4d3a">Web Design</span>
+				</div>
+			</a>
+
+			<!-- ── 廣宣設計 ── -->
+			<a class="wk-card" data-cat="graphic" href="detailpages/graphic_detail17.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/banner/banner17.jpg" alt="中山大學 研討會、論壇講座" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">中山大學 研討會、論壇講座</div>
+					<span class="wk-pill" style="background:#e4ddf3;color:#3f3460">廣宣設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="graphic" href="detailpages/graphic_detail18.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/banner/banner18.jpg" alt="中山大學 管院校友回娘家" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">中山大學 管院校友回娘家</div>
+					<span class="wk-pill" style="background:#e4ddf3;color:#3f3460">廣宣設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="graphic" href="detailpages/graphic_detail19.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/banner/banner19.jpg" alt="培根規劃設計 做農讀書人書籍" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">培根規劃設計 做農讀書人書籍</div>
+					<span class="wk-pill" style="background:#e4ddf3;color:#3f3460">廣宣設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="graphic" href="detailpages/graphic_detail20.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/banner/banner20.jpg" alt="西子灣教育基金會 年曆筆記本" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">西子灣教育基金會 年曆筆記本</div>
+					<span class="wk-pill" style="background:#e4ddf3;color:#3f3460">廣宣設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="graphic" href="detailpages/graphic_detail21.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/banner/banner21.jpg" alt="西子灣教育基金會 年曆相片書" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">西子灣教育基金會 年曆相片書</div>
+					<span class="wk-pill" style="background:#e4ddf3;color:#3f3460">廣宣設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="graphic" href="detailpages/graphic_detail22.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/banner/banner22.jpg" alt="中山大學諮商 年曆及相關設計" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">中山大學諮商 年曆及相關設計</div>
+					<span class="wk-pill" style="background:#e4ddf3;color:#3f3460">廣宣設計</span>
+				</div>
+			</a>
+
+		</div>
+	</div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="fi-footer">
+	<div class="fi-container fi-footer-inner">
+		<div class="fi-footer-grid">
+			<div>
+				<div class="fi-f-logo">
+					<img src="images/logo-yuhan-white.svg" alt="YUHAN" class="fi-f-logo-img">
+				</div>
+				<p class="fi-f-desc">UI/UX Designer based in Taiwan.<br>打造有溫度的數位體驗。</p>
+			</div>
+			<div>
+				<span class="fi-f-col-title">Navigation</span>
+				<div class="fi-f-links">
+					<a href="index.html" class="fi-f-link">Home</a>
+					<a href="works.html" class="fi-f-link">Works</a>
+					<a href="about.html" class="fi-f-link">About</a>
+				</div>
+			</div>
+			<div>
+				<span class="fi-f-col-title">Contact</span>
+				<div class="fi-f-links">
+					<a href="mailto:sky13146@gmail.com" class="fi-f-link">sky13146@gmail.com</a>
+				</div>
+			</div>
+		</div>
+		<div class="fi-footer-bottom">
+			<span class="fi-f-copy">© 2026 YUHAN. All rights reserved.</span>
+			<div class="fi-f-status">
+				<span class="fi-dot"></span>
+				Available for work
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script>
+(function () {
+	/* Nav scroll */
+	var nav = document.getElementById('fi-nav');
+	window.addEventListener('scroll', function () {
+		nav.classList.toggle('scrolled', window.scrollY > 32);
+	}, { passive: true });
+
+	/* Mobile drawer */
+	var mBtn = document.getElementById('fi-mobile-btn');
+	var drawer = document.getElementById('fi-drawer');
+	mBtn.addEventListener('click', function () {
+		var open = mBtn.classList.toggle('open');
+		drawer.classList.toggle('open', open);
+	});
+
+	/* Active nav highlight */
+	var worksLink = document.getElementById('nav-works-link');
+	if (worksLink) {
+		worksLink.style.color = 'var(--fi-ink)';
+		worksLink.style.fontWeight = '700';
+	}
+
+	/* Cards & filter */
+	var cards   = Array.prototype.slice.call(document.querySelectorAll('.wk-card'));
+	var fBtns   = Array.prototype.slice.call(document.querySelectorAll('.wk-fb'));
+	var visEl   = document.getElementById('wk-visible');
+
+	/* Staggered entry animation */
+	cards.forEach(function (c, i) {
+		setTimeout(function () {
+			requestAnimationFrame(function () { c.classList.add('in'); });
+		}, i * 55);
+	});
+
+	function updateCount() {
+		var n = cards.filter(function (c) { return c.style.display !== 'none'; }).length;
+		if (visEl) visEl.textContent = n;
+	}
+
+	function applyFilter(cat) {
+		fBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.filter === cat); });
+		var delay = 0;
+		cards.forEach(function (card) {
+			if (cat === 'all' || card.dataset.cat === cat) {
+				card.style.display = '';
+				card.classList.remove('in');
+				(function (c, d) {
+					setTimeout(function () {
+						requestAnimationFrame(function () { c.classList.add('in'); });
+					}, d);
+				})(card, delay);
+				delay += 55;
+			} else {
+				card.classList.remove('in');
+				card.style.display = 'none';
+			}
+		});
+		updateCount();
+	}
+
+	fBtns.forEach(function (b) {
+		b.addEventListener('click', function () { applyFilter(b.dataset.filter); });
+	});
+})();
+</script>
+
+</body>
+</html>
