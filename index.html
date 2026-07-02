@@ -88,11 +88,11 @@
 					<span class="fi-thumb-lbl">UI/UX Design</span>
 				</div>
 				<div class="fi-thumb fi-thumb-b">
-					<div class="fi-thumb-img"><img src="images/web/web32.jpg" alt="植感生活節"></div>
+					<div class="fi-thumb-img"><img src="images/web/web26.jpg" alt="植感生活節"></div>
 					<span class="fi-thumb-lbl">Web Design</span>
 				</div>
 				<div class="fi-thumb fi-thumb-c">
-					<div class="fi-thumb-img"><img src="images/web/web35.jpg" alt="台灣美食特產"></div>
+					<div class="fi-thumb-img"><img src="images/web/web29.jpg" alt="台灣美食特產"></div>
 					<span class="fi-thumb-lbl">Web Design</span>
 				</div>
 
@@ -245,15 +245,7 @@
 						<span class="fi-about-rotating-text fi-about-rotating-text--next">thinking</span>
 					</span>
 					</div>
-					<div class="fi-about-box-inner">
-						<div class="fi-yh">YH</div>
-						<div class="fi-shapes">
-							<div class="fi-sh-circle"></div>
-							<div class="fi-sh-square"></div>
-							<div class="fi-sh-ring"></div>
-						</div>
-						<p class="fi-about-caption">Designing with purpose</p>
-					</div>
+					<div class="fi-about-box-inner" style="background-image: url(images/person02.jpg);"></div>
 					<div class="fi-about-badge">✦</div>
 				</div>
 			</div>
@@ -270,11 +262,10 @@
 				</div>
 
 				<div class="fi-tags">
-					<span class="fi-tag">Figma</span>
-					<span class="fi-tag">Adobe XD</span>
-					<span class="fi-tag">Photoshop</span>
-					<span class="fi-tag">Illustrator</span>
-					<span class="fi-tag">HTML / CSS</span>
+					<span class="fi-tag">UIUX設計</span>
+					<span class="fi-tag">RWD/APP</span>
+					<span class="fi-tag">2C產品</span>
+					<span class="fi-tag">0→1建構</span>
 				</div>
 			</div>
 		</div>
@@ -395,6 +386,24 @@
 						var prTmp = prCur; prCur = prNext; prNext = prTmp;
 					}, 380);
 				}, 2200);
+			}
+
+			var aboutBadge = document.querySelector('.fi-about-badge');
+			if (aboutBadge) {
+				var badgeRotation = 12;
+				var lastScrollY = window.scrollY;
+				var badgeTicking = false;
+				window.addEventListener('scroll', function () {
+					if (badgeTicking) { return; }
+					badgeTicking = true;
+					requestAnimationFrame(function () {
+						var currentScrollY = window.scrollY;
+						badgeRotation += (currentScrollY - lastScrollY) * 0.2;
+						lastScrollY = currentScrollY;
+						aboutBadge.style.transform = 'rotate(' + badgeRotation + 'deg)';
+						badgeTicking = false;
+					});
+				});
 			}
 
 			var skills = ["UI Design", "UX Research", "Prototyping", "Web Design", "Figma", "RWD", "Branding"];
