@@ -57,15 +57,17 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 /* ── NAVBAR ────────────────────────────────── */
 .fi-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: transparent;
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(86, 92, 107, .08);
-  transition: background .3s, border-color .3s, backdrop-filter .3s;
+  background: rgba(233,239,249,.28);
+  backdrop-filter: blur(14px) saturate(1.5); -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  border-bottom: 1px solid rgba(255,255,255,.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+  transition: background .3s, border-color .3s, backdrop-filter .3s, box-shadow .3s;
 }
 .fi-nav.scrolled {
-  background: rgba(233,239,249,.22);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom-color: rgba(86, 92, 107, .12);
+  background: rgba(233,239,249,.52);
+  backdrop-filter: blur(22px) saturate(1.7); -webkit-backdrop-filter: blur(22px) saturate(1.7);
+  border-bottom-color: rgba(255,255,255,.4);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 10px 32px rgba(89,95,112,.16);
 }
 .fi-nav-inner {
   height: 60px; display: flex; align-items: center; justify-content: space-between;
@@ -324,8 +326,13 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 
 .fi-hero-arcs { position: absolute; top: 0; right: 0; bottom: 0; left: -100px; width: calc(100% + 100px); height: 100%; pointer-events: none; z-index: 0; }
 .fi-geo-sq { position: absolute; top: 52px; right: 12px; width: 12px; height: 12px; background: #b8a8f4; transform: rotate(45deg); border-radius: 2px; }
-.fi-geo-ci { position: absolute; bottom: 100px; left: -12px; width: 10px; height: 10px; border-radius: 50%; background: #e84040; opacity: .55; }
+.fi-geo-ci { position: absolute; bottom: 100px; left: -22px; width: 40px; height: 40px; opacity: .8; animation: fi-float 4s ease-in-out infinite; }
 .fi-geo-sm { position: absolute; top: 20px; right: 48px; width: 8px; height: 8px; background: #4a80d0; transform: rotate(12deg); border-radius: 2px; opacity: .65; }
+
+@keyframes fi-float {
+  0%, 100% { transform: rotate(30deg) translateY(0); }
+  50% { transform: rotate(30deg) translateY(-8px); }
+}
 
 .fi-hero-chip {
   position: absolute; bottom: 140px; right: -30px;
@@ -699,9 +706,52 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
   background: var(--fi-mist); border: 1px solid var(--fi-border-s); color: #3a3f4c;
 }
 
+/* ── CASE STUDY DETAIL PAGE ──────────────────── */
+.fi-detail-hero { position: relative; overflow: hidden; padding: 140px 0 56px; }
+.fi-detail-hero .fi-dot-grid { height: calc(100% + 120px); }
+.fi-detail-inner { position: relative; z-index: 1; max-width: 760px; }
+.fi-detail-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--fi-400);
+  margin-bottom: 28px; transition: color .2s;
+}
+.fi-detail-back:hover { color: var(--fi-ink); }
+.fi-detail-tag {
+  display: inline-block; font-size: 11.5px; font-weight: 600;
+  letter-spacing: .04em; padding: 6px 14px; border-radius: 999px;
+  margin-bottom: 20px;
+}
+.fi-detail-title {
+  font-family: var(--fi-font); font-weight: 800;
+  font-size: clamp(2rem,5vw,3.2rem); line-height: 1.05;
+  letter-spacing: -.02em; color: var(--fi-ink); margin-bottom: 20px;
+}
+.fi-detail-desc { font-size: 15.5px; line-height: 1.75; color: var(--fi-500); max-width: 560px; }
+
+.fi-detail-body { padding-bottom: 96px; }
+.fi-detail-frame {
+  border-radius: 24px; overflow: hidden;
+  border: 1px solid var(--fi-border); box-shadow: 0 24px 70px rgba(21,23,30,.10);
+  margin-bottom: 40px;
+}
+.fi-detail-frame img { width: 100%; display: block; }
+
+.fi-detail-navbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+@media (max-width: 640px) {
+  .fi-detail-hero { padding: 112px 0 40px; }
+  .fi-detail-navbar { justify-content: center; }
+}
+
 /* ── FOOTER ────────────────────────────────── */
-.fi-footer { background: var(--fi-ink); }
-.fi-footer-inner { padding-top: 64px; padding-bottom: 64px; }
+.fi-footer { background: var(--fi-ink); position: relative; overflow: hidden; }
+.fi-footer-deco {
+  position: absolute; right: -24px; bottom: -20px;
+  width: 200px; height: auto;
+  opacity: .07; pointer-events: none; z-index: 0;
+}
+.fi-footer-inner { padding-top: 64px; padding-bottom: 64px; position: relative; z-index: 1; }
 .fi-footer-grid {
   display: grid; grid-template-columns: 1.5fr 1fr 1fr;
   gap: 48px; margin-bottom: 56px;

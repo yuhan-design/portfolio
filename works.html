@@ -2,6 +2,7 @@
 <html lang="zh-tw">
 <head>
 	<meta charset="utf-8">
+	<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Works — Portfolio of Yuhan</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,7 +54,30 @@
 			padding: 2px 6px; border-radius: 6px;
 			background: #eef2fb; color: var(--fi-300);
 		}
-		.wk-fb.active .wk-count { background: rgba(242,217,107,0.22); color: #f2d96b; }
+		.wk-fb.active .wk-count { background: rgba(255,255,255,0.18); color: #fbfcfe; }
+
+		/* Sub-filter bar (illustration subcategories) */
+		.wk-subfilter-row {
+			display: none; flex-wrap: wrap; gap: 8px;
+			margin-top: 14px; padding-top: 14px;
+			border-top: 1px dashed #e6e9f0;
+		}
+		.wk-subfilter-row.show { display: flex; }
+		.wk-sfb {
+			display: inline-flex; align-items: center; gap: 6px;
+			padding: 5px 12px; border-radius: 999px;
+			border: 1px solid var(--fi-border-s);
+			font-family: 'Hanken Grotesk', sans-serif;
+			font-size: 12px; font-weight: 500; cursor: pointer;
+			background: transparent; color: var(--fi-400);
+			transition: background 0.2s, color 0.2s, border-color 0.2s;
+		}
+		.wk-sfb:hover:not(.active) { border-color: var(--fi-ink); color: var(--fi-ink); }
+		.wk-sfb.active {
+			background: var(--fi-ink); color: #fbfcfe; border-color: var(--fi-ink);
+		}
+		.wk-sfb .wk-count { background: rgba(255,255,255,0.6); color: inherit; }
+		.wk-sfb.active .wk-count { background: rgba(255,255,255,0.18); color: #fbfcfe; }
 
 		/* Status line */
 		.wk-status {
@@ -125,8 +149,9 @@
 			padding: 4px 10px; border-radius: 999px;
 		}
 		.wk-pill--uiux { background: #c9ddf7; color: #1c2a44; }
-		.wk-pill--web { background: #d8ecdf; color: #2c4d3a; }
-		.wk-pill--graphic { background: #e4ddf3; color: #3f3460; }
+		.wk-pill--web { background: #6fae8a; color: #2c4d3a; }
+		.wk-pill--graphic { background: #c9b8e8; color: #3f3460; }
+		.wk-pill--illustration { background: #f2d96b; color: #5b5535; }
 
 		/* Page transition */
 		body { animation: wk-fadein 0.4s ease both; }
@@ -209,12 +234,20 @@
 <div class="wk-filter-wrap">
 	<div class="fi-container">
 		<div class="wk-filter-row" role="group" aria-label="作品分類篩選">
-			<button class="wk-fb active" data-filter="all">All <span class="wk-count">144</span></button>
+			<button class="wk-fb active" data-filter="all">All <span class="wk-count">190</span></button>
 			<button class="wk-fb" data-filter="uiux">UI/UX <span class="wk-count">7</span></button>
 			<button class="wk-fb" data-filter="web">Web Design <span class="wk-count">29</span></button>
 			<button class="wk-fb" data-filter="graphic">廣宣設計 <span class="wk-count">108</span></button>
+			<button class="wk-fb" data-filter="illustration">平面與插畫設計 <span class="wk-count">46</span></button>
 		</div>
-		<p class="wk-status">顯示 <strong id="wk-visible">144</strong> 件作品</p>
+		<div class="wk-subfilter-row" id="wk-subfilter-row" role="group" aria-label="平面與插畫設計子分類篩選">
+			<button class="wk-sfb active" data-subfilter="all">Show All <span class="wk-count">46</span></button>
+			<button class="wk-sfb" data-subfilter="illustration">Illustration <span class="wk-count">11</span></button>
+			<button class="wk-sfb" data-subfilter="book">Book &amp; DM <span class="wk-count">9</span></button>
+			<button class="wk-sfb" data-subfilter="activity">Activity <span class="wk-count">15</span></button>
+			<button class="wk-sfb" data-subfilter="branding">Branding <span class="wk-count">11</span></button>
+		</div>
+		<p class="wk-status">顯示 <strong id="wk-visible">190</strong> 件作品</p>
 	</div>
 </div>
 
@@ -1809,12 +1842,522 @@
 					<span class="wk-pill wk-pill--graphic">廣宣設計</span>
 				</div>
 			</div>
+
+			<!-- ── 平面與插畫設計 ── -->
+			<a class="wk-card" data-cat="illustration" data-subcat="book" href="detailpages/graphic_detail27.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic49.jpg" alt="熊棉廣宣與DM設計" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">熊棉廣宣與DM設計</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="illustration" data-full="images/graphic/graphic48.jpg">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic48.jpg" alt="似顏繪" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">似顏繪</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail26.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic47.jpg" alt="YT頻道素材" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">YT頻道素材</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail25.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic46.jpg" alt="公益講座活動與抽獎社群宣傳" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">公益講座活動與抽獎社群宣傳</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="branding" href="detailpages/graphic_detail24.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic45.jpg" alt="公益CIS規範與應用" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">公益CIS規範與應用</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="illustration" href="detailpages/graphic_detail23.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic44.jpg" alt="合作簡報設計" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">合作簡報設計</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="illustration" href="detailpages/graphic_detail22.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic43.jpg" alt="中保潔菌家" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">中保潔菌家</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="book" href="detailpages/graphic_detail21.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic42.jpg" alt="公司業務-店家傳單" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">公司業務-店家傳單</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail20.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic41.jpg" alt="LINE互動遊戲設計" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">LINE互動遊戲設計</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="branding" href="detailpages/graphic_detail19.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic40.jpg" alt="睿士達電動車" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">睿士達電動車</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="activity" data-full="images/graphic/graphic39.jpg">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic39.jpg" alt="樹德健促中心活動" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">樹德健促中心活動</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="illustration" href="detailpages/graphic_detail18.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic38.jpg" alt="公益懶人包設計" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">公益懶人包設計</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="illustration" data-full="images/graphic/graphic37.jpg">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic37.jpg" alt="FG會員大頭照" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">FG會員大頭照</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="illustration" data-full="detailpages/images/graphic/graphic20-1.jpg">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic36.jpg" alt="2018狗年賀卡-會員版&amp;廠商版" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">2018狗年賀卡-會員版&amp;廠商版</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail17.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic35.jpg" alt="2018秋季美容展" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">2018秋季美容展</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail16.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic34.jpg" alt="2018 FG 美妝大賞" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">2018 FG 美妝大賞</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail15.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic33.jpg" alt="2018 春季美容展" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">2018 春季美容展</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail14.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic32.gif" alt="冰雪嘉年華" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">冰雪嘉年華</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="branding" data-full="images/graphic/graphic31.jpg">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic31.jpg" alt="FG 部落客TOP100&amp;百位體驗認證" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">FG 部落客TOP100&amp;百位體驗認證</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="activity" data-full="images/graphic/graphic30.jpg">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic30.jpg" alt="2017 南部智慧城市座談會" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">2017 南部智慧城市座談會</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="illustration" data-full="images/graphic/graphic29.jpg">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic29.jpg" alt="Soft-Life 吉祥物" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">Soft-Life 吉祥物</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="book" data-full="detailpages/images/graphic/graphic15-1.jpg">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic28.jpg" alt="育成高中 危機應變與防範" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">育成高中 危機應變與防範</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail13.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic27.jpg" alt="新庄國小 41屆畢業同學會" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">新庄國小 41屆畢業同學會</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="branding" href="detailpages/graphic_detail12.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic26.jpg" alt="金兆億企業" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">金兆億企業</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="branding" href="detailpages/graphic_detail11.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic25.jpg" alt="喜歡來" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">喜歡來</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="branding" href="detailpages/graphic_detail10.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic24.jpg" alt="草萃" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">草萃</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="branding" href="detailpages/graphic_detail9.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic23.jpg" alt="轟炸G" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">轟炸G</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="book" href="detailpages/graphic_detail8.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic22.jpg" alt="樹德科技大學諮商" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">樹德科技大學諮商</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="book" href="detailpages/graphic_detail7.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic21.jpg" alt="中山大學諮商" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">中山大學諮商</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="book" href="detailpages/graphic_detail6.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic20.jpg" alt="西子灣教育基金會" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">西子灣教育基金會</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="book" href="detailpages/graphic_detail5.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic19.jpg" alt="西子灣教育基金會" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">西子灣教育基金會</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="book" href="detailpages/graphic_detail4.html">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic18.jpg" alt="培根規劃設計公司" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">培根規劃設計公司</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail3.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic17.jpg" alt="中山大學 管院校友回娘家活動" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">中山大學 管院校友回娘家活動</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail2.html">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic16.jpg" alt="中山大學 研討會、論壇講座" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">中山大學 研討會、論壇講座</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="illustration" data-full="images/graphic/graphic15.jpg">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic15.jpg" alt="猴年行大運" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">猴年行大運</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="illustration" data-full="images/graphic/graphic14.jpg">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic14.jpg" alt="JBdesign" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">JBdesign</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="book" data-full="images/graphic/graphic13.jpg">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic13.jpg" alt="新雪米家 年節禮盒" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">新雪米家 年節禮盒</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="activity" data-full="images/graphic/graphic12.jpg">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic12.jpg" alt="活動、講座、產品介紹" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">活動、講座、產品介紹</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="activity" data-full="images/graphic/graphic11.jpg">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic11.jpg" alt="活動、講座" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">活動、講座</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="illustration" data-full="images/graphic/graphic10.jpg">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic10.jpg" alt="樹德科技大學 健促中心" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">樹德科技大學 健促中心</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="illustration" data-full="images/graphic/graphic9.gif">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic9.gif" alt="涵吉" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">涵吉</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="branding" data-full="images/graphic/graphic8.jpg">
+				<div class="wk-card-img" style="background:#f7f1d8">
+					<img src="images/graphic/graphic8.jpg" alt="五洲牌" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">五洲牌</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="branding" data-full="images/graphic/graphic7.jpg">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic7.jpg" alt="忻琦樂團" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">忻琦樂團</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="branding" data-full="images/graphic/graphic6.jpg">
+				<div class="wk-card-img" style="background:#ede8f5">
+					<img src="images/graphic/graphic6.jpg" alt="個人名片" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">個人名片</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<div class="wk-card wk-card--lightbox" data-cat="illustration" data-subcat="branding" data-full="images/graphic/graphic5.jpg">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<img src="images/graphic/graphic5.jpg" alt="正合印刷" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">⛶</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">正合印刷</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</div>
+
+			<a class="wk-card" data-cat="illustration" data-subcat="activity" href="detailpages/graphic_detail1.html">
+				<div class="wk-card-img" style="background:#d8ecdf">
+					<img src="images/graphic/graphic4.jpg" alt="壽山動物園" loading="lazy">
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">壽山動物園</div>
+					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
+				</div>
+			</a>
 		</div>
 	</div>
 </section>
 
 <!-- ============ FOOTER ============ -->
 <footer class="fi-footer">
+	<svg class="fi-footer-deco" viewBox="0 0 281 293" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M181.067 4.99281C194.222 1.21922 207.824 -0.390941 221.439 0.0797271C230.213 0.389805 239.016 1.54331 247.66 3.76332C255.698 5.82979 263.184 9.74425 270.52 13.6901C271.006 13.9514 271.493 14.2133 271.98 14.4752C274.777 15.9739 277.513 17.616 280.173 19.3903V65.4606C278.407 64.4002 276.828 63.0231 275.526 61.3766C270.175 54.6016 263.422 49.02 255.645 44.8424C255.32 44.6678 254.991 44.4986 254.66 44.3366C249.61 41.8725 243.947 40.8779 238.483 39.4752C232.566 37.9543 226.392 37.0282 220.145 36.8082C210.456 36.4666 200.612 37.7276 191.376 40.4538C191.248 40.4917 191.12 40.5311 190.991 40.5709C187.112 41.7641 182.899 43.8904 178.587 46.5934C173.167 49.9822 167.646 54.278 161.848 59.0084C161.795 59.0514 161.742 59.0953 161.69 59.1383C157.077 62.9164 152.835 66.9875 149.076 71.3444C145.207 75.826 141.882 80.6233 139.078 85.6491C139.389 85.6714 139.701 85.6934 140.013 85.7204C140.792 85.7849 141.567 85.8637 142.35 85.9567C154.284 87.4693 165.898 91.6412 176.302 100.268C191.042 111.492 196.821 134.702 192.867 150.246C192.765 150.77 192.655 151.292 192.536 151.808C187.375 171.585 173.875 183.269 158.246 190.06C147.054 194.711 132.286 196.83 118.421 190.461C118.298 190.404 118.173 190.346 118.049 190.288C107.118 185.404 94.9768 175.268 89.6225 161.805C87.5255 156.641 86.303 151.618 85.6684 146.779C82.8068 149.692 80.1103 152.717 77.5151 155.779C72.4072 161.8 67.8924 168.171 63.8618 174.967C59.3788 182.512 55.5381 190.641 51.9428 199.273C51.8731 199.44 51.8035 199.609 51.7339 199.776C47.984 208.751 44.3568 217.65 43.1128 224.115C43.0976 224.194 43.082 224.274 43.0669 224.353C41.7509 231.292 41.0173 238.562 40.5796 245.816C40.179 252.502 40.1162 259.198 40.4399 265.814C40.5281 267.611 40.6446 269.401 40.7915 271.179C41.3773 278.267 42.4153 285.222 44.0063 291.862C44.0824 292.179 44.1522 292.498 44.2182 292.818H3.33152C2.15536 286.737 1.3315 280.662 0.795384 274.611C0.59818 272.378 0.439633 270.146 0.316869 267.915C-0.133168 259.702 -0.0988687 251.545 0.388158 243.403C0.92668 234.55 2.06358 225.794 3.75144 216.873C3.77099 216.77 3.79038 216.666 3.81003 216.564C6.52696 203.408 10.8365 193.798 14.6811 184.331C14.7526 184.159 14.8247 183.988 14.896 183.817C19.0003 173.975 23.8253 164 29.6762 154.393C34.9291 145.743 41.0477 137.472 47.7827 129.901C53.0139 124.01 58.7125 118.658 64.4507 113.527C64.7482 113.261 65.0476 112.995 65.3481 112.729C73.7112 105.431 82.7693 99.1123 93.5766 94.401C96.8686 85.4072 100.502 76.9297 105.241 68.1413C105.257 68.1107 105.275 68.0799 105.291 68.0495C109.572 60.216 114.802 52.9812 120.594 46.4284C125.987 40.3229 131.886 34.8098 138.092 29.8668C138.163 29.8107 138.234 29.7539 138.304 29.6979C144.571 24.7375 151.349 19.5486 159.139 14.8395C165.364 11.0953 172.301 7.63626 180.267 5.22914C180.533 5.14931 180.799 5.06984 181.067 4.99281ZM136.832 124.096C133.093 123.771 129.045 124.156 124.33 125.124C124.234 125.673 124.142 126.225 124.056 126.779C124.035 126.911 124.015 127.045 123.995 127.177C122.655 135.594 123.124 143.033 124.921 147.033C126.438 150.567 128.89 153.204 134.381 155.948C134.399 155.957 134.417 155.965 134.434 155.973C136.111 156.905 139.754 157.544 144.153 155.724C150.207 153.452 155.807 146.997 156.302 143.492C156.322 143.403 156.34 143.315 156.355 143.231C157.505 135.776 156.118 132.995 152.019 129.449C148.854 126.867 143.29 124.784 137.864 124.199C137.522 124.16 137.18 124.125 136.832 124.096Z" fill="#ffffff"/>
+	</svg>
 	<div class="fi-container fi-footer-inner">
 		<div class="fi-footer-grid">
 			<div>
@@ -1835,6 +2378,7 @@
 				<span class="fi-f-col-title">Contact</span>
 				<div class="fi-f-links">
 					<a href="mailto:sky13146@gmail.com" class="fi-f-link">sky13146@gmail.com</a>
+					<a href="https://www.linkedin.com/in/yuhan-lin-hana/" class="fi-f-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 				</div>
 			</div>
 		</div>
@@ -1885,16 +2429,29 @@
 	var fBtns   = Array.prototype.slice.call(document.querySelectorAll('.wk-fb'));
 	var visEl   = document.getElementById('wk-visible');
 
+	/* Sub-filter (illustration subcategories) */
+	var subFilterRow = document.getElementById('wk-subfilter-row');
+	var sfBtns = Array.prototype.slice.call(document.querySelectorAll('.wk-sfb'));
+	var currentMainFilter = 'all';
+	var currentSubFilter = 'all';
+
 	function updateCount() {
 		var n = cards.filter(function (c) { return c.style.display !== 'none'; }).length;
 		if (visEl) visEl.textContent = n;
 	}
 
-	function applyFilter(cat, instant) {
-		fBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.filter === cat); });
+	function cardMatchesFilters(card) {
+		if (currentMainFilter !== 'all' && card.dataset.cat !== currentMainFilter) return false;
+		if (currentMainFilter === 'illustration' && currentSubFilter !== 'all') {
+			return card.dataset.subcat === currentSubFilter;
+		}
+		return true;
+	}
+
+	function renderCards(instant) {
 		var delay = 0;
 		cards.forEach(function (card) {
-			if (cat === 'all' || card.dataset.cat === cat) {
+			if (cardMatchesFilters(card)) {
 				card.style.display = '';
 				if (instant) {
 					card.classList.add('in');
@@ -1914,6 +2471,25 @@
 		});
 		updateCount();
 	}
+
+	function applyFilter(cat, instant) {
+		currentMainFilter = cat;
+		currentSubFilter = 'all';
+		fBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.filter === cat); });
+		sfBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.subfilter === 'all'); });
+		if (subFilterRow) subFilterRow.classList.toggle('show', cat === 'illustration');
+		renderCards(instant);
+	}
+
+	function applySubFilter(subcat) {
+		currentSubFilter = subcat;
+		sfBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.subfilter === subcat); });
+		renderCards(false);
+	}
+
+	sfBtns.forEach(function (b) {
+		b.addEventListener('click', function () { applySubFilter(b.dataset.subfilter); });
+	});
 
 	/* Remember the active filter tab so a plain reload stays on the same category */
 	var FILTER_KEY = 'wk-active-filter';
