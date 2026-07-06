@@ -135,8 +135,17 @@
 			.fi-detail-highlights { grid-template-columns: 1fr; }
 		}
 
-		/* Case study body continues the rounded panel's white surface (no color seam) */
-		.fi-detail-body { background: #fbfcfe; }
+		/* Case study body continues the rounded panel's white surface (no color seam).
+		   position:relative (z-index left auto) so it still paints above the sticky hero --
+		   a non-positioned element would otherwise render BELOW a positioned one regardless
+		   of DOM order, letting the hero show through over this section while scrolling. */
+		.fi-detail-body { position: relative; background: #fbfcfe; }
+
+		/* Hero stays pinned to the viewport top so the rounded highlights strip below can scroll
+		   up and over it. z-index left at auto (not explicit) so the footer -- also
+		   position:relative with z-index auto, later in DOM -- still paints above it once
+		   scrolled that far. */
+		.fi-detail-hero { position: sticky; top: 0; }
 	</style>
 </head>
 <body class="fi-page">
