@@ -51,8 +51,8 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 
 .fi-container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
 @media (min-width: 1440px) { .fi-container { max-width: 1280px; padding: 0 48px; } }
-@media (max-width: 768px) { .fi-container { padding: 0 24px; } }
-@media (max-width: 480px) { .fi-container { padding: 0 20px; } }
+@media (max-width: 768px) { .fi-container { padding: 0 24px 50px; } }
+@media (max-width: 480px) { .fi-container { padding: 0 20px 50px; } }
 
 /* ── NAVBAR ────────────────────────────────── */
 .fi-nav {
@@ -731,7 +731,7 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 .fi-detail-body { padding-bottom: 96px; }
 .fi-detail-frame {
   border-radius: 24px; overflow: hidden;
-  border: 1px solid var(--fi-border); box-shadow: 0 24px 70px rgba(21,23,30,.10);
+  border: 1px solid var(--fi-border);
   margin-bottom: 40px;
 }
 .fi-detail-frame img { width: 100%; display: block; }

@@ -47,8 +47,16 @@
 		.fi-detail-breadcrumb-sep { color: var(--fi-300); font-size: 12px; }
 		.fi-detail-breadcrumb-current { font-size: 13px; color: var(--fi-500); font-family: var(--fi-font); }
 
-		/* Highlights strip -- full-width, below the two-column hero (previously the stats grid) */
-		.fi-detail-stats { border-top: 1px solid var(--fi-border); border-bottom: 1px solid var(--fi-border); padding: 40px 0; margin-top: 12px; }
+		/* Highlights strip -- full-width, below the two-column hero (previously the stats grid).
+		   Rounded top corners so it reads as a white card overlapping the hero above. */
+		.fi-detail-stats {
+			position: relative; z-index: 2;
+			background: #fbfcfe;
+			border-radius: 32px 32px 0 0;
+			margin-top: -32px;
+			padding: 56px 0 40px;
+			box-shadow: 0 -16px 40px rgba(21,23,30,.05);
+		}
 		.fi-detail-highlights--strip { grid-template-columns: repeat(4, 1fr); margin-top: 0; }
 		.fi-detail-stat-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
 		.fi-detail-stat-num {
@@ -57,7 +65,7 @@
 		}
 		.fi-detail-stat-unit { font-family: var(--fi-font); font-weight: 800; font-size: 15px; color: var(--fi-ink); }
 		.fi-detail-stat-desc { font-size: 13px; color: var(--fi-400); line-height: 1.6; max-width: 460px; }
-		.fi-detail-stats-inline { margin-top: 28px; display: flex; flex-direction: row; gap: 3%; }
+		.fi-detail-stats-inline { margin-top: 50px; display: flex; flex-direction: row; gap: 3%; }
 		.fi-detail-stat { flex: 0 0 32%; }
 		@media (max-width: 700px) { .fi-detail-highlights--strip { grid-template-columns: 1fr; gap: 24px; } }
 
@@ -119,16 +127,16 @@
 			border-radius: 50%; border: 1.5px dashed var(--fi-border-s);
 			right: 26px; bottom: 22px;
 		}
-		@media (max-width: 900px) {
+		@media (max-width: 1024px) {
 			.fi-detail-hero-grid { grid-template-columns: 1fr; }
-			.fi-detail-hero-visual { max-width: 320px; margin: 24px auto 0; padding: 26px 20px 46px 14px; }
-			.fi-detail-visual-chip { top: -14px; right: -8px; width: 190px; padding: 8px; gap: 8px; }
-			.fi-chip-thumb { width: 48px; height: 48px; }
-			.fi-chip-skel { height: 12px; }
-			.fi-chip-price-now { font-size: 13px; }
-			.fi-chip-price-was { font-size: 10px; }
+			.fi-detail-hero-visual { display: none; }
+		}
+		@media (max-width: 900px) {
 			.fi-detail-highlights { grid-template-columns: 1fr; }
 		}
+
+		/* Case study body continues the rounded panel's white surface (no color seam) */
+		.fi-detail-body { background: #fbfcfe; }
 	</style>
 </head>
 <body class="fi-page">
