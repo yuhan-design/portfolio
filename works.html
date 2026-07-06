@@ -17,8 +17,28 @@
 	<style>
 		/* ── WORKS PAGE ──────────────────────────────────────────── */
 
-		/* Hero */
-		.wk-hero { padding: 136px 0 52px; }
+		/* Hero — full-bleed light banner with GradientBlinds glow.
+		   The canvas multiplies onto this gradient, so white shader areas
+		   show the glass-gradient wash instead of dead white. */
+		.wk-hero {
+			position: relative; overflow: hidden;
+			padding: 160px 0 72px;
+			background:
+				radial-gradient(58% 75% at 18% -8%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 62%),
+				radial-gradient(55% 65% at 88% 8%, rgba(169,198,238,0.4) 0%, rgba(169,198,238,0) 65%),
+				radial-gradient(60% 80% at 45% 108%, rgba(175, 232, 255, 0.781) 0%, rgba(216,236,223,0) 65%),
+				linear-gradient(168deg, #eef3fb 0%, #ffffff 48%, #d4e5ff 100%);
+		}
+		.wk-hero::before {
+			content: ''; position: absolute; inset: 0 0 auto 0; height: 1px;
+			background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+		}
+		#wk-hero-fx {
+			position: absolute; inset: 0;
+			width: 100%; height: 100%; display: block;
+			mix-blend-mode: multiply;
+		}
+		.wk-hero-content { position: relative; z-index: 1; }
 		.wk-hero h1 {
 			font-family: 'Hanken Grotesk', sans-serif;
 			font-size: clamp(2.5rem, 7vw, 6rem);
@@ -28,39 +48,44 @@
 		.wk-hero-desc {
 			font-family: 'Hanken Grotesk', sans-serif;
 			font-size: 15px; line-height: 1.7;
-			color: var(--fi-400); max-width: 420px; margin-top: 16px;
+			color: var(--fi-500); max-width: 420px; margin-top: 16px;
+		}
+		@media (max-width: 640px) {
+			.wk-hero { padding: 128px 0 56px; }
 		}
 
 		/* Filter bar */
-		.wk-filter-wrap { padding-bottom: 40px; }
-		.wk-filter-row { display: flex; flex-wrap: wrap; gap: 10px; }
+		.wk-filter-wrap { padding: 56px 0 40px; }
+		.wk-filter-row {
+			display: flex; flex-wrap: wrap; align-items: flex-end;
+			gap: 8px 28px;
+			border-bottom: 1px solid var(--fi-border-s);
+		}
 		.wk-fb {
 			display: inline-flex; align-items: center; gap: 8px;
-			padding: 8px 16px; border-radius: 999px;
-			border: 1px solid var(--fi-border-s);
+			padding: 0 0 14px; margin-bottom: -1px; border-radius: 0;
+			border: none; border-bottom: 2px solid transparent;
 			font-family: 'Hanken Grotesk', sans-serif;
-			font-size: 13px; font-weight: 500; cursor: pointer;
-			background: #fbfcfe; color: var(--fi-400);
-			transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+			font-size: 14px; font-weight: 500; cursor: pointer;
+			background: transparent; color: var(--fi-400);
+			transition: color 0.2s, border-color 0.2s;
 		}
-		.wk-fb:hover:not(.active) { border-color: var(--fi-ink); color: var(--fi-ink); }
+		.wk-fb:hover:not(.active) { color: var(--fi-ink); }
 		.wk-fb.active {
-			background: var(--fi-ink); color: #fbfcfe;
-			border-color: var(--fi-ink);
-			box-shadow: 0 2px 12px rgba(21,23,30,0.18);
+			background: transparent; color: var(--fi-ink); font-weight: 600;
+			border-bottom-color: var(--fi-ink);
 		}
 		.wk-count {
 			font-size: 11px; font-weight: 700;
 			padding: 2px 6px; border-radius: 6px;
 			background: #eef2fb; color: var(--fi-300);
 		}
-		.wk-fb.active .wk-count { background: rgba(255,255,255,0.18); color: #fbfcfe; }
+		.wk-fb.active .wk-count { background: rgba(21,23,30,0.08); color: var(--fi-ink); }
 
 		/* Sub-filter bar (illustration subcategories) */
 		.wk-subfilter-row {
 			display: none; flex-wrap: wrap; gap: 8px;
 			margin-top: 14px; padding-top: 14px;
-			border-top: 1px dashed #e6e9f0;
 		}
 		.wk-subfilter-row.show { display: flex; }
 		.wk-sfb {
@@ -81,8 +106,7 @@
 
 		/* Status line */
 		.wk-status {
-			margin-top: 20px; padding-top: 20px;
-			border-top: 1px solid #e6e9f0;
+			margin-top: 20px;
 			font-family: 'Hanken Grotesk', sans-serif;
 			font-size: 12.5px; color: var(--fi-300);
 		}
@@ -149,7 +173,7 @@
 			padding: 4px 10px; border-radius: 999px;
 		}
 		.wk-pill--uiux { background: #c9ddf7; color: #1c2a44; }
-		.wk-pill--web { background: #6fae8a; color: #2c4d3a; }
+		.wk-pill--web { background: #d8ecdf; color: #2c4d3a; }
 		.wk-pill--graphic { background: #c9b8e8; color: #3f3460; }
 		.wk-pill--illustration { background: #f2d96b; color: #5b5535; }
 
@@ -222,8 +246,9 @@
 </nav>
 
 <!-- ============ HERO ============ -->
-<section class="wk-hero">
-	<div class="fi-container">
+<section class="wk-hero" id="wk-hero-banner">
+	<canvas id="wk-hero-fx" aria-hidden="true"></canvas>
+	<div class="fi-container wk-hero-content">
 		<span class="fi-eyebrow">Works</span>
 		<h1>作品集</h1>
 		<p class="wk-hero-desc">涵蓋 UI/UX 設計、網頁設計，以及廣宣與品牌設計。</p>
@@ -2400,6 +2425,253 @@
 	<button class="wk-lightbox-nav wk-lightbox-next" id="wk-lightbox-next" aria-label="下一張">›</button>
 	<div class="wk-lightbox-counter" id="wk-lightbox-counter"></div>
 </div>
+
+<script>
+/* Hero GradientBlinds — vanilla WebGL port of React Bits <GradientBlinds /> */
+(function () {
+	var canvas = document.getElementById('wk-hero-fx');
+	var banner = document.getElementById('wk-hero-banner');
+	if (!canvas || !banner) return;
+	var gl = canvas.getContext('webgl', { alpha: true, antialias: true });
+	if (!gl) { canvas.style.display = 'none'; return; }
+
+	var CFG = {
+		/* Bright vivid blue, animated diagonal blinds kept */
+		gradientColors: ['#cfe0fb', '#5b8de0', '#cfe0fb'],
+		lightMode: true,   /* invert the shader: color blooms on white instead of glow on black */
+		angle: 20,
+		noise: 0.1,
+		blindCount: 20,
+		blindMinWidth: 50,
+		spotlightRadius: 0.65,
+		spotlightSoftness: 0.9,
+		spotlightOpacity: 0.45,
+		mouseDampening: 0.2,
+		mirrorGradient: false,
+		distortAmount: 5,
+		shineDirection: 'left'
+	};
+
+	var VERT = 'attribute vec2 position;void main(){gl_Position=vec4(position,0.0,1.0);}';
+
+	var FRAG = [
+		'precision mediump float;',
+		'uniform vec3  iResolution;',
+		'uniform vec2  iMouse;',
+		'uniform float iTime;',
+		'uniform float uAngle;',
+		'uniform float uNoise;',
+		'uniform float uBlindCount;',
+		'uniform float uSpotlightRadius;',
+		'uniform float uSpotlightSoftness;',
+		'uniform float uSpotlightOpacity;',
+		'uniform float uMirror;',
+		'uniform float uDistort;',
+		'uniform float uShineFlip;',
+		'uniform float uInvert;',
+		'uniform vec3  uColors[8];',
+		'uniform int   uColorCount;',
+		'float rand(vec2 co){ return fract(sin(dot(co, vec2(12.9898,78.233))) * 43758.5453); }',
+		'vec2 rotate2D(vec2 p, float a){ float c=cos(a); float s=sin(a); return mat2(c,-s,s,c)*p; }',
+		'vec3 getGradientColor(float t){',
+		'  float tt = clamp(t, 0.0, 1.0);',
+		'  float scaled = tt * float(uColorCount - 1);',
+		'  float seg = floor(scaled);',
+		'  float f = fract(scaled);',
+		'  vec3 a = uColors[0];',
+		'  vec3 b = uColors[1];',
+		'  for (int i = 0; i < 7; i++) {',
+		'    if (i == int(seg) && i < uColorCount - 1) { a = uColors[i]; b = uColors[i + 1]; }',
+		'  }',
+		'  return mix(a, b, f);',
+		'}',
+		'void main() {',
+		'  vec2 fragCoord = gl_FragCoord.xy;',
+		'  vec2 uv0 = fragCoord / iResolution.xy;',
+		'  float aspect = iResolution.x / iResolution.y;',
+		'  vec2 p = uv0 * 2.0 - 1.0;',
+		'  p.x *= aspect;',
+		'  vec2 pr = rotate2D(p, uAngle);',
+		'  pr.x /= aspect;',
+		'  vec2 uv = pr * 0.5 + 0.5;',
+		'  vec2 uvMod = uv;',
+		'  if (uDistort > 0.0) {',
+		'    float a = uvMod.y * 6.0;',
+		'    float b = uvMod.x * 6.0;',
+		'    float w = 0.01 * uDistort;',
+		'    uvMod.x += sin(a) * w;',
+		'    uvMod.y += cos(b) * w;',
+		'  }',
+		'  float t = uvMod.x;',
+		'  if (uMirror > 0.5) { t = 1.0 - abs(1.0 - 2.0 * fract(t)); }',
+		'  vec3 base = getGradientColor(t);',
+		'  vec2 offset = iMouse / iResolution.xy;',
+		'  float d = length(uv0 - offset);',
+		'  float r = max(uSpotlightRadius, 1e-4);',
+		'  float dn = d / r;',
+		'  float spot = (1.0 - 2.0 * pow(dn, uSpotlightSoftness)) * uSpotlightOpacity;',
+		'  float stripe = fract(uvMod.x * max(uBlindCount, 1.0));',
+		'  if (uShineFlip > 0.5) { stripe = 1.0 - stripe; }',
+		'  vec3 col = vec3(spot) + base - vec3(stripe);',
+		'  col += (rand(fragCoord + iTime) - 0.5) * uNoise;',
+		'  if (uInvert > 0.5) { col = vec3(1.0) - col; }',
+		'  gl_FragColor = vec4(col, 1.0);',
+		'}'
+	].join('\n');
+
+	function compile(type, src) {
+		var sh = gl.createShader(type);
+		gl.shaderSource(sh, src);
+		gl.compileShader(sh);
+		if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+			console.error(gl.getShaderInfoLog(sh));
+			return null;
+		}
+		return sh;
+	}
+
+	var vs = compile(gl.VERTEX_SHADER, VERT);
+	var fs = compile(gl.FRAGMENT_SHADER, FRAG);
+	if (!vs || !fs) { canvas.style.display = 'none'; return; }
+	var prog = gl.createProgram();
+	gl.attachShader(prog, vs);
+	gl.attachShader(prog, fs);
+	gl.linkProgram(prog);
+	if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+		console.error(gl.getProgramInfoLog(prog));
+		canvas.style.display = 'none';
+		return;
+	}
+	gl.useProgram(prog);
+
+	/* Fullscreen triangle */
+	var buf = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+	var posLoc = gl.getAttribLocation(prog, 'position');
+	gl.enableVertexAttribArray(posLoc);
+	gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+	var U = {};
+	['iResolution', 'iMouse', 'iTime', 'uAngle', 'uNoise', 'uBlindCount',
+	 'uSpotlightRadius', 'uSpotlightSoftness', 'uSpotlightOpacity',
+	 'uMirror', 'uDistort', 'uShineFlip', 'uInvert', 'uColorCount'].forEach(function (n) {
+		U[n] = gl.getUniformLocation(prog, n);
+	});
+	U.uColors = gl.getUniformLocation(prog, 'uColors[0]');
+
+	function hexToRGB(hex) {
+		var c = hex.replace('#', '');
+		return [
+			parseInt(c.slice(0, 2), 16) / 255,
+			parseInt(c.slice(2, 4), 16) / 255,
+			parseInt(c.slice(4, 6), 16) / 255
+		];
+	}
+	var stops = CFG.gradientColors.slice(0, 8);
+	if (stops.length === 1) stops.push(stops[0]);
+	var colorCount = Math.max(2, stops.length);
+	while (stops.length < 8) stops.push(stops[stops.length - 1]);
+	var flat = [];
+	stops.forEach(function (h) { flat = flat.concat(hexToRGB(h)); });
+	if (CFG.lightMode) {
+		/* Feed complementary colors; the shader's invert pass flips them back */
+		flat = flat.map(function (v) { return 1 - v; });
+	}
+
+	gl.uniform1f(U.uInvert, CFG.lightMode ? 1 : 0);
+	gl.uniform1f(U.uAngle, CFG.angle * Math.PI / 180);
+	gl.uniform1f(U.uNoise, CFG.noise);
+	gl.uniform1f(U.uSpotlightRadius, CFG.spotlightRadius);
+	gl.uniform1f(U.uSpotlightSoftness, CFG.spotlightSoftness);
+	gl.uniform1f(U.uSpotlightOpacity, CFG.spotlightOpacity);
+	gl.uniform1f(U.uMirror, CFG.mirrorGradient ? 1 : 0);
+	gl.uniform1f(U.uDistort, CFG.distortAmount);
+	gl.uniform1f(U.uShineFlip, CFG.shineDirection === 'right' ? 1 : 0);
+	gl.uniform3fv(U.uColors, new Float32Array(flat));
+	gl.uniform1i(U.uColorCount, colorCount);
+
+	var dpr = Math.min(window.devicePixelRatio || 1, 2);
+	var mouse = [0, 0];
+	var mouseTarget = [0, 0];
+	var firstResize = true;
+
+	function resize() {
+		var rect = banner.getBoundingClientRect();
+		canvas.width = Math.max(1, Math.round(rect.width * dpr));
+		canvas.height = Math.max(1, Math.round(rect.height * dpr));
+		gl.viewport(0, 0, canvas.width, canvas.height);
+		gl.uniform3f(U.iResolution, canvas.width, canvas.height, 1);
+		var maxByMinWidth = Math.max(1, Math.floor(rect.width / CFG.blindMinWidth));
+		gl.uniform1f(U.uBlindCount, Math.max(1, Math.min(CFG.blindCount, maxByMinWidth)));
+		if (firstResize) {
+			firstResize = false;
+			mouse = [canvas.width / 2, canvas.height / 2];
+			mouseTarget = mouse.slice();
+		}
+	}
+
+	function draw(t) {
+		gl.uniform1f(U.iTime, t * 0.001);
+		gl.uniform2f(U.iMouse, mouse[0], mouse[1]);
+		gl.drawArrays(gl.TRIANGLES, 0, 3);
+	}
+
+	resize();
+	draw(0); /* paint immediately; the observer below only manages the ongoing loop */
+	if (window.ResizeObserver) {
+		new ResizeObserver(resize).observe(banner);
+	} else {
+		window.addEventListener('resize', resize);
+	}
+
+	var reducedMotion = window.matchMedia
+		&& window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	if (reducedMotion) {
+		draw(0);
+		return;
+	}
+
+	banner.addEventListener('pointermove', function (e) {
+		var rect = canvas.getBoundingClientRect();
+		mouseTarget = [
+			(e.clientX - rect.left) * dpr,
+			(rect.height - (e.clientY - rect.top)) * dpr
+		];
+	});
+
+	var raf = null;
+	var lastTime = 0;
+	function loop(t) {
+		raf = requestAnimationFrame(loop);
+		if (!lastTime) lastTime = t;
+		var dt = (t - lastTime) / 1000;
+		lastTime = t;
+		if (CFG.mouseDampening > 0) {
+			var factor = Math.min(1, 1 - Math.exp(-dt / CFG.mouseDampening));
+			mouse[0] += (mouseTarget[0] - mouse[0]) * factor;
+			mouse[1] += (mouseTarget[1] - mouse[1]) * factor;
+		} else {
+			mouse = mouseTarget.slice();
+		}
+		draw(t);
+	}
+
+	/* Only animate while the banner is on screen */
+	if (window.IntersectionObserver) {
+		new IntersectionObserver(function (entries) {
+			if (entries[0].isIntersecting) {
+				if (raf === null) { lastTime = 0; raf = requestAnimationFrame(loop); }
+			} else if (raf !== null) {
+				cancelAnimationFrame(raf);
+				raf = null;
+			}
+		}).observe(banner);
+	} else {
+		raf = requestAnimationFrame(loop);
+	}
+})();
+</script>
 
 <script>
 (function () {
