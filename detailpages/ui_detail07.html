@@ -13,6 +13,123 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../css/figma-index.css">
+
+	<style>
+		.fi-detail-hero-grid {
+			display: grid; grid-template-columns: 1.15fr 0.85fr;
+			gap: 48px; align-items: center;
+		}
+		.fi-detail-version {
+			display: flex; align-items: center; gap: 14px;
+			font-family: var(--fi-font); font-weight: 800; font-size: 15px;
+			color: var(--fi-300); margin-bottom: 18px;
+		}
+		.fi-detail-version span:first-child,
+		.fi-detail-version span:last-child { color: var(--fi-ink); }
+		.fi-detail-version-line { width: 56px; height: 1px; background: var(--fi-border-s); }
+		.fi-detail-highlights {
+			margin-top: 28px;
+			display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 18px;
+		}
+		.fi-detail-highlight {
+			padding: 14px 16px; border-radius: 14px;
+			background: #ffffff; border: 1px solid var(--fi-border);
+		}
+		.fi-detail-highlight-label {
+			display: block; font-size: 13px; font-weight: 700;
+			letter-spacing: .04em; text-transform: uppercase;
+			color: var(--fi-blue); margin-bottom: 5px;
+		}
+		.fi-detail-highlight-text { font-size: 13.5px; line-height: 1.55; color: var(--fi-500); }
+
+		.fi-detail-breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 28px; }
+		.fi-detail-breadcrumb .fi-detail-back { margin-bottom: 0; }
+		.fi-detail-breadcrumb-sep { color: var(--fi-300); font-size: 12px; }
+		.fi-detail-breadcrumb-current { font-size: 13px; color: var(--fi-500); font-family: var(--fi-font); }
+
+		/* Highlights strip -- full-width, below the two-column hero (previously the stats grid) */
+		.fi-detail-stats { border-top: 1px solid var(--fi-border); border-bottom: 1px solid var(--fi-border); padding: 40px 0; margin-top: 12px; }
+		.fi-detail-highlights--strip { grid-template-columns: repeat(4, 1fr); margin-top: 0; }
+		.fi-detail-stat-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+		.fi-detail-stat-num {
+			font-family: var(--fi-font); font-weight: 800;
+			font-size: clamp(1.5rem, 3vw, 1.9rem); letter-spacing: -.03em; color: var(--fi-ink);
+		}
+		.fi-detail-stat-unit { font-family: var(--fi-font); font-weight: 800; font-size: 15px; color: var(--fi-ink); }
+		.fi-detail-stat-desc { font-size: 13px; color: var(--fi-400); line-height: 1.6; max-width: 460px; }
+		.fi-detail-stats-inline { margin-top: 28px; display: flex; flex-direction: row; gap: 3%; }
+		.fi-detail-stat { flex: 0 0 32%; }
+		@media (max-width: 700px) { .fi-detail-highlights--strip { grid-template-columns: 1fr; gap: 24px; } }
+
+		/* Dynamic hero visual: main screen + overlapping thumb + floating stat chip */
+		.fi-detail-hero-visual {
+			position: relative;
+			padding: 26px 30px 46px 0;
+			max-width: 300px; margin-left: auto;
+		}
+		.fi-detail-visual-main {
+			position: relative; z-index: 2;
+		}
+		.fi-detail-visual-main img { width: 100%; display: block; }
+		.fi-detail-visual-thumb {
+			position: absolute;
+    		z-index: 3;
+    		left: -60px;
+    		bottom: 30px;
+    		width: 55%;
+    		transform: rotate(-12deg);
+		}
+		.fi-detail-visual-thumb img { width: 100%; display: block; }
+		.fi-detail-visual-chip {
+			position: absolute; z-index: 4; top: -18px; right: -50px;
+			display: flex; align-items: center; gap: 10px;
+			width: 190px;
+			background: #fbfcfe; border-radius: 16px; padding: 10px;
+			border: 1px solid var(--fi-border);
+			box-shadow: 0 16px 36px rgba(21,23,30,.18);
+			font-family: var(--fi-font);
+		}
+		.fi-chip-thumb {
+			position: relative; width: 60px; height: 60px; border-radius: 10px;
+			overflow: hidden; flex-shrink: 0;
+		}
+		.fi-chip-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+		.fi-chip-thumb-badge {
+			position: absolute; left: 4px; top: 4px; width: 16px; height: 16px;
+			border-radius: 4px; background: rgba(21,23,30,.55);
+			display: flex; align-items: center; justify-content: center; font-size: 9px;
+		}
+		.fi-chip-info { min-width: 0; }
+		.fi-chip-skel {
+			display: block; height: 14px; border-radius: 4px;
+			background: #dfe2e8; margin-bottom: 5px;
+		}
+		.fi-chip-skel--1 { width: 100%; }
+		.fi-chip-skel--2 { width: 78%; margin-bottom: 5px; }
+		.fi-chip-price { display: flex; align-items: baseline; gap: 6px; }
+		.fi-chip-price-now { font-size: 15px; font-weight: 800; color: var(--fi-ink); }
+		.fi-chip-price-was { font-size: 11px; color: var(--fi-300); text-decoration: line-through; }
+		.fi-detail-geo-dot {
+			position: absolute; z-index: 1; width: 16px; height: 16px;
+			border-radius: 50%; background: #f2d96b;
+			left: 10px; top: -2px;
+		}
+		.fi-detail-geo-ring {
+			position: absolute; z-index: 1; width: 46px; height: 46px;
+			border-radius: 50%; border: 1.5px dashed var(--fi-border-s);
+			right: 26px; bottom: 22px;
+		}
+		@media (max-width: 900px) {
+			.fi-detail-hero-grid { grid-template-columns: 1fr; }
+			.fi-detail-hero-visual { max-width: 320px; margin: 24px auto 0; padding: 26px 20px 46px 14px; }
+			.fi-detail-visual-chip { top: -14px; right: -8px; width: 190px; padding: 8px; gap: 8px; }
+			.fi-chip-thumb { width: 48px; height: 48px; }
+			.fi-chip-skel { height: 12px; }
+			.fi-chip-price-now { font-size: 13px; }
+			.fi-chip-price-was { font-size: 10px; }
+			.fi-detail-highlights { grid-template-columns: 1fr; }
+		}
+	</style>
 </head>
 <body class="fi-page">
 
@@ -47,14 +164,85 @@
 <section class="fi-detail-hero">
 	<div class="fi-dot-grid" aria-hidden="true"></div>
 	<div class="fi-container">
-		<div class="fi-detail-inner">
-			<a href="../works.html" class="fi-detail-back">← 返回作品集</a>
-			<span class="fi-detail-tag" style="background:#c9ddf7;color:#1c2a44">App · UI/UX Design</span>
-			<h1 class="fi-detail-title">痞客邦APP-優化</h1>
-			<p class="fi-detail-desc">深入分析使用者行為與訪談洞察，重新設計痞客邦 App 介面，提升瀏覽與互動體驗。</p>
+		<div class="fi-detail-hero-grid">
+			<div class="fi-detail-inner">
+				<div class="fi-detail-breadcrumb">
+					<a href="../works.html" class="fi-detail-back">← 作品集</a>
+					<span class="fi-detail-breadcrumb-sep">/</span>
+					<span class="fi-detail-breadcrumb-current">痞客邦 APP 優化</span>
+				</div>
+				<span class="fi-detail-tag" style="background:#c9ddf7;color:#1c2a44">UI/UX · APP Design</span>
+				<h1 class="fi-detail-title" style="font-weight:800;">痞客邦APP優化</h1>
+				<div class="fi-detail-version"><span>1.0</span><span class="fi-detail-version-line"></span><span>3.0</span></div>
+				<p class="fi-detail-desc">透過使用者訪談與易用性測試找出痛點，重新設計首頁資訊架構、優惠券與任務系統，並優化「我的」頁面呈現，讓內容更聚焦、操作更直覺，提升整體使用體驗與 App 在市場中的競爭力。</p>
+
+				<div class="fi-detail-stats-inline">
+					<div class="fi-detail-stat">
+						<div class="fi-detail-stat-top"><span class="fi-detail-stat-num">3</span><span class="fi-detail-stat-unit">核心版本迭代</span></div>
+						<p class="fi-detail-stat-desc">從 1.0 到 3.0 的完整改版歷程</p>
+					</div>
+					<div class="fi-detail-stat">
+						<div class="fi-detail-stat-top"><span class="fi-detail-stat-num">4</span><span class="fi-detail-stat-unit">功能模組優化</span></div>
+						<p class="fi-detail-stat-desc">首頁、優惠券、任務活動、個人頁全面重新設計</p>
+					</div>
+					<div class="fi-detail-stat">
+						<div class="fi-detail-stat-top"><span class="fi-detail-stat-num">10</span><span class="fi-detail-stat-unit">位受測者</span></div>
+						<p class="fi-detail-stat-desc">焦點訪談與易用性測試完整驗證</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="fi-detail-hero-visual">
+				<div class="fi-detail-geo-dot"></div>
+				<div class="fi-detail-geo-ring"></div>
+
+				<div class="fi-detail-visual-main">
+					<img src="images/ui/ui7.png" alt="痞客邦App 首頁介面預覽">
+					<div class="fi-detail-visual-chip">
+						<div class="fi-chip-thumb">
+							<img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=200&h=200&fit=crop&auto=format" alt="山島行旅 住宿券">
+							<span class="fi-chip-thumb-badge">⛰</span>
+						</div>
+						<div class="fi-chip-info">
+							<span class="fi-chip-skel fi-chip-skel--1"></span>
+							<span class="fi-chip-skel fi-chip-skel--2"></span>
+							<div class="fi-chip-price">
+								<span class="fi-chip-price-now">$3900</span>
+								<span class="fi-chip-price-was">$4200</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="fi-detail-visual-thumb">
+					<img src="images/ui/ui7-1.png" alt="優惠券付款成功畫面">
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
+
+<!-- ============ HIGHLIGHTS STRIP ============ -->
+<div class="fi-detail-stats">
+	<div class="fi-container fi-detail-highlights fi-detail-highlights--strip">
+		<div class="fi-detail-highlight">
+			<span class="fi-detail-highlight-label">首頁改版</span>
+			<p class="fi-detail-highlight-text">從單一大圖轉為多圖排列，依用戶興趣逐步收斂內容</p>
+		</div>
+		<div class="fi-detail-highlight">
+			<span class="fi-detail-highlight-label">優惠券系統</span>
+			<p class="fi-detail-highlight-text">卡片式瀏覽，領取、存入票券到掃碼核銷一次到位</p>
+		</div>
+		<div class="fi-detail-highlight">
+			<span class="fi-detail-highlight-label">任務・活動整合</span>
+			<p class="fi-detail-highlight-text">合併活動與遊戲任務，新增獎品展示區並回歸慣用位置</p>
+		</div>
+		<div class="fi-detail-highlight">
+			<span class="fi-detail-highlight-label">個人頁優化</span>
+			<p class="fi-detail-highlight-text">儀表板化呈現個人資料、票券與積分等數據</p>
+		</div>
+	</div>
+</div>
 
 <!-- ============ CASE STUDY BODY ============ -->
 <section class="fi-detail-body">
