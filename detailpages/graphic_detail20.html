@@ -1,117 +1,170 @@
-﻿<!DOCTYPE HTML>
-<html lang="zh-tw" data-theme="apex">
-	<head>
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Portfolio of Yuhan</title>
+	<title>LINE互動遊戲設計 — Portfolio of Yuhan</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- common meta -->
 	<meta name="author" content="Yuhan">
-	<meta property="fb:app_id" content="1590515954569893">
-	<meta property="og:site_name" content="Portfolio of Yuhan">
-	<meta property="og:type" content="article">
+	<meta name="description" content="LINE互動遊戲設計">
 	<link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
-	<meta property="og:url" content="https://yuahan.github.io/design/" />
 
-	<!-- title -->
-    <meta name="title" content="Portfolio of Yuhan" />
-    <meta property="og:title" content="Portfolio of Yuhan" />
-    <meta itemprop="name" content="Portfolio of Yuhan" />
-
-  	<!-- description -->
-    <meta name="description" content="網頁設計、廣告、各式平面排版作品集" />
-  	<meta property="og:description" content="網頁設計、廣告、各式平面排版作品集" />
-  	<meta itemprop="description" content="網頁設計、廣告、各式平面排版作品集" />
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="../css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="../css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="../css/bootstrap.css">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="../css/style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="../css/themes/theme-apex.css" id="pf-theme-css">
-	<link rel="stylesheet" href="../css/portfolio-redesign.css">
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/figma-index.css">
 
-	<!-- Modernizr JS -->
-	<script src="../js/modernizr-2.6.2.min.js"></script>
+	<style>
+		.fi-detail-breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 28px; }
+		.fi-detail-breadcrumb .fi-detail-back { margin-bottom: 0; }
+		.fi-detail-breadcrumb-sep { color: var(--fi-300); font-size: 12px; }
+		.fi-detail-breadcrumb-current { font-size: 13px; color: var(--fi-500); font-family: var(--fi-font); }
 
-	</head>
-	<body class="pf-body">
-	<div class="pf-site-bg" aria-hidden="true"></div>
+		/* Hero stays pinned to the viewport top so the rounded card below can scroll up and over it.
+		   z-index left at auto (not explicit) so the footer -- also position:relative with z-index
+		   auto, later in DOM -- still paints above it once scrolled that far. */
+		.fi-detail-hero { position: sticky; top: 0; }
 
-		
-	<div class="fh5co-loader"></div>
-	
-	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="fh5co-top-logo">
-				<div id="fh5co-logo"><a href="../index.html"><img src="../images/logo.png"></a></div>
-			</div>
-			<div class="fh5co-top-menu menu-1 text-center">
-				<ul>
-					<li><a href="../index.html">Web Design</a></li>
-					<li><a href="../uiux.html">UI/UX</a></li>
-					<li class="has-dropdown">
-						<a href="#">More</a>
-						<ul class="dropdown">
-							<li><a href="../banner.html">Banner</a></li>
-							<li><a href="../graphic.html">Graphic Design</a></li>
-						</ul>
-					</li>
-					<li><a href="../about.html">About</a></li>
-				</ul>
-			</div>
+		/* Case study body reads as a white card overlapping the hero above, rounded top corners.
+		   Higher z-index than the sticky hero so it slides up and covers it while scrolling. */
+		.fi-detail-body {
+			position: relative; z-index: 2;
+			background: #fbfcfe;
+			border-radius: 32px 32px 0 0;
+			margin-top: -32px;
+			padding-top: 56px;
+			box-shadow: 0 -16px 40px rgba(21,23,30,.05);
+		}
+		.fi-detail-caption { font-size: 13px; font-weight: 600; color: var(--fi-400); margin-bottom: 8px; }
+		/* This gallery has no prev/next -- centre the single "view all" button */
+		.fi-detail-navbar { justify-content: center; }
+	</style>
+</head>
+<body class="fi-page">
+
+<!-- ============ NAV ============ -->
+<nav class="fi-nav" id="fi-nav">
+	<div class="fi-container fi-nav-inner">
+		<a href="../index.html" class="fi-logo">
+			<img src="../images/logo-yuhan.svg" alt="YUHAN" class="fi-logo-img">
+		</a>
+
+		<div class="fi-nav-links">
+			<a href="../works.html" class="fi-nav-link">Works</a>
+			<a href="../about.html" class="fi-nav-link">About</a>
+			<a href="mailto:sky13146@gmail.com" class="fi-nav-cta">Contact</a>
 		</div>
-	</nav>
-	
-	<div id="fh5co-author">
-		<div class="container">
-			<div class="row top-line animate-box">
-				<div class="col-md-6 col-md-offset-3 col-md-push-2 text-left fh5co-heading">
-					<h2>LINE互動遊戲設計</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<p class="animate-box">LINE互動遊戲廣告推播<img src="images/graphic/graphic23-1.jpg" class="img-responsive" alt="互動遊戲"></p>
-					<p class="animate-box">抽籤過程<img src="images/graphic/graphic23-2.png" class="img-responsive" alt="互動遊戲"></p>
-					<p class="animate-box">抽籤結果<img src="images/graphic/graphic23-3.jpg" class="img-responsive" alt="互動遊戲"></p>
-					<div class="row row-pt-md portfolio-navigation">
-						<div class="col-xs-12 text-center">
-							<a href="../graphic.html" class="btn btn-primary btn-outline"><i class="icon-grid2"></i> View All</a>
-						</div>
-					</div>
-				</div>
-			</div>
+
+		<button class="fi-mobile-btn" id="fi-mobile-btn">
+			<span></span><span></span><span></span>
+		</button>
+	</div>
+
+	<div class="fi-drawer" id="fi-drawer">
+		<div class="fi-drawer-inner">
+			<a href="../works.html" class="fi-nav-link">Works</a>
+			<a href="../about.html" class="fi-nav-link">About</a>
+			<a href="mailto:sky13146@gmail.com" class="fi-nav-link">Contact</a>
 		</div>
 	</div>
+</nav>
 
-	<footer id="fh5co-footer"></footer>
-	
+<!-- ============ CASE STUDY HEADER ============ -->
+<section class="fi-detail-hero">
+	<div class="fi-dot-grid" aria-hidden="true"></div>
+	<div class="fi-container">
+		<div class="fi-detail-inner">
+			<div class="fi-detail-breadcrumb">
+				<a href="../works.html" class="fi-detail-back">← 作品集</a>
+				<span class="fi-detail-breadcrumb-sep">/</span>
+				<span class="fi-detail-breadcrumb-current">LINE互動遊戲設計</span>
+			</div>
+			<span class="fi-detail-tag" style="background:#c9ddf7;color:#1c2a44">平面與插畫設計</span>
+			<h1 class="fi-detail-title" style="font-weight:800;">LINE互動遊戲設計</h1>
+		</div>
 	</div>
+</section>
 
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+<!-- ============ CASE STUDY BODY ============ -->
+<section class="fi-detail-body">
+	<div class="fi-container">
+		<p class="fi-detail-caption">LINE互動遊戲廣告推播</p>
+		<div class="fi-detail-frame">
+			<img src="images/graphic/graphic23-1.jpg" alt="互動遊戲">
+		</div>
+
+		<p class="fi-detail-caption">抽籤過程</p>
+		<div class="fi-detail-frame">
+			<img src="images/graphic/graphic23-2.png" alt="互動遊戲">
+		</div>
+
+		<p class="fi-detail-caption">抽籤結果</p>
+		<div class="fi-detail-frame">
+			<img src="images/graphic/graphic23-3.jpg" alt="互動遊戲">
+		</div>
+		<div class="fi-detail-navbar">
+			<a href="../works.html" class="fi-btn-dark">查看全部作品</a>
+		</div>
 	</div>
-	
-	<!-- jQuery -->
-	<script src="../js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="../js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="../js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="../js/jquery.waypoints.min.js"></script>
-	<script src="../js/theme.js"></script>
-	<script src="../js/main.js"></script>
+</section>
 
-	</body>
+<!-- ============ FOOTER ============ -->
+<footer class="fi-footer">
+	<svg class="fi-footer-deco" viewBox="0 0 281 293" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M181.067 4.99281C194.222 1.21922 207.824 -0.390941 221.439 0.0797271C230.213 0.389805 239.016 1.54331 247.66 3.76332C255.698 5.82979 263.184 9.74425 270.52 13.6901C271.006 13.9514 271.493 14.2133 271.98 14.4752C274.777 15.9739 277.513 17.616 280.173 19.3903V65.4606C278.407 64.4002 276.828 63.0231 275.526 61.3766C270.175 54.6016 263.422 49.02 255.645 44.8424C255.32 44.6678 254.991 44.4986 254.66 44.3366C249.61 41.8725 243.947 40.8779 238.483 39.4752C232.566 37.9543 226.392 37.0282 220.145 36.8082C210.456 36.4666 200.612 37.7276 191.376 40.4538C191.248 40.4917 191.12 40.5311 190.991 40.5709C187.112 41.7641 182.899 43.8904 178.587 46.5934C173.167 49.9822 167.646 54.278 161.848 59.0084C161.795 59.0514 161.742 59.0953 161.69 59.1383C157.077 62.9164 152.835 66.9875 149.076 71.3444C145.207 75.826 141.882 80.6233 139.078 85.6491C139.389 85.6714 139.701 85.6934 140.013 85.7204C140.792 85.7849 141.567 85.8637 142.35 85.9567C154.284 87.4693 165.898 91.6412 176.302 100.268C191.042 111.492 196.821 134.702 192.867 150.246C192.765 150.77 192.655 151.292 192.536 151.808C187.375 171.585 173.875 183.269 158.246 190.06C147.054 194.711 132.286 196.83 118.421 190.461C118.298 190.404 118.173 190.346 118.049 190.288C107.118 185.404 94.9768 175.268 89.6225 161.805C87.5255 156.641 86.303 151.618 85.6684 146.779C82.8068 149.692 80.1103 152.717 77.5151 155.779C72.4072 161.8 67.8924 168.171 63.8618 174.967C59.3788 182.512 55.5381 190.641 51.9428 199.273C51.8731 199.44 51.8035 199.609 51.7339 199.776C47.984 208.751 44.3568 217.65 43.1128 224.115C43.0976 224.194 43.082 224.274 43.0669 224.353C41.7509 231.292 41.0173 238.562 40.5796 245.816C40.179 252.502 40.1162 259.198 40.4399 265.814C40.5281 267.611 40.6446 269.401 40.7915 271.179C41.3773 278.267 42.4153 285.222 44.0063 291.862C44.0824 292.179 44.1522 292.498 44.2182 292.818H3.33152C2.15536 286.737 1.3315 280.662 0.795384 274.611C0.59818 272.378 0.439633 270.146 0.316869 267.915C-0.133168 259.702 -0.0988687 251.545 0.388158 243.403C0.92668 234.55 2.06358 225.794 3.75144 216.873C3.77099 216.77 3.79038 216.666 3.81003 216.564C6.52696 203.408 10.8365 193.798 14.6811 184.331C14.7526 184.159 14.8247 183.988 14.896 183.817C19.0003 173.975 23.8253 164 29.6762 154.393C34.9291 145.743 41.0477 137.472 47.7827 129.901C53.0139 124.01 58.7125 118.658 64.4507 113.527C64.7482 113.261 65.0476 112.995 65.3481 112.729C73.7112 105.431 82.7693 99.1123 93.5766 94.401C96.8686 85.4072 100.502 76.9297 105.241 68.1413C105.257 68.1107 105.275 68.0799 105.291 68.0495C109.572 60.216 114.802 52.9812 120.594 46.4284C125.987 40.3229 131.886 34.8098 138.092 29.8668C138.163 29.8107 138.234 29.7539 138.304 29.6979C144.571 24.7375 151.349 19.5486 159.139 14.8395C165.364 11.0953 172.301 7.63626 180.267 5.22914C180.533 5.14931 180.799 5.06984 181.067 4.99281ZM136.832 124.096C133.093 123.771 129.045 124.156 124.33 125.124C124.234 125.673 124.142 126.225 124.056 126.779C124.035 126.911 124.015 127.045 123.995 127.177C122.655 135.594 123.124 143.033 124.921 147.033C126.438 150.567 128.89 153.204 134.381 155.948C134.399 155.957 134.417 155.965 134.434 155.973C136.111 156.905 139.754 157.544 144.153 155.724C150.207 153.452 155.807 146.997 156.302 143.492C156.322 143.403 156.34 143.315 156.355 143.231C157.505 135.776 156.118 132.995 152.019 129.449C148.854 126.867 143.29 124.784 137.864 124.199C137.522 124.16 137.18 124.125 136.832 124.096Z" fill="#ffffff"/>
+	</svg>
+	<div class="fi-container fi-footer-inner">
+		<div class="fi-footer-grid">
+			<div>
+				<div class="fi-f-logo">
+					<img src="../images/logo-yuhan-white.svg" alt="YUHAN" class="fi-f-logo-img">
+				</div>
+				<p class="fi-f-desc">UI/UX Designer based in Taiwan.<br>打造有溫度的數位體驗。</p>
+			</div>
+
+			<div>
+				<span class="fi-f-col-title">Navigation</span>
+				<div class="fi-f-links">
+					<a href="../index.html" class="fi-f-link">Home</a>
+					<a href="../works.html" class="fi-f-link">Works</a>
+					<a href="../about.html" class="fi-f-link">About</a>
+				</div>
+			</div>
+
+			<div>
+				<span class="fi-f-col-title">Contact</span>
+				<div class="fi-f-links">
+					<a href="mailto:sky13146@gmail.com" class="fi-f-link">sky13146@gmail.com</a>
+					<a href="https://www.linkedin.com/in/yuhan-lin-hana/" class="fi-f-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="fi-footer-bottom">
+			<span class="fi-f-copy">© 2026 YUHAN. All rights reserved.</span>
+			<div class="fi-f-status">
+				<span class="fi-dot"></span>
+				Available for work
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script>
+(function () {
+	var nav = document.getElementById('fi-nav');
+	window.addEventListener('scroll', function () {
+		nav.classList.toggle('scrolled', window.scrollY > 32);
+	}, { passive: true });
+
+	var btn = document.getElementById('fi-mobile-btn');
+	var drawer = document.getElementById('fi-drawer');
+	btn.addEventListener('click', function () {
+		btn.classList.toggle('open');
+		drawer.classList.toggle('open');
+	});
+})();
+</script>
+
+</body>
 </html>
-
