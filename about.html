@@ -1,224 +1,531 @@
-﻿<!DOCTYPE HTML>
-<html lang="zh-tw" data-theme="apex">
-	<head>
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Portfolio of Yuhan</title>
+	<title>About — Portfolio of Yuhan</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- common meta -->
 	<meta name="author" content="Yuhan">
-	<meta property="fb:app_id" content="1590515954569893">
-	<meta property="og:site_name" content="Portfolio of Yuhan">
-	<meta property="og:type" content="article">
+	<meta name="description" content="六年以上 UI/UX 與網頁設計經驗，打造兼具美感與功能性的數位產品體驗。">
 	<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-	<meta property="og:url" content="https://yuahan.github.io/design/" />
 
-	<!-- title -->
-    <meta name="title" content="Portfolio of Yuhan" />
-    <meta property="og:title" content="Portfolio of Yuhan" />
-    <meta itemprop="name" content="Portfolio of Yuhan" />
-
-  	<!-- description -->
-    <meta name="description" content="網頁設計、UI/UX、廣告、各式平面排版作品集" />
-  	<meta property="og:description" content="網頁設計、UI/UX、廣告、各式平面排版作品集" />
-  	<meta itemprop="description" content="網頁設計、UI/UX、廣告、各式平面排版作品集" />
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/themes/theme-apex.css" id="pf-theme-css">
-	<link rel="stylesheet" href="css/portfolio-redesign.css">
-	<link rel="stylesheet" href="css/fresh-glass.css">
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/figma-index.css">
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<style>
+		/* ── ABOUT HERO ── matches works.html's wk-hero gradient banner */
+		.ab-hero {
+			position: relative; overflow: hidden;
+			padding: 160px 0 72px;
+			background:
+				radial-gradient(58% 75% at 18% -8%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 62%),
+				radial-gradient(55% 65% at 88% 8%, rgba(169,198,238,0.4) 0%, rgba(169,198,238,0) 65%),
+				radial-gradient(60% 80% at 45% 108%, rgba(175,232,255,0.78) 0%, rgba(216,236,223,0) 65%),
+				linear-gradient(168deg, #eef3fb 0%, #ffffff 48%, #d4e5ff 100%);
+		}
+		.ab-hero::before {
+			content: ''; position: absolute; inset: 0 0 auto 0; height: 1px;
+			background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent);
+		}
+		.ab-hero-content { position: relative; z-index: 1; }
+		.ab-hero h1 {
+			font-family: 'Hanken Grotesk', sans-serif;
+			font-size: clamp(2rem, 5vw, 4.2rem);
+			font-weight: 900; line-height: .92;
+			letter-spacing: -.03em; color: var(--fi-ink); margin-top: 8px;
+		}
+		.ab-hero-desc { font-size: 15px; line-height: 1.7; color: var(--fi-500); max-width: 460px; margin-top: 16px; }
+		@media (max-width: 640px) { .ab-hero { padding: 128px 0 56px; } }
 
-	</head>
-	<body class="pf-body">
-	<div class="pf-site-bg" aria-hidden="true">
-		<div class="fg-blob fg-blob-a"></div>
-		<div class="fg-blob fg-blob-b"></div>
-		<div class="fg-blob fg-blob-c"></div>
+		/* ── RESUME CTA + TOOLS ── sits under the reused fi-about bio */
+		.ab-resume-cta { margin-top: 24px; }
+		.ab-tools-title {
+			font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+			color: var(--fi-300); margin: 32px 0 10px;
+		}
+
+		/* ── WORK TYPES ── simple 4-up card grid, no images needed */
+		.ab-work-grid {
+			display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+			margin-bottom: 56px;
+		}
+		@media (max-width: 900px) { .ab-work-grid { grid-template-columns: repeat(2, 1fr); } }
+		@media (max-width: 480px) { .ab-work-grid { grid-template-columns: 1fr; } }
+		.ab-work-card {
+			display: flex; flex-direction: column; gap: 12px;
+			padding: 24px 22px; border-radius: 18px;
+			background: #ffffff; border: 1px solid var(--fi-border);
+			transition: transform .25s, box-shadow .25s;
+		}
+		.ab-work-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(21,23,30,.08); }
+		.ab-work-title { font-family: var(--fi-font); font-weight: 800; font-size: 16px; color: var(--fi-ink); }
+		.ab-work-desc { font-size: 13px; line-height: 1.6; color: var(--fi-500); flex: 1; }
+		.ab-work-link { font-size: 13px; font-weight: 600; color: var(--fi-blue); }
+
+		/* ── ANIMATED TYPE ICONS ── abstract, continuously-animating badges
+		   replacing static emoji, one motion pattern per work type. */
+		.ab-icon {
+			width: 44px; height: 44px; border-radius: 50%;
+			display: flex; align-items: center; justify-content: center;
+			background: var(--fi-bg); border: 1px solid var(--fi-border);
+			overflow: hidden;
+		}
+
+		.ab-icon--eq { gap: 3px; }
+		.ab-icon--eq .ab-icon-bar {
+			width: 3px; height: 16px; border-radius: 2px;
+			background: var(--fi-ink); animation: ab-eq 1.1s ease-in-out infinite;
+		}
+		.ab-icon--eq .ab-icon-bar:nth-child(1) { animation-delay: -0.9s; }
+		.ab-icon--eq .ab-icon-bar:nth-child(2) { animation-delay: -0.5s; }
+		.ab-icon--eq .ab-icon-bar:nth-child(3) { animation-delay: -0.7s; }
+		.ab-icon--eq .ab-icon-bar:nth-child(4) { animation-delay: -0.2s; }
+		@keyframes ab-eq { 0%, 100% { transform: scaleY(.4); } 50% { transform: scaleY(1); } }
+
+		.ab-icon--grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; padding: 11px; }
+		.ab-icon--grid .ab-icon-cell {
+			width: 100%; height: 100%; border-radius: 2px;
+			background: var(--fi-ink); animation: ab-cell 1.8s ease-in-out infinite;
+		}
+		.ab-icon--grid .ab-icon-cell:nth-child(1) { animation-delay: 0s; }
+		.ab-icon--grid .ab-icon-cell:nth-child(2) { animation-delay: .3s; }
+		.ab-icon--grid .ab-icon-cell:nth-child(3) { animation-delay: .6s; }
+		.ab-icon--grid .ab-icon-cell:nth-child(4) { animation-delay: .9s; }
+		@keyframes ab-cell { 0%, 100% { opacity: .22; } 50% { opacity: 1; } }
+
+		.ab-icon--dots { gap: 5px; }
+		.ab-icon--dots .ab-icon-dot {
+			width: 6px; height: 6px; border-radius: 50%;
+			background: var(--fi-ink); animation: ab-dot 1s ease-in-out infinite;
+		}
+		.ab-icon--dots .ab-icon-dot:nth-child(1) { animation-delay: 0s; }
+		.ab-icon--dots .ab-icon-dot:nth-child(2) { animation-delay: .15s; }
+		.ab-icon--dots .ab-icon-dot:nth-child(3) { animation-delay: .3s; }
+		@keyframes ab-dot { 0%, 100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(-7px); opacity: 1; } }
+
+		.ab-icon--wave { gap: 2.5px; }
+		.ab-icon--wave .ab-icon-bar {
+			width: 2.5px; height: 20px; border-radius: 2px;
+			background: var(--fi-ink); animation: ab-wave 1.6s ease-in-out infinite;
+		}
+		.ab-icon--wave .ab-icon-bar:nth-child(1) { animation-delay: 0s; }
+		.ab-icon--wave .ab-icon-bar:nth-child(2) { animation-delay: .12s; }
+		.ab-icon--wave .ab-icon-bar:nth-child(3) { animation-delay: .24s; }
+		.ab-icon--wave .ab-icon-bar:nth-child(4) { animation-delay: .36s; }
+		.ab-icon--wave .ab-icon-bar:nth-child(5) { animation-delay: .48s; }
+		@keyframes ab-wave { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+
+		@media (prefers-reduced-motion: reduce) {
+			.ab-icon-bar, .ab-icon-cell, .ab-icon-dot { animation: none; }
+		}
+
+		/* ── WORK GALLERY MARQUEE ── two rows of thumbnails drifting opposite
+		   directions; JS eases the speed down (not to a full stop) on hover
+		   so a moving thumbnail is still easy to aim a click at. */
+		.ab-gallery { padding: 88px 0 96px; background: #fbfcfe; overflow: hidden; }
+		.ab-gallery-head { margin-bottom: 36px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+		.ab-gallery-link { font-size: 13.5px; font-weight: 600; color: var(--fi-ink); white-space: nowrap; }
+
+		/* ── CUSTOM CURSOR ── arrow + trailing label pill that replaces the
+		   native cursor while hovering the head above the gallery. Arrow
+		   follows the pointer on a snappy lerp, the label trails on a
+		   laggier one and rocks slightly with horizontal velocity. */
+		.ab-cursor-zone { position: relative; }
+		.ab-cursor-zone.ab-cursor-active { cursor: none; }
+		.ab-cursor-layer {
+			position: absolute; inset: 0; overflow: visible;
+			pointer-events: none; z-index: 20;
+		}
+		.ab-cursor-arrow, .ab-cursor-label {
+			position: absolute; top: 0; left: 0;
+			opacity: 0; transition: opacity .15s ease;
+			will-change: transform, opacity;
+		}
+		.ab-cursor-zone.ab-cursor-active .ab-cursor-arrow,
+		.ab-cursor-zone.ab-cursor-active .ab-cursor-label { opacity: 1; }
+		.ab-cursor-arrow svg { display: block; }
+		.ab-cursor-arrow-path { fill: #8a72e8; }
+		.ab-cursor-label {
+			background: #8a72e8; color: #fff;
+			padding: 7px 16px; border-radius: 999px;
+			font-family: var(--fi-font); font-size: 12.5px; font-weight: 600;
+			white-space: nowrap; transform-origin: 0% 50%;
+			box-shadow: 0 8px 20px rgba(138,114,232,.4);
+		}
+		.ab-gallery-rows { display: flex; flex-direction: column; gap: 20px; }
+		.ab-gallery-row { overflow: hidden; }
+		.ab-gallery-track { display: flex; gap: 20px; width: max-content; will-change: transform; }
+		.ab-gallery-item {
+			flex-shrink: 0; width: 240px; height: 160px;
+			border-radius: 16px; overflow: hidden; display: block;
+			border: 1px solid var(--fi-border); background: #eef2fb;
+			transition: transform .3s;
+		}
+		.ab-gallery-item:hover { transform: translateY(-5px); }
+		.ab-gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+		@media (max-width: 640px) {
+			.ab-gallery-item { width: 168px; height: 112px; }
+			.ab-gallery-track { gap: 12px; }
+			.ab-gallery-rows { gap: 12px; }
+		}
+	</style>
+</head>
+<body class="fi-page">
+
+<!-- ============ NAV ============ -->
+<nav class="fi-nav" id="fi-nav">
+	<div class="fi-container fi-nav-inner">
+		<a href="index.html" class="fi-logo">
+			<img src="images/logo-yuhan.svg" alt="YUHAN" class="fi-logo-img">
+		</a>
+
+		<div class="fi-nav-links">
+			<a href="works.html" class="fi-nav-link">Works</a>
+			<a href="about.html" class="fi-nav-link">About</a>
+			<a href="mailto:sky13146@gmail.com" class="fi-nav-cta">Contact</a>
+		</div>
+
+		<button class="fi-mobile-btn" id="fi-mobile-btn">
+			<span></span><span></span><span></span>
+		</button>
 	</div>
-	<div class="fg-grain" aria-hidden="true"></div>
 
-		
-	<div class="fh5co-loader"></div>
-	
-	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="fg-nav-inner">
-				<a class="fg-logo" href="index.html">
-					<div class="fg-logo-mark">Y</div>
-					<span class="fg-logo-text">YUHAN</span>
-				</a>
-				<ul class="fg-nav-links">
-					<li><a href="index.html">Work</a></li>
-					<li><a href="uiux.html">UI/UX</a></li>
-					<li class="has-dropdown">
-						<a href="#">More</a>
-						<ul class="dropdown">
-							<li><a href="banner.html">Banner</a></li>
-							<li><a href="graphic.html">Graphic Design</a></li>
-						</ul>
-					</li>
-					<li><a href="about.html" class="fg-active">About</a></li>
-				</ul>
-				<div class="fg-nav-right">
-					<a href="about.html" class="fg-nav-avatar">Y</a>
+	<div class="fi-drawer" id="fi-drawer">
+		<div class="fi-drawer-inner">
+			<a href="works.html" class="fi-nav-link">Works</a>
+			<a href="about.html" class="fi-nav-link">About</a>
+			<a href="mailto:sky13146@gmail.com" class="fi-nav-link">Contact</a>
+		</div>
+	</div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="ab-hero">
+	<div class="fi-container ab-hero-content">
+		<span class="fi-eyebrow">About</span>
+		<h1>關於我</h1>
+		<p class="ab-hero-desc">UI/UX Designer、Web Designer — 打造清晰、有結構、有溫度的數位體驗。</p>
+	</div>
+</section>
+
+<!-- ============ ABOUT / BIO ============ -->
+<section id="about" class="fi-about ab-cursor-zone">
+	<div class="fi-container fi-about-inner">
+		<div class="fi-about-vis">
+			<div class="fi-about-box">
+				<div class="fi-blob-a"></div>
+				<div class="fi-blob-b"></div>
+				<div class="fi-about-rotating" aria-label="Rotating label">
+					<span class="fi-about-rotating-label">Creative</span>
+					<span class="fi-about-rotating-pill" aria-live="polite" data-texts="design|thinking|coding|solutions">
+						<span class="fi-about-rotating-text fi-about-rotating-text--current">design</span>
+						<span class="fi-about-rotating-text fi-about-rotating-text--next">thinking</span>
+					</span>
+				</div>
+				<div class="fi-about-box-inner" style="background-image: url(images/person02.jpg);"></div>
+				<div class="fi-about-badge">✦</div>
+			</div>
+		</div>
+
+		<div class="fi-about-body">
+			<div>
+				<span class="fi-eyebrow">Yuhan, Lin</span>
+				<h2 class="fi-h2" style="margin-bottom:24px">UI/UX Designer, Web Designer</h2>
+				<div class="fi-bio">
+					<p>Hi，我是 <strong>YUHAN</strong>，擁有六年以上 UI/UX 與網頁設計經驗，優化過各式網站和 app 流程與畫面，也參與產品從零到一上線的過程，打造出具有美感與功能性的介面。</p>
+					<p>擅長從使用者研究出發，透過問卷訪談深入了解使用者需求與反饋，將這些資訊轉化為實際的設計改進，也熟悉商業策略研究，能以更全面的角度思考設計，與商業目標相結合。</p>
+					<p>除了 UI/UX 設計，也具備一定的 HTML/CSS 切版能力，讓我在團隊合作中能更順暢地與開發人員協作。目前正在尋求全職設計職位或合作機會，歡迎聯絡！</p>
+				</div>
+
+				<div class="ab-resume-cta">
+					<a href="https://www.cakeresume.com/s--MiQU3ELLO_OzaQCgzi_Mbw--/yuhanlin" target="_blank" rel="noopener noreferrer" class="fi-btn-dark">查看完整履歷 ↗</a>
+				</div>
+			</div>
+
+			<div>
+				<div class="fi-tags">
+					<span class="fi-tag">UIUX設計</span>
+					<span class="fi-tag">RWD/APP</span>
+					<span class="fi-tag">2C產品</span>
+					<span class="fi-tag">0→1建構</span>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+	<div class="ab-cursor-layer" aria-hidden="true">
+		<div class="ab-cursor-arrow">
+			<svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path class="ab-cursor-arrow-path" d="M5 3 L23 14 L14 16 L11 24 Z" stroke="rgba(255,255,255,.5)" stroke-width="0.6" stroke-linejoin="round"/>
+			</svg>
+		</div>
+		<div class="ab-cursor-label">Solve Problems</div>
+	</div>
+</section>
+
+<!-- ============ WORK GALLERY MARQUEE ============ -->
+<section class="ab-gallery">
+	<div class="fi-container ab-gallery-head">
+		<div>
+			<span class="fi-eyebrow">Portfolio</span>
+			<h2 class="fi-h2">作品集</h2>
+		</div>
+		<a href="works.html" class="ab-gallery-link">查看完整作品集 →</a>
+	</div>
+
+	<div class="fi-container">
+		<div class="ab-work-grid">
+			<a href="works.html" class="ab-work-card">
+				<span class="ab-icon ab-icon--eq" aria-hidden="true">
+					<span class="ab-icon-bar"></span><span class="ab-icon-bar"></span><span class="ab-icon-bar"></span><span class="ab-icon-bar"></span>
+				</span>
+				<span class="ab-work-title">UI/UX</span>
+				<p class="ab-work-desc">APP/Web 產品規劃、流程設計與優化</p>
+				<span class="ab-work-link">了解更多 →</span>
+			</a>
+			<a href="works.html" class="ab-work-card">
+				<span class="ab-icon ab-icon--grid" aria-hidden="true">
+					<span class="ab-icon-cell"></span><span class="ab-icon-cell"></span><span class="ab-icon-cell"></span><span class="ab-icon-cell"></span>
+				</span>
+				<span class="ab-work-title">Web Design</span>
+				<p class="ab-work-desc">響應式活動網頁、官網優化與設計</p>
+				<span class="ab-work-link">了解更多 →</span>
+			</a>
+			<a href="works.html" class="ab-work-card">
+				<span class="ab-icon ab-icon--dots" aria-hidden="true">
+					<span class="ab-icon-dot"></span><span class="ab-icon-dot"></span><span class="ab-icon-dot"></span>
+				</span>
+				<span class="ab-work-title">廣宣設計</span>
+				<p class="ab-work-desc">品牌與活動站內廣告、FB、IG 宣傳圖、LINE 廣告</p>
+				<span class="ab-work-link">了解更多 →</span>
+			</a>
+			<a href="works.html" class="ab-work-card">
+				<span class="ab-icon ab-icon--wave" aria-hidden="true">
+					<span class="ab-icon-bar"></span><span class="ab-icon-bar"></span><span class="ab-icon-bar"></span><span class="ab-icon-bar"></span><span class="ab-icon-bar"></span>
+				</span>
+				<span class="ab-work-title">平面與插畫設計</span>
+				<p class="ab-work-desc">活動相關視覺、插畫、書籍設計、海報、CIS</p>
+				<span class="ab-work-link">了解更多 →</span>
+			</a>
+		</div>
+	</div>
+
+	<div class="ab-gallery-rows">
+		<div class="ab-gallery-row" data-dir="-1">
+			<div class="ab-gallery-track">
+				<a class="ab-gallery-item" href="detailpages/ui_detail07.html"><img src="images/uiux/ui7.jpg" alt="痞客邦app-優化" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/ui_detail06.html"><img src="images/uiux/ui6.jpg" alt="痞客邦web-官網優化" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/ui_detail05.html"><img src="images/uiux/ui5.jpg" alt="叩叩 APP-0到1的完整規劃" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/ui_detail04.html"><img src="images/uiux/ui4.jpg" alt="敦謙集團官網設計、商務中心設計" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/ui_detail03.html"><img src="images/uiux/ui3.jpg" alt="雀客-品牌形象網站Ｘ自助機台畫面" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/ui_detail01.html"><img src="images/uiux/ui1.jpg" alt="DCARD APP-我的畫面redesign" loading="lazy"></a>
+			</div>
+		</div>
+		<div class="ab-gallery-row" data-dir="1">
+			<div class="ab-gallery-track">
+				<a class="ab-gallery-item" href="detailpages/web_detail29.html"><img src="images/web/web29.jpg" alt="台灣美食特產" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/web_detail28.html"><img src="images/web/web28.jpg" alt="富邦-新戶安心限定禮" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/web_detail27.html"><img src="images/web/web27.jpg" alt="DT網站內頁設計" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/web_detail26.html"><img src="images/web/web26.jpg" alt="植感生活節" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/graphic_detail27.html"><img src="images/graphic/graphic49.jpg" alt="熊棉廣宣與DM設計" loading="lazy"></a>
+				<a class="ab-gallery-item" href="detailpages/graphic_detail26.html"><img src="images/graphic/graphic47.jpg" alt="YT頻道素材" loading="lazy"></a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="fi-footer">
+	<svg class="fi-footer-deco" viewBox="0 0 281 293" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M181.067 4.99281C194.222 1.21922 207.824 -0.390941 221.439 0.0797271C230.213 0.389805 239.016 1.54331 247.66 3.76332C255.698 5.82979 263.184 9.74425 270.52 13.6901C271.006 13.9514 271.493 14.2133 271.98 14.4752C274.777 15.9739 277.513 17.616 280.173 19.3903V65.4606C278.407 64.4002 276.828 63.0231 275.526 61.3766C270.175 54.6016 263.422 49.02 255.645 44.8424C255.32 44.6678 254.991 44.4986 254.66 44.3366C249.61 41.8725 243.947 40.8779 238.483 39.4752C232.566 37.9543 226.392 37.0282 220.145 36.8082C210.456 36.4666 200.612 37.7276 191.376 40.4538C191.248 40.4917 191.12 40.5311 190.991 40.5709C187.112 41.7641 182.899 43.8904 178.587 46.5934C173.167 49.9822 167.646 54.278 161.848 59.0084C161.795 59.0514 161.742 59.0953 161.69 59.1383C157.077 62.9164 152.835 66.9875 149.076 71.3444C145.207 75.826 141.882 80.6233 139.078 85.6491C139.389 85.6714 139.701 85.6934 140.013 85.7204C140.792 85.7849 141.567 85.8637 142.35 85.9567C154.284 87.4693 165.898 91.6412 176.302 100.268C191.042 111.492 196.821 134.702 192.867 150.246C192.765 150.77 192.655 151.292 192.536 151.808C187.375 171.585 173.875 183.269 158.246 190.06C147.054 194.711 132.286 196.83 118.421 190.461C118.298 190.404 118.173 190.346 118.049 190.288C107.118 185.404 94.9768 175.268 89.6225 161.805C87.5255 156.641 86.303 151.618 85.6684 146.779C82.8068 149.692 80.1103 152.717 77.5151 155.779C72.4072 161.8 67.8924 168.171 63.8618 174.967C59.3788 182.512 55.5381 190.641 51.9428 199.273C51.8731 199.44 51.8035 199.609 51.7339 199.776C47.984 208.751 44.3568 217.65 43.1128 224.115C43.0976 224.194 43.082 224.274 43.0669 224.353C41.7509 231.292 41.0173 238.562 40.5796 245.816C40.179 252.502 40.1162 259.198 40.4399 265.814C40.5281 267.611 40.6446 269.401 40.7915 271.179C41.3773 278.267 42.4153 285.222 44.0063 291.862C44.0824 292.179 44.1522 292.498 44.2182 292.818H3.33152C2.15536 286.737 1.3315 280.662 0.795384 274.611C0.59818 272.378 0.439633 270.146 0.316869 267.915C-0.133168 259.702 -0.0988687 251.545 0.388158 243.403C0.92668 234.55 2.06358 225.794 3.75144 216.873C3.77099 216.77 3.79038 216.666 3.81003 216.564C6.52696 203.408 10.8365 193.798 14.6811 184.331C14.7526 184.159 14.8247 183.988 14.896 183.817C19.0003 173.975 23.8253 164 29.6762 154.393C34.9291 145.743 41.0477 137.472 47.7827 129.901C53.0139 124.01 58.7125 118.658 64.4507 113.527C64.7482 113.261 65.0476 112.995 65.3481 112.729C73.7112 105.431 82.7693 99.1123 93.5766 94.401C96.8686 85.4072 100.502 76.9297 105.241 68.1413C105.257 68.1107 105.275 68.0799 105.291 68.0495C109.572 60.216 114.802 52.9812 120.594 46.4284C125.987 40.3229 131.886 34.8098 138.092 29.8668C138.163 29.8107 138.234 29.7539 138.304 29.6979C144.571 24.7375 151.349 19.5486 159.139 14.8395C165.364 11.0953 172.301 7.63626 180.267 5.22914C180.533 5.14931 180.799 5.06984 181.067 4.99281ZM136.832 124.096C133.093 123.771 129.045 124.156 124.33 125.124C124.234 125.673 124.142 126.225 124.056 126.779C124.035 126.911 124.015 127.045 123.995 127.177C122.655 135.594 123.124 143.033 124.921 147.033C126.438 150.567 128.89 153.204 134.381 155.948C134.399 155.957 134.417 155.965 134.434 155.973C136.111 156.905 139.754 157.544 144.153 155.724C150.207 153.452 155.807 146.997 156.302 143.492C156.322 143.403 156.34 143.315 156.355 143.231C157.505 135.776 156.118 132.995 152.019 129.449C148.854 126.867 143.29 124.784 137.864 124.199C137.522 124.16 137.18 124.125 136.832 124.096Z" fill="#ffffff"/>
+	</svg>
+	<div class="fi-container fi-footer-inner">
+		<div class="fi-footer-grid">
+			<div>
+				<div class="fi-f-logo">
+					<img src="images/logo-yuhan-white.svg" alt="YUHAN" class="fi-f-logo-img">
+				</div>
+				<p class="fi-f-desc">UI/UX Designer based in Taiwan.<br>打造有溫度的數位體驗。</p>
+			</div>
+
+			<div>
+				<span class="fi-f-col-title">Navigation</span>
+				<div class="fi-f-links">
+					<a href="index.html" class="fi-f-link">Home</a>
+					<a href="works.html" class="fi-f-link">Works</a>
+					<a href="about.html" class="fi-f-link">About</a>
+				</div>
+			</div>
+
+			<div>
+				<span class="fi-f-col-title">Contact</span>
+				<div class="fi-f-links">
+					<a href="mailto:sky13146@gmail.com" class="fi-f-link">sky13146@gmail.com</a>
+					<a href="https://www.linkedin.com/in/yuhan-lin-hana/" class="fi-f-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 				</div>
 			</div>
 		</div>
-	</nav>
-	
-	<div id="fh5co-author">
-		<div class="container">
-			<div class="row top-line animate-box">
-				<div class="col-md-8 col-md-offset-2 gtco-heading text-center intro">
-					<h2>About Me</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<div class="author">
-						<div class="author-inner animate-box" style="background-image: url(images/person.jpg);">
-						</div>
-						<div class="desc animate-box">
-							<span>UI/UX Designer、Web Designer</span>
-							<h3>Yuhan, Lin</h3>
-							<p>六年以上 UIUX 與網頁設計經驗，優化過各式網站和 app 流程與畫面，也參與產品從零到一上線的過程，打造出具有美感與功能性的介面，在過去工作中，使用問券訪談深入了解使用者需求與反饋，將這些資訊轉化為實際的設計改進，也熟悉商業策略研究，深入了解產品與市場之間的關係，能夠更全面的角度思考設計，與商業目標相結合，確保設計方案不僅滿足用戶需求，同時也有助於實現業務目標。<br>除了 UI/UX 設計，也具備一定的 HTML/CSS 切版能力，這讓我在團隊合作中能更順暢的與開發人員合作，實現設計到產品的無縫過渡。</p>
-							<p><a href="https://www.cakeresume.com/s--MiQU3ELLO_OzaQCgzi_Mbw--/yuhanlin" class="btn btn-primary btn-outline">Learn More</a></p>
-							<ul class="fh5co-social-icons">
-								<li><i class="icon-mail"></i>sky13146@gmail.com</li>
-							</ul>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 skills-bottom">
-							<h3 class="title animate-box">My Skills</h3>
-							<div class="animate-box pf-skills-box">
-								<p>Figma、HTML5/CSS3/SASS、jQuery、Bootstrap、Sketch、Prott/Zeplin、PS/AI/AN</p>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<h3 class="title animate-box">My Work</h3>
-						</div>
-					</div>
-					<div class="row pf-work-types">
-						<div class="col-md-4 col-sm-6">
-							<article class="pf-type-card animate-box" data-animate-effect="fadeIn">
-								<span class="pf-type-card__icon" aria-hidden="true"><i class="icon-eye"></i></span>
-								<h3 class="pf-type-card__title">UI/UX</h3>
-								<p class="pf-type-card__desc">APP/Web 產品規劃、流程設計與優化</p>
-								<a href="uiux.html" class="btn btn-primary btn-outline">Learn More</a>
-							</article>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<article class="pf-type-card animate-box" data-animate-effect="fadeIn">
-								<span class="pf-type-card__icon" aria-hidden="true"><i class="icon-layout"></i></span>
-								<h3 class="pf-type-card__title">Web Design</h3>
-								<p class="pf-type-card__desc">響應式活動網頁、官網優化與設計</p>
-								<a href="index.html" class="btn btn-primary btn-outline">Learn More</a>
-							</article>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<article class="pf-type-card animate-box" data-animate-effect="fadeIn">
-								<span class="pf-type-card__icon" aria-hidden="true"><i class="icon-brush"></i></span>
-								<h3 class="pf-type-card__title">Banner</h3>
-								<p class="pf-type-card__desc">品牌與活動站內廣告、FB、IG 宣傳圖、LINE 廣告</p>
-								<a href="banner.html" class="btn btn-primary btn-outline">Learn More</a>
-							</article>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<article class="pf-type-card animate-box" data-animate-effect="fadeIn">
-								<span class="pf-type-card__icon" aria-hidden="true"><i class="icon-book"></i></span>
-								<h3 class="pf-type-card__title">Graphic Design</h3>
-								<p class="pf-type-card__desc">活動相關視覺、插畫、書籍設計、海報、CIS</p>
-								<a href="graphic.html" class="btn btn-primary btn-outline">Learn More</a>
-							</article>
-						</div>
-					</div>
-				</div>
+
+		<div class="fi-footer-bottom">
+			<span class="fi-f-copy">© 2026 YUHAN. All rights reserved.</span>
+			<div class="fi-f-status">
+				<span class="fi-dot"></span>
+				Available for work
 			</div>
 		</div>
 	</div>
+</footer>
 
-	<footer id="fh5co-footer">
-		<div class="fg-footer">
-			<div class="fg-footer-inner">
-				<div class="fg-footer-cta-row">
-					<div>
-						<div class="fg-footer-cta-label">Let's work together</div>
-						<h2 class="fg-footer-cta-heading">Have a project in <em>mind?</em></h2>
-					</div>
-					<a href="mailto:sky13146@gmail.com" class="fg-footer-email-btn">sky13146@gmail.com &nbsp;→</a>
-				</div>
-				<div class="fg-footer-grid">
-					<div class="fg-footer-brand">
-						<div class="fg-footer-brand-logo">
-							<div class="fg-footer-logo-mark">Y</div>
-							<span class="fg-footer-brand-name">YUHAN</span>
-						</div>
-						<p>Product designer crafting calm, structured digital experiences from Taipei.</p>
-					</div>
-					<div class="fg-footer-col">
-						<div class="fg-footer-col-title">Work</div>
-						<ul>
-							<li><a href="index.html">Web Design</a></li>
-							<li><a href="uiux.html">UI/UX</a></li>
-							<li><a href="graphic.html">Graphic Design</a></li>
-							<li><a href="about.html">About</a></li>
-						</ul>
-					</div>
-					<div class="fg-footer-col">
-						<div class="fg-footer-col-title">More</div>
-						<ul>
-							<li><a href="banner.html">Banner</a></li>
-						</ul>
-					</div>
-					<div class="fg-footer-col">
-						<div class="fg-footer-col-title">Status</div>
-						<div class="fg-footer-status-badge">
-							<div class="fg-footer-status-dot"></div>
-							<span>Available 2026</span>
-						</div>
-					</div>
-				</div>
-				<div class="fg-footer-bottom">
-					<span>© 2026 YUHAN · All rights reserved</span>
-					<span>Fresh Glass Design System</span>
-				</div>
-			</div>
-		</div>
-	</footer>
-	
-	</div>
+<script>
+(function () {
+	var nav = document.getElementById('fi-nav');
+	window.addEventListener('scroll', function () {
+		nav.classList.toggle('scrolled', window.scrollY > 32);
+	}, { passive: true });
 
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-	
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<script src="js/theme.js"></script>
-	<script src="js/main.js"></script>
+	var btn = document.getElementById('fi-mobile-btn');
+	var drawer = document.getElementById('fi-drawer');
+	btn.addEventListener('click', function () {
+		btn.classList.toggle('open');
+		drawer.classList.toggle('open');
+	});
 
-	</body>
+	var prPill = document.querySelector('.fi-about-rotating-pill');
+	if (prPill) {
+		var prWords = prPill.getAttribute('data-texts').split('|');
+		var prEls = Array.prototype.slice.call(prPill.querySelectorAll('.fi-about-rotating-text'));
+		var prIdx = 0;
+		prEls[0].textContent = prWords[0];
+		prEls[1].textContent = prWords[1] || prWords[0];
+		var prCur = prEls[0], prNext = prEls[1];
+		prCur.className = 'fi-about-rotating-text fi-about-rotating-text--current';
+		prNext.className = 'fi-about-rotating-text fi-about-rotating-text--next';
+
+		setInterval(function () {
+			if (prWords.length < 2) { return; }
+			prIdx = (prIdx + 1) % prWords.length;
+			prCur.className = 'fi-about-rotating-text fi-about-rotating-text--out';
+			prNext.className = 'fi-about-rotating-text fi-about-rotating-text--current';
+			setTimeout(function () {
+				prCur.textContent = prWords[(prIdx + 1) % prWords.length];
+				prCur.className = 'fi-about-rotating-text fi-about-rotating-text--next';
+				var prTmp = prCur; prCur = prNext; prNext = prTmp;
+			}, 380);
+		}, 2200);
+	}
+
+	var aboutBadge = document.querySelector('.fi-about-badge');
+	if (aboutBadge) {
+		var badgeRotation = 12;
+		var lastScrollY = window.scrollY;
+		var badgeTicking = false;
+		window.addEventListener('scroll', function () {
+			if (badgeTicking) { return; }
+			badgeTicking = true;
+			requestAnimationFrame(function () {
+				var currentScrollY = window.scrollY;
+				badgeRotation += (currentScrollY - lastScrollY) * 0.2;
+				lastScrollY = currentScrollY;
+				aboutBadge.style.transform = 'rotate(' + badgeRotation + 'deg)';
+				badgeTicking = false;
+			});
+		});
+	}
+
+	/* Work gallery marquee: two rows drifting opposite directions.
+	   rAF-driven (not a CSS animation) so hover can ease the speed down
+	   smoothly instead of jumping when animation-duration would change. */
+	var galleryRows = document.querySelectorAll('.ab-gallery-row');
+	galleryRows.forEach(function (row) {
+		var track = row.querySelector('.ab-gallery-track');
+		track.innerHTML += track.innerHTML; // duplicate once for a seamless loop
+
+		var dir = row.getAttribute('data-dir') === '1' ? 1 : -1;
+		var baseSpeed = 0.5;
+		var speed = baseSpeed;
+		var targetSpeed = baseSpeed;
+		var pos = 0;
+		var half = track.scrollWidth / 2;
+
+		window.addEventListener('resize', function () { half = track.scrollWidth / 2; });
+		row.addEventListener('mouseenter', function () { targetSpeed = baseSpeed * 0.15; });
+		row.addEventListener('mouseleave', function () { targetSpeed = baseSpeed; });
+
+		(function tick() {
+			speed += (targetSpeed - speed) * 0.06;
+			pos += speed;
+			if (half > 0 && pos >= half) pos -= half;
+			track.style.transform = 'translateX(' + (dir === -1 ? -pos : pos - half) + 'px)';
+			requestAnimationFrame(tick);
+		})();
+	});
+
+	/* Custom cursor over the hero and bio sections: an arrow follows the
+	   pointer on a snappy lerp, a label pill trails on a laggier one and
+	   rocks with horizontal velocity -- a vanilla-JS approximation of the
+	   spring-physics "user cursor" pattern (arrow spring stiffer than
+	   label spring, label tilt driven by velocity, hidden on touch
+	   devices). Applied to every .ab-cursor-zone independently. */
+	var isCoarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+	if (!isCoarsePointer) {
+		document.querySelectorAll('.ab-cursor-zone').forEach(function (cursorZone) {
+			var cArrow = cursorZone.querySelector('.ab-cursor-arrow');
+			var cLabel = cursorZone.querySelector('.ab-cursor-label');
+			if (!cArrow || !cLabel) return;
+
+			var targetX = 0, targetY = 0;
+			var arrowX = 0, arrowY = 0;
+			var labelX = 0, labelY = 0;
+			var tilt = 0, tiltTarget = 0;
+			var lastSample = null;
+
+			cursorZone.addEventListener('mouseenter', function () {
+				cursorZone.classList.add('ab-cursor-active');
+			});
+			cursorZone.addEventListener('mouseleave', function () {
+				cursorZone.classList.remove('ab-cursor-active');
+				lastSample = null;
+				tiltTarget = 0;
+			});
+			cursorZone.addEventListener('mousemove', function (e) {
+				var rect = cursorZone.getBoundingClientRect();
+				targetX = e.clientX - rect.left;
+				targetY = e.clientY - rect.top;
+
+				var now = performance.now();
+				if (lastSample) {
+					var dt = Math.max(1, now - lastSample.t);
+					var vx = (targetX - lastSample.x) / dt * 1000;
+					var vy = (targetY - lastSample.y) / dt * 1000;
+					var speedPx = Math.hypot(vx, vy);
+					var norm = Math.min(1, speedPx / 1500);
+					var sign = vx === 0 ? 0 : (vx > 0 ? 1 : -1);
+					tiltTarget = sign * norm * 18; // deg, capped
+				}
+				lastSample = { x: targetX, y: targetY, t: now };
+			});
+
+			(function cursorTick() {
+				arrowX += (targetX - arrowX) * 0.35;
+				arrowY += (targetY - arrowY) * 0.35;
+				labelX += (targetX - labelX) * 0.16;
+				labelY += (targetY - labelY) * 0.16;
+				tilt += (tiltTarget - tilt) * 0.12;
+
+				cArrow.style.transform = 'translate(' + arrowX + 'px,' + arrowY + 'px)';
+				cLabel.style.transform =
+					'translate(' + (labelX + 22) + 'px,' + (labelY + 14) + 'px) rotate(' + tilt + 'deg)';
+
+				requestAnimationFrame(cursorTick);
+			})();
+		});
+	}
+})();
+</script>
+
+</body>
 </html>
-
