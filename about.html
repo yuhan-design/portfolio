@@ -170,6 +170,72 @@
 			.ab-gallery-track { gap: 12px; }
 			.ab-gallery-rows { gap: 12px; }
 		}
+
+		/* ── WORK EXPERIENCE TIMELINE ── date | dot-rail | content grid.
+		   Rail position is a custom property so the connecting line and
+		   dots always line up, even after the mobile column collapse. */
+		.ab-timeline { padding: 88px 0 96px; }
+		.ab-timeline-head { margin-bottom: 48px; }
+		.ab-timeline-list { position: relative; --ab-tl-rail-x: 188px; }
+		.ab-timeline-list::before {
+			content: ''; position: absolute; top: 6px; bottom: 6px;
+			left: var(--ab-tl-rail-x); width: 1px;
+			background:
+				linear-gradient(rgba(21,23,30,.14), rgba(21,23,30,.14)),
+				linear-gradient(180deg, transparent 0%, var(--fi-blue) 45%, var(--fi-blue) 55%, transparent 100%);
+			background-repeat: no-repeat;
+			background-size: 100% 100%, 100% 46%;
+			background-position: 0 0, 0 -60%;
+			animation: ab-tl-flow 3.6s linear infinite;
+		}
+		@keyframes ab-tl-flow {
+			0% { background-position: 0 0, 0 -60%; }
+			100% { background-position: 0 0, 0 160%; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.ab-timeline-list::before { animation: none; }
+		}
+		.ab-timeline-item {
+			display: grid;
+			grid-template-columns: 140px 32px 1fr;
+			grid-template-areas: "date rail content";
+			column-gap: 32px;
+			position: relative;
+			padding-bottom: 56px;
+		}
+		.ab-timeline-item:last-child { padding-bottom: 0; }
+		.ab-timeline-date {
+			grid-area: date; text-align: right;
+			font-weight: 700; font-size: 14px; color: var(--fi-ink);
+			padding-top: 3px; white-space: nowrap;
+		}
+		.ab-timeline-rail { grid-area: rail; display: flex; justify-content: center; }
+		.ab-timeline-dot {
+			width: 12px; height: 12px; border-radius: 50%;
+			background: var(--fi-ink); margin-top: 6px;
+			position: relative; z-index: 1;
+			box-shadow: 0 0 0 4px var(--fi-bg);
+		}
+		.ab-timeline-content { grid-area: content; min-width: 0; }
+		.ab-timeline-role { font-family: var(--fi-font); font-weight: 800; font-size: 19px; color: var(--fi-ink); margin-bottom: 14px; }
+		.ab-timeline-desc { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+		.ab-timeline-desc li { font-size: 14px; line-height: 1.75; color: var(--fi-500); padding-left: 14px; position: relative; }
+		.ab-timeline-desc li::before { content: '‧'; position: absolute; left: 0; color: var(--fi-300); }
+		.ab-timeline-skills { display: flex; flex-direction: column; gap: 6px; }
+		.ab-timeline-skills p { font-size: 13px; line-height: 1.7; color: var(--fi-500); }
+		.ab-timeline-skills strong { font-weight: 700; color: var(--fi-ink); }
+
+		@media (max-width: 900px) {
+			.ab-timeline { padding: 64px 0 72px; }
+			.ab-timeline-list { --ab-tl-rail-x: 16px; }
+			.ab-timeline-item {
+				grid-template-columns: 32px 1fr;
+				grid-template-areas: "rail date" "rail content";
+				row-gap: 6px; column-gap: 20px;
+				padding-bottom: 40px;
+			}
+			.ab-timeline-date { text-align: left; font-size: 13px; padding-top: 0; }
+		}
 	</style>
 </head>
 <body class="fi-page">
@@ -210,8 +276,10 @@
 	</div>
 </section>
 
-<!-- ============ ABOUT / BIO ============ -->
-<section id="about" class="fi-about ab-cursor-zone">
+<!-- ============ ABOUT / BIO + WORK EXPERIENCE (shared cursor zone) ============ -->
+<div class="ab-cursor-zone">
+
+<section id="about" class="fi-about">
 	<div class="fi-container fi-about-inner">
 		<div class="fi-about-vis">
 			<div class="fi-about-box">
@@ -256,16 +324,67 @@
 			</div>
 		</div>
 	</div>
+</section>
 
-	<div class="ab-cursor-layer" aria-hidden="true">
-		<div class="ab-cursor-arrow">
-			<svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path class="ab-cursor-arrow-path" d="M5 3 L23 14 L14 16 L11 24 Z" stroke="rgba(255,255,255,.5)" stroke-width="0.6" stroke-linejoin="round"/>
-			</svg>
+<!-- ============ WORK EXPERIENCE TIMELINE ============ -->
+<section class="ab-timeline">
+	<div class="fi-container">
+		<div class="ab-timeline-head">
+			<span class="fi-eyebrow">Experience</span>
+			<h2 class="fi-h2">工作經驗</h2>
 		</div>
-		<div class="ab-cursor-label">Solve Problems</div>
+
+		<div class="ab-timeline-list">
+			<div class="ab-timeline-item">
+				<div class="ab-timeline-date">Mar 2022 - Present</div>
+				<div class="ab-timeline-rail"><span class="ab-timeline-dot"></span></div>
+				<div class="ab-timeline-content">
+					<div class="ab-timeline-role">公司名稱 A ｜ UI/UX Designer</div>
+					<ul class="ab-timeline-desc">
+						<li>負責公司旗下多項產品的介面設計與體驗優化</li>
+						<li>與產品團隊和工程開發團隊溝通討論設計方向</li>
+						<li>負責 UX flowchart、sitemap、wireframe 製作與響應式網站 UI 介面（Responsive Web Design）</li>
+						<li>與其他 UI/UX 設計師、前端、後端工程師協作，提出最佳使用者體驗的改善方案</li>
+					</ul>
+					<div class="ab-timeline-skills">
+						<p><strong>使用者經驗設計 User Experience：</strong>Competitor analysis、Functional Map、Flow、Wireframe</p>
+						<p><strong>使用者介面設計 User Interface：</strong>Guideline、UI Mockup、Prototype</p>
+						<p><strong>Responsive Web Design：</strong>Landing page、官網、系統後台</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="ab-timeline-item">
+				<div class="ab-timeline-date">Jan 2020 - Mar 2022</div>
+				<div class="ab-timeline-rail"><span class="ab-timeline-dot"></span></div>
+				<div class="ab-timeline-content">
+					<div class="ab-timeline-role">公司名稱 B ｜ UI/UX Designer</div>
+					<ul class="ab-timeline-desc">
+						<li>產品規劃開發，參與多項專案從需求訪談到上線的完整流程</li>
+						<li>負責前後台介面設計與互動流程規劃</li>
+						<li>製作設計規範文件，提升團隊協作效率</li>
+					</ul>
+					<div class="ab-timeline-skills">
+						<p><strong>產品設計 Product Design：</strong>需求訪談、UX Research、Persona</p>
+						<p><strong>視覺設計 Visual Design：</strong>Design System、Icon 設計</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
+
+<div class="ab-cursor-layer" aria-hidden="true">
+	<div class="ab-cursor-arrow">
+		<svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path class="ab-cursor-arrow-path" d="M5 3 L23 14 L14 16 L11 24 Z" stroke="rgba(255,255,255,.5)" stroke-width="0.6" stroke-linejoin="round"/>
+		</svg>
+	</div>
+	<div class="ab-cursor-label">Solve Problems</div>
+</div>
+
+</div>
+<!-- /.ab-cursor-zone -->
 
 <!-- ============ WORK GALLERY MARQUEE ============ -->
 <section class="ab-gallery">

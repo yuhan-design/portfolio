@@ -177,6 +177,14 @@
 		.wk-pill--graphic { background: #c9b8e8; color: #3f3460; }
 		.wk-pill--illustration { background: #f2d96b; color: #5b5535; }
 
+		/* Placeholder card thumbnail (no real screenshot yet) -- mini dashboard mockup,
+		   swap this block for a plain <img src="images/uiux/ui8.jpg"> once a real one exists. */
+		.wk8-mock { position: absolute; inset: 0; display: flex; flex-direction: column; }
+		.wk8-mock-bar { display: flex; gap: 5px; padding: 12px 14px; }
+		.wk8-mock-bar span { width: 7px; height: 7px; border-radius: 50%; background: rgba(21,23,30,.14); }
+		.wk8-mock-chart { flex: 1; display: flex; align-items: flex-end; gap: 6px; padding: 0 16px 18px; }
+		.wk8-mock-chart span { flex: 1; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, var(--fi-blue), var(--fi-sky)); }
+
 		/* Page transition */
 		body { animation: wk-fadein 0.4s ease both; }
 		@keyframes wk-fadein { from { opacity: 0; } to { opacity: 1; } }
@@ -259,8 +267,8 @@
 <div class="wk-filter-wrap">
 	<div class="fi-container">
 		<div class="wk-filter-row" role="group" aria-label="作品分類篩選">
-			<button class="wk-fb active" data-filter="all">All <span class="wk-count">190</span></button>
-			<button class="wk-fb" data-filter="uiux">UI/UX <span class="wk-count">7</span></button>
+			<button class="wk-fb active" data-filter="all">All <span class="wk-count">191</span></button>
+			<button class="wk-fb" data-filter="uiux">UI/UX <span class="wk-count">8</span></button>
 			<button class="wk-fb" data-filter="web">Web Design <span class="wk-count">29</span></button>
 			<button class="wk-fb" data-filter="graphic">廣宣設計 <span class="wk-count">108</span></button>
 			<button class="wk-fb" data-filter="illustration">平面與插畫設計 <span class="wk-count">46</span></button>
@@ -272,7 +280,7 @@
 			<button class="wk-sfb" data-subfilter="activity">Activity <span class="wk-count">15</span></button>
 			<button class="wk-sfb" data-subfilter="branding">Branding <span class="wk-count">11</span></button>
 		</div>
-		<p class="wk-status">顯示 <strong id="wk-visible">190</strong> 件作品</p>
+		<p class="wk-status">顯示 <strong id="wk-visible">191</strong> 件作品</p>
 	</div>
 </div>
 
@@ -282,6 +290,26 @@
 		<div class="wk-grid" id="wk-grid">
 
 			<!-- ── UI/UX ── -->
+			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail08.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<div class="wk8-mock" aria-hidden="true">
+						<div class="wk8-mock-bar"><span></span><span></span><span></span></div>
+						<div class="wk8-mock-chart">
+							<span style="height:35%"></span>
+							<span style="height:58%"></span>
+							<span style="height:44%"></span>
+							<span style="height:76%"></span>
+							<span style="height:52%"></span>
+						</div>
+					</div>
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">美股放大鏡網站改版</div>
+					<span class="wk-pill wk-pill--uiux">UI/UX</span>
+				</div>
+			</a>
+
 			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail07.html">
 				<div class="wk-card-img" style="background:#eef2fb">
 					<img src="images/uiux/ui7.jpg" alt="痞客邦app-優化" loading="lazy">

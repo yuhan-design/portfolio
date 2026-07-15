@@ -580,15 +580,15 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 @media (max-width: 1024px) { .fi-about-inner { gap: 40px; } }
 @media (max-width: 900px) {
   .fi-about-inner { grid-template-columns: 1fr; gap: 40px; }
-  .fi-about-vis { max-width: 320px; margin: 0 auto; }
+  .fi-about-vis { width: min(100%, 420px); max-width: none; margin: 0 auto; }
+  .fi-blob-b { bottom: 0; right: 0; }
 }
 
 .fi-about-vis { position: relative; }
 .fi-about-box {
   aspect-ratio: 1; border-radius: 32px; overflow: visible; position: relative;
-  background: linear-gradient(180deg, rgba(238,246,255,.96) 0%, rgba(249,251,255,1) 100%);
   box-shadow: 0 24px 80px rgba(21,23,30,.08);
-  border: 1px solid rgba(229,233,242,.9); max-width: 420px;
+  max-width: 420px;
 }
 .fi-blob-a {
   position: absolute;
