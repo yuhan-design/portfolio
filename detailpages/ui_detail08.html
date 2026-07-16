@@ -126,37 +126,21 @@
 		.fi-result-card--d .fi-result-plus { background: #fff; color: var(--fi-ink); }
 		.fi-result-card:hover .fi-result-plus { opacity: 1; transform: scale(1) rotate(0deg); }
 
-		/* ── 使用流程 -- numbered accordion, single item open, grid-rows expand ── */
-		.fi-detail-flow { margin: 8px 0 64px; border-top: 1px solid var(--fi-border); }
-		.fi-flow-item { border-bottom: 1px solid var(--fi-border); }
-		.fi-flow-head {
-			display: flex; align-items: center; gap: 18px;
-			width: 100%; padding: 22px 4px; background: none; border: none;
-			cursor: pointer; text-align: left; font-family: var(--fi-font);
-		}
-		.fi-flow-num { font-size: 13px; font-weight: 800; color: var(--fi-300); flex-shrink: 0; width: 22px; }
-		.fi-flow-title { flex: 1; font-size: 16px; font-weight: 700; color: var(--fi-ink); }
-		.fi-flow-icon { position: relative; width: 20px; height: 20px; flex-shrink: 0; }
-		.fi-flow-icon::before, .fi-flow-icon::after {
-			content: ''; position: absolute; top: 50%; left: 50%;
-			background: var(--fi-ink); transform: translate(-50%,-50%);
-			transition: transform .3s cubic-bezier(.22,.61,.36,1);
-		}
-		.fi-flow-icon::before { width: 12px; height: 1.5px; }
-		.fi-flow-icon::after { width: 1.5px; height: 12px; }
-		.fi-flow-item.open .fi-flow-icon::after { transform: translate(-50%,-50%) scaleY(0); }
-		.fi-flow-body-wrap {
-			display: grid; grid-template-rows: 0fr;
-			transition: grid-template-rows .4s cubic-bezier(.22,.61,.36,1);
-		}
-		.fi-flow-item.open .fi-flow-body-wrap { grid-template-rows: 1fr; }
-		.fi-flow-body-inner { overflow: hidden; }
-		.fi-flow-desc { padding: 0 4px 24px 40px; font-size: 14px; line-height: 1.7; color: var(--fi-500); max-width: 560px; }
-
 		.fi-detail-section-head { margin-bottom: 8px; }
 		.fi-detail-section-head .fi-h2 { margin-bottom: 0; }
 		.dt8-section { margin-bottom: 64px; }
 		.dt8-lead { font-size: 14.5px; line-height: 1.8; color: var(--fi-500); max-width: 640px; margin-bottom: 24px; }
+
+		/* Design process: vertical dot-and-rail timeline (matches Figma "設計流程" node) */
+		.dt8-vtimeline { display: flex; flex-direction: column; margin-top: 12px; max-width: 640px; }
+		.dt8-vtimeline-item { display: flex; gap: 16px; }
+		.dt8-vtimeline-rail { display: flex; flex-direction: column; align-items: center; padding-top: 6px; align-self: stretch; }
+		.dt8-vtimeline-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--fi-blue); flex-shrink: 0; }
+		.dt8-vtimeline-rail-line { flex: 1; width: 1px; background: rgba(21,23,30,.14); margin-top: 4px; }
+		.dt8-vtimeline-item:last-child .dt8-vtimeline-rail-line { display: none; }
+		.dt8-vtimeline-content { flex: 1; padding-bottom: 28px; }
+		.dt8-vtimeline-title { font-size: 15px; font-weight: 700; color: var(--fi-ink); margin-bottom: 4px; }
+		.dt8-vtimeline-desc { font-size: 13.5px; line-height: 1.7; color: var(--fi-500); }
 
 		/* Problem list: numbered items, blue-tint badge (same accent family as highlight labels) */
 		.dt8-issue-list { display: flex; flex-direction: column; gap: 18px; max-width: 640px; }
@@ -177,12 +161,99 @@
 		.dt8-issue-title { font-size: 15px; font-weight: 800; color: var(--fi-ink); margin-bottom: 6px; }
 		.dt8-issue-item .dt8-issue-text { padding-top: 0; }
 
-		/* Research process timeline strip */
-		.dt8-process-timeline { display: flex; gap: 20px; overflow-x: auto; margin: 0 0 40px; padding-bottom: 4px; }
-		.dt8-process-step { flex: 1 0 150px; }
-		.dt8-process-date { font-family: var(--fi-font); font-size: 11px; font-weight: 700; color: var(--fi-300); }
-		.dt8-process-label { font-size: 13.5px; font-weight: 700; color: var(--fi-ink); margin-top: 5px; }
-		.dt8-process-bar { height: 3px; border-radius: 2px; background: var(--fi-blue); margin-top: 12px; opacity: .8; }
+		/* Research methods: clickable cards that swap a preview panel (matches Figma "研究方法" node) */
+		.dt8-research { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: stretch; margin: 24px 0 8px; }
+		@media (max-width: 900px) { .dt8-research { grid-template-columns: 1fr; gap: 24px; align-items: start; } }
+
+		.dt8-research-list { display: flex; flex-direction: column; gap: 14px; }
+		.dt8-research-item { display: flex; flex-direction: column; }
+		.dt8-research-card {
+			display: flex; flex-direction: column; gap: 14px; width: 100%;
+			background: #fbfcfe; border: 1px solid var(--fi-border); border-radius: 20px;
+			padding: 22px; cursor: pointer; text-align: left; font-family: var(--fi-font);
+			appearance: none; transition: border-color .2s;
+		}
+		.dt8-research-card:hover { border-color: var(--fi-300); }
+		.dt8-research-card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+		.dt8-research-tag { font-size: 11.5px; font-weight: 700; padding: 3px 12px; border-radius: 999px; }
+		.dt8-research-arrow {
+			flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+			border: 1.5px solid var(--fi-border-s); display: flex; align-items: center; justify-content: center;
+			color: var(--fi-300); transition: border-color .2s, color .2s;
+		}
+		.dt8-research-desc { font-size: 13px; line-height: 1.7; color: var(--fi-500); }
+
+		.dt8-research-view { display: none; }
+		.dt8-research-view.is-active { display: block; }
+		.dt8-research-inline { display: none; }
+
+		/* Desktop: card border/arrow highlight tracks whichever view shows in the side panel */
+		@media (min-width: 901px) {
+			.dt8-research-item.is-active .dt8-research-card { border-color: #95a0b9; }
+			.dt8-research-item.is-active .dt8-research-arrow { border-color: var(--fi-blue); color: var(--fi-blue); }
+		}
+
+		/* Mobile: no side panel -- each card expands into its own inline accordion body.
+		   First item (認知走查) opens by default; desktop's 競品分析 default stays desktop-only. */
+		@media (max-width: 900px) {
+			.dt8-research-panel { display: none; }
+			.dt8-research-item {
+				background: #fbfcfe; border: 1px solid var(--fi-border); border-radius: 20px;
+				overflow: hidden; transition: border-color .2s;
+			}
+			.dt8-research-item.is-open { border-color: #95a0b9; }
+			.dt8-research-item .dt8-research-card { border: none; background: none; border-radius: 0; }
+			.dt8-research-item.is-open .dt8-research-arrow { border-color: var(--fi-blue); color: var(--fi-blue); transform: rotate(90deg); }
+			.dt8-research-inline {
+				display: grid; grid-template-rows: 0fr;
+				transition: grid-template-rows .35s cubic-bezier(.22,.61,.36,1);
+			}
+			.dt8-research-item.is-open .dt8-research-inline { grid-template-rows: 1fr; }
+			.dt8-research-inline-body { overflow: hidden; }
+			.dt8-research-inline-content { padding: 0 22px 22px; }
+		}
+
+		.dt8-research-placeholder {
+			aspect-ratio: 766 / 558; border-radius: 24px;
+			display: flex; align-items: center; justify-content: center;
+			font-family: var(--fi-font); font-size: 13px; font-weight: 700; color: rgba(21,23,30,.32);
+		}
+
+		.dt8-research-compare { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 766 / 558; background: var(--fi-border); }
+
+		/* Desktop: stretch the panel to match the card list's full height instead of a fixed aspect box.
+		   The active view is taken out of normal flow (position:absolute) so the comparison image's
+		   own intrinsic aspect ratio can't feed back into the grid row's auto-sizing -- without this,
+		   the row height would follow whichever is taller (list vs. image-derived height) instead of
+		   always tracking the card list, causing the panel to balloon taller only on the 競品分析 tab. */
+		@media (min-width: 901px) {
+			.dt8-research-panel { position: relative; min-height: 0; }
+			.dt8-research-view.is-active { position: absolute; inset: 0; }
+			.dt8-research-placeholder, .dt8-research-compare { height: 100%; width: 100%; aspect-ratio: auto; }
+		}
+		.dt8-research-shot { width: 100%; height: 100%; object-fit: cover; object-position: left top; display: block; }
+		.dt8-research-callout {
+			position: absolute; top: 17%; left: 17%; right: 6%;
+			background: #fff; border-radius: 16px; padding: 20px 22px;
+			box-shadow: 0 24px 48px rgba(21,23,30,.14);
+		}
+		.dt8-research-callout-title { font-size: 14px; font-weight: 800; color: var(--fi-blue); margin-bottom: 12px; }
+		.dt8-research-callout-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+		.dt8-research-callout-item { display: flex; gap: 9px; align-items: flex-start; font-size: 12px; line-height: 1.6; }
+		.dt8-research-callout-dot { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; background: var(--fi-300); }
+		.dt8-research-callout-item.is-solved .dt8-research-callout-dot { background: var(--fi-blue); }
+		.dt8-research-callout-item.is-solved { color: var(--fi-ink); }
+		.dt8-research-callout-item:not(.is-solved) { color: var(--fi-400); }
+		.dt8-research-callout-check { color: var(--fi-blue); font-weight: 800; margin-left: 3px; }
+
+		/* Mobile: an absolute overlay would crush 7 bullet points into a sliver, so stack instead --
+		   comparison shot on top (short peek crop), callout becomes a plain full-width card below it */
+		@media (max-width: 640px) {
+			.dt8-research-compare { aspect-ratio: auto; }
+			.dt8-research-shot { aspect-ratio: 766 / 320; }
+			.dt8-research-callout { position: static; box-shadow: none; border: 1px solid var(--fi-border); margin-top: 14px; }
+			.dt8-research-placeholder { aspect-ratio: auto; height: 200px; }
+		}
 
 		/* Research insight callout after the accordion */
 		.dt8-insight-box { background: #fff; border: 1px solid var(--fi-border); border-radius: 20px; padding: 28px 30px; margin-top: 8px; }
@@ -221,7 +292,7 @@
 
 		/* Case study body continues the rounded panel's white surface (no color seam).
 		   position:relative (z-index left auto) so it still paints above the sticky hero. */
-		.fi-detail-body { position: relative; background: #fbfcfe; }
+		.fi-detail-body { position: relative; background: #fbfcfe; padding-top: 64px; }
 
 		/* Hero stays pinned to the viewport top so the rounded highlights strip below can scroll
 		   up and over it. z-index left at auto (not explicit) so the footer -- also
@@ -340,6 +411,206 @@
 <section class="fi-detail-body">
 	<div class="fi-container">
 
+		<!-- ── 設計流程 ── -->
+		<div class="dt8-section">
+			<div class="fi-detail-section-head">
+				<span class="fi-eyebrow">Process</span>
+				<h2 class="fi-h2" style="margin-bottom:24px">設計流程</h2>
+			</div>
+			<p class="dt8-lead">先以認知走查釐清問題，再依實際使用習慣重新定位架構規劃的依據。</p>
+			<div class="dt8-vtimeline">
+				<div class="dt8-vtimeline-item">
+					<div class="dt8-vtimeline-rail">
+						<span class="dt8-vtimeline-dot"></span>
+						<span class="dt8-vtimeline-rail-line"></span>
+					</div>
+					<div class="dt8-vtimeline-content">
+						<p class="dt8-vtimeline-title">認知走查</p>
+						<p class="dt8-vtimeline-desc">逐一走過個股頁的關鍵任務流程，統整目前資訊架構與畫面上的問題</p>
+					</div>
+				</div>
+				<div class="dt8-vtimeline-item">
+					<div class="dt8-vtimeline-rail">
+						<span class="dt8-vtimeline-dot"></span>
+						<span class="dt8-vtimeline-rail-line"></span>
+					</div>
+					<div class="dt8-vtimeline-content">
+						<p class="dt8-vtimeline-title">競品分析．架構規劃 v1．設計初版</p>
+						<p class="dt8-vtimeline-desc">比較站內外美股資訊平台，找出功能落差，並產出第一版資訊架構與設計稿來評估閱讀動線</p>
+					</div>
+				</div>
+				<div class="dt8-vtimeline-item">
+					<div class="dt8-vtimeline-rail">
+						<span class="dt8-vtimeline-dot"></span>
+						<span class="dt8-vtimeline-rail-line"></span>
+					</div>
+					<div class="dt8-vtimeline-content">
+						<p class="dt8-vtimeline-title">美股研究員／投資者訪談</p>
+						<p class="dt8-vtimeline-desc">提供畫面給訪談者，深入了解內部研究員與美股 PM 的實際使用習慣，作為本專案最關鍵的架構調整依據</p>
+					</div>
+				</div>
+				<div class="dt8-vtimeline-item">
+					<div class="dt8-vtimeline-rail">
+						<span class="dt8-vtimeline-dot"></span>
+						<span class="dt8-vtimeline-rail-line"></span>
+					</div>
+					<div class="dt8-vtimeline-content">
+						<p class="dt8-vtimeline-title">架構規劃定案</p>
+						<p class="dt8-vtimeline-desc">根據現有數據評估各項數據點擊量，並考量工程人力與美股放大鏡目前的低流量現況，決定先補齊重要數值，而非一次做滿所有競品功能</p>
+					</div>
+				</div>
+				<div class="dt8-vtimeline-item">
+					<div class="dt8-vtimeline-rail">
+						<span class="dt8-vtimeline-dot"></span>
+						<span class="dt8-vtimeline-rail-line"></span>
+					</div>
+					<div class="dt8-vtimeline-content">
+						<p class="dt8-vtimeline-title">設計精稿 → 工程開發</p>
+						<p class="dt8-vtimeline-desc">完成高保真設計稿並交付工程實作</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ── 研究方法 ── -->
+		<div class="dt8-section">
+			<div class="fi-detail-section-head">
+				<span class="fi-eyebrow">Research</span>
+				<h2 class="fi-h2" style="margin-bottom:24px">研究方法</h2>
+			</div>
+			<p class="dt8-lead">透過四種互補的研究手法，從不同角度收斂問題真相，避免單一方法帶來的視角盲區。</p>
+
+			<div class="dt8-research" id="dt8-research">
+				<div class="dt8-research-list">
+					<div class="dt8-research-item is-open is-active" data-target="cognitive">
+						<button type="button" class="dt8-research-card">
+							<div class="dt8-research-card-head">
+								<span class="dt8-research-tag" style="background:#c9ddf7;color:#1c2a44">認知走查</span>
+								<span class="dt8-research-arrow" aria-hidden="true">
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+								</span>
+							</div>
+							<p class="dt8-research-desc">模擬不同使用者心智模型，逐步走查個股頁的資訊架構，記錄每個決策節點的認知摩擦點</p>
+						</button>
+						<div class="dt8-research-inline">
+							<div class="dt8-research-inline-body">
+								<div class="dt8-research-inline-content">
+									<div class="dt8-research-placeholder" style="background:#c9ddf7">視覺呈現製作中</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="dt8-research-item" data-target="competitor">
+						<button type="button" class="dt8-research-card">
+							<div class="dt8-research-card-head">
+								<span class="dt8-research-tag" style="background:#d8ecdf;color:#2c4d3a">競品分析</span>
+								<span class="dt8-research-arrow" aria-hidden="true">
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+								</span>
+							</div>
+							<p class="dt8-research-desc">橫向比較國內外主流財經平台（Yahoo Finance、Investing.com、財報狗），歸納業界個股頁資訊揭露標準</p>
+						</button>
+						<div class="dt8-research-inline">
+							<div class="dt8-research-inline-body">
+								<div class="dt8-research-inline-content">
+									<div class="dt8-research-compare">
+										<img class="dt8-research-shot" src="images/ui/ui8-compare.jpg" alt="美股放大鏡與其他競品資訊呈現比較表">
+										<div class="dt8-research-callout">
+											<p class="dt8-research-callout-title">與競品相比，我們目前缺乏的功能</p>
+											<ul class="dt8-research-callout-list">
+												<li class="dt8-research-callout-item is-solved"><span class="dt8-research-callout-dot"></span>財報分析資訊不足：缺少完整的三大財報資料（損益表、資產負債表、現金流量表）<span class="dt8-research-callout-check">✓</span></li>
+												<li class="dt8-research-callout-item is-solved"><span class="dt8-research-callout-dot"></span>即時數據與走勢關鍵值缺乏：如昨收、開高低收等即時行情關鍵指標<span class="dt8-research-callout-check">✓</span></li>
+												<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>個股比較功能：無法並列比較多檔股票的財務與走勢表現</li>
+												<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>SEC 13F 機構持股報告：缺乏機構投資者的持股變化資訊</li>
+												<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>策略選股指標：缺少可作為買進依據的篩選條件或策略指標</li>
+												<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>分析師目標價與評級預測：無分析師對個股的預期與評價</li>
+												<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>名人持股資訊：缺少投資名人或機構持倉公開資料</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="dt8-research-item" data-target="matrix">
+						<button type="button" class="dt8-research-card">
+							<div class="dt8-research-card-head">
+								<span class="dt8-research-tag" style="background:#f7f1d8;color:#5b5535">功能優先級矩陣</span>
+								<span class="dt8-research-arrow" aria-hidden="true">
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+								</span>
+							</div>
+							<p class="dt8-research-desc">結合用戶需求頻率與開發成本，將所有待優化項目落點至 Impact × Effort 矩陣，確立衝刺優先序</p>
+						</button>
+						<div class="dt8-research-inline">
+							<div class="dt8-research-inline-body">
+								<div class="dt8-research-inline-content">
+									<div class="dt8-research-placeholder" style="background:#f7f1d8">視覺呈現製作中</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="dt8-research-item" data-target="interview">
+						<button type="button" class="dt8-research-card">
+							<div class="dt8-research-card-head">
+								<span class="dt8-research-tag" style="background:#e4ddf3;color:#3f3460">使用者訪談</span>
+								<span class="dt8-research-arrow" aria-hidden="true">
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+								</span>
+							</div>
+							<p class="dt8-research-desc">訪談 2 位台灣美股散戶與 2 位美股研究寫手，了解其進站動機、資訊消費習慣，以及對現有頁面的核心痛點</p>
+						</button>
+						<div class="dt8-research-inline">
+							<div class="dt8-research-inline-body">
+								<div class="dt8-research-inline-content">
+									<div class="dt8-research-placeholder" style="background:#e4ddf3">視覺呈現製作中</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="dt8-research-panel">
+					<div class="dt8-research-view is-active" data-view="cognitive">
+						<div class="dt8-research-placeholder" style="background:#c9ddf7">視覺呈現製作中</div>
+					</div>
+					<div class="dt8-research-view" data-view="competitor">
+						<div class="dt8-research-compare">
+							<img class="dt8-research-shot" src="images/ui/ui8-compare.jpg" alt="美股放大鏡與其他競品資訊呈現比較表">
+							<div class="dt8-research-callout">
+								<p class="dt8-research-callout-title">與競品相比，我們目前缺乏的功能</p>
+								<ul class="dt8-research-callout-list">
+									<li class="dt8-research-callout-item is-solved"><span class="dt8-research-callout-dot"></span>財報分析資訊不足：缺少完整的三大財報資料（損益表、資產負債表、現金流量表）<span class="dt8-research-callout-check">✓</span></li>
+									<li class="dt8-research-callout-item is-solved"><span class="dt8-research-callout-dot"></span>即時數據與走勢關鍵值缺乏：如昨收、開高低收等即時行情關鍵指標<span class="dt8-research-callout-check">✓</span></li>
+									<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>個股比較功能：無法並列比較多檔股票的財務與走勢表現</li>
+									<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>SEC 13F 機構持股報告：缺乏機構投資者的持股變化資訊</li>
+									<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>策略選股指標：缺少可作為買進依據的篩選條件或策略指標</li>
+									<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>分析師目標價與評級預測：無分析師對個股的預期與評價</li>
+									<li class="dt8-research-callout-item"><span class="dt8-research-callout-dot"></span>名人持股資訊：缺少投資名人或機構持倉公開資料</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="dt8-research-view" data-view="matrix">
+						<div class="dt8-research-placeholder" style="background:#f7f1d8">視覺呈現製作中</div>
+					</div>
+					<div class="dt8-research-view" data-view="interview">
+						<div class="dt8-research-placeholder" style="background:#e4ddf3">視覺呈現製作中</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="dt8-insight-box">
+				<span class="fi-detail-highlight-label">研究洞察</span>
+				<p class="dt8-lead" style="margin:8px 0 14px">深度訪談後，將目標族群從「美股投資小白」重新定位為「美股投資初學者」——具備基礎投資經驗、剛接觸美股的中文用戶，並確立「研究員為主、投資者為輔」的資訊架構原則。</p>
+				<ul class="dt8-insight-list">
+					<li>新增 EPS YoY、本淨比、估值與未來成長預估等關鍵財務數據</li>
+					<li>財務數據時間軸拉長至近 10 年或近 8 季</li>
+					<li>調整閱讀順序為：走勢／K 線 → 新聞 → 公司營收與獲利</li>
+				</ul>
+			</div>
+		</div>
+
 		<!-- ── 發現的問題 ── -->
 		<div class="dt8-section">
 			<div class="fi-detail-section-head">
@@ -381,104 +652,6 @@
 						<p class="dt8-issue-text">初期為填滿畫面，所有區塊一律採展開式排列（accordion always-open）。隨資料量成長，頁面長度急遽增加，導致滾動體驗惡化，且無法為新增資訊類型建立合理的視覺容器。</p>
 					</div>
 				</div>
-			</div>
-		</div>
-
-		<!-- ── 研究方法 ── -->
-		<div class="dt8-section">
-			<div class="fi-detail-section-head">
-				<span class="fi-eyebrow">Research</span>
-				<h2 class="fi-h2" style="margin-bottom:24px">研究方法</h2>
-			</div>
-			<p class="dt8-lead">透過四種互補的研究手法，從不同角度收斂問題真相，避免單一方法帶來的視角盲區。</p>
-
-			<div class="dt8-process-timeline" aria-hidden="true">
-				<div class="dt8-process-step">
-					<span class="dt8-process-date">3/20–3/25</span>
-					<p class="dt8-process-label">認知走查</p>
-					<div class="dt8-process-bar"></div>
-				</div>
-				<div class="dt8-process-step">
-					<span class="dt8-process-date">4/28–5/23</span>
-					<p class="dt8-process-label">訪談與競品分析</p>
-					<div class="dt8-process-bar"></div>
-				</div>
-				<div class="dt8-process-step">
-					<span class="dt8-process-date">5/27–5/29</span>
-					<p class="dt8-process-label">資訊架構定案</p>
-					<div class="dt8-process-bar"></div>
-				</div>
-				<div class="dt8-process-step">
-					<span class="dt8-process-date">5/29–6/05</span>
-					<p class="dt8-process-label">設計精稿</p>
-					<div class="dt8-process-bar"></div>
-				</div>
-				<div class="dt8-process-step">
-					<span class="dt8-process-date">6/09</span>
-					<p class="dt8-process-label">工程開發</p>
-					<div class="dt8-process-bar"></div>
-				</div>
-			</div>
-
-			<div class="fi-detail-flow" id="dt8-flow" style="margin-top:0">
-				<div class="fi-flow-item open">
-					<button class="fi-flow-head" type="button">
-						<span class="fi-flow-num">01</span>
-						<span class="fi-flow-title">認知走查 Cognitive Walkthrough</span>
-						<span class="fi-flow-icon"></span>
-					</button>
-					<div class="fi-flow-body-wrap">
-						<div class="fi-flow-body-inner">
-							<p class="fi-flow-desc">模擬不同使用者心智模型，逐步走查個股頁的資訊架構，記錄每個決策節點的認知摩擦點。</p>
-						</div>
-					</div>
-				</div>
-				<div class="fi-flow-item">
-					<button class="fi-flow-head" type="button">
-						<span class="fi-flow-num">02</span>
-						<span class="fi-flow-title">競品分析</span>
-						<span class="fi-flow-icon"></span>
-					</button>
-					<div class="fi-flow-body-wrap">
-						<div class="fi-flow-body-inner">
-							<p class="fi-flow-desc">橫向比較國內外主流財經平台（Yahoo Finance、Investing.com、財報狗），歸納業界個股頁資訊揭露標準，找出美股放大鏡目前缺乏的功能。</p>
-						</div>
-					</div>
-				</div>
-				<div class="fi-flow-item">
-					<button class="fi-flow-head" type="button">
-						<span class="fi-flow-num">03</span>
-						<span class="fi-flow-title">使用者訪談</span>
-						<span class="fi-flow-icon"></span>
-					</button>
-					<div class="fi-flow-body-wrap">
-						<div class="fi-flow-body-inner">
-							<p class="fi-flow-desc">深度訪談美股研究員與美股投資者兩種角色，了解其進站動機、資訊消費習慣，以及對現有頁面的核心痛點。</p>
-						</div>
-					</div>
-				</div>
-				<div class="fi-flow-item">
-					<button class="fi-flow-head" type="button">
-						<span class="fi-flow-num">04</span>
-						<span class="fi-flow-title">產品功能優先級矩陣分析</span>
-						<span class="fi-flow-icon"></span>
-					</button>
-					<div class="fi-flow-body-wrap">
-						<div class="fi-flow-body-inner">
-							<p class="fi-flow-desc">結合用戶需求頻率與開發成本，將所有待優化項目落點至 Impact × Effort 矩陣，確立衝刺優先序。</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="dt8-insight-box">
-				<span class="fi-detail-highlight-label">研究洞察</span>
-				<p class="dt8-lead" style="margin:8px 0 14px">深度訪談後，將目標族群從「美股投資小白」重新定位為「美股投資初學者」——具備基礎投資經驗、剛接觸美股的中文用戶，並確立「研究員為主、投資者為輔」的資訊架構原則。</p>
-				<ul class="dt8-insight-list">
-					<li>新增 EPS YoY、本淨比、估值與未來成長預估等關鍵財務數據</li>
-					<li>財務數據時間軸拉長至近 10 年或近 8 季</li>
-					<li>調整閱讀順序為：走勢／K 線 → 新聞 → 公司營收與獲利</li>
-				</ul>
 			</div>
 		</div>
 
@@ -649,16 +822,23 @@
 		drawer.classList.toggle('open');
 	});
 
-	/* 使用流程 accordion -- single item open at a time */
-	var flow = document.getElementById('dt8-flow');
-	if (flow) {
-		var items = Array.prototype.slice.call(flow.querySelectorAll('.fi-flow-item'));
+	/* 研究方法 method cards -- desktop: click swaps the side panel; mobile: click expands that
+	   item's own inline accordion body. Defaults differ on purpose (desktop starts on 競品分析
+	   to match Figma, mobile starts on the first item) but a click syncs both going forward. */
+	var research = document.getElementById('dt8-research');
+	if (research) {
+		var items = Array.prototype.slice.call(research.querySelectorAll('.dt8-research-item'));
+		var views = Array.prototype.slice.call(research.querySelectorAll('.dt8-research-view'));
 		items.forEach(function (item) {
-			var head = item.querySelector('.fi-flow-head');
-			head.addEventListener('click', function () {
-				var wasOpen = item.classList.contains('open');
-				items.forEach(function (i) { i.classList.remove('open'); });
-				if (!wasOpen) item.classList.add('open');
+			var card = item.querySelector('.dt8-research-card');
+			card.addEventListener('click', function () {
+				var target = item.getAttribute('data-target');
+				items.forEach(function (i) {
+					var match = i === item;
+					i.classList.toggle('is-active', match);
+					i.classList.toggle('is-open', match);
+				});
+				views.forEach(function (v) { v.classList.toggle('is-active', v.getAttribute('data-view') === target); });
 			});
 		});
 	}
