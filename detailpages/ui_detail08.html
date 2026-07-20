@@ -41,6 +41,7 @@
 
 		/* Skill/topic tag chips beneath the hero description */
 		.dt8-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 4px; }
+		.fi-detail-cta { margin-top: 24px; }
 		.dt8-tag-chip {
 			font-family: var(--fi-font); font-size: 12px; font-weight: 600;
 			padding: 7px 15px; border-radius: 999px;
@@ -229,7 +230,16 @@
 		@media (min-width: 901px) {
 			.dt8-research-panel { position: relative; min-height: 0; }
 			.dt8-research-view.is-active { position: absolute; inset: 0; }
-			.dt8-research-placeholder, .dt8-research-compare { height: 100%; width: 100%; aspect-ratio: auto; }
+			.dt8-research-placeholder, .dt8-research-compare, .dt8-research-shotgrid, .dt8-interview { height: 100%; width: 100%; aspect-ratio: auto; }
+			.dt8-research-shotgrid { display: flex; flex-direction: column; }
+			.dt8-research-shotgrid-body { flex: 1; min-height: 0; grid-template-rows: repeat(2, 1fr); }
+			.dt8-research-shotcard { height: 100%; }
+			.dt8-research-shotcard img { flex: 1; min-height: 0; aspect-ratio: auto; }
+			.dt8-interview-personas { flex: 1; min-height: 0; }
+			.dt8-persona-card { min-height: 0; }
+			/* No scrollbar: the list's item count already matches what the Figma source fit in this
+			   height, and the trailing "..." item signals more exists rather than clipping mid-sentence. */
+			.dt8-persona-list { flex: 1; min-height: 0; overflow: hidden; }
 		}
 		.dt8-research-shot { width: 100%; height: 100%; object-fit: cover; object-position: left top; display: block; }
 		.dt8-research-callout {
@@ -245,6 +255,46 @@
 		.dt8-research-callout-item.is-solved { color: var(--fi-ink); }
 		.dt8-research-callout-item:not(.is-solved) { color: var(--fi-400); }
 		.dt8-research-callout-check { color: var(--fi-blue); font-weight: 800; margin-left: 3px; }
+
+		/* 功能優先級矩陣 panel: centered note card over the priority-matrix board image */
+		.dt8-research-callout--note {
+			top: 50%; left: 50%; right: auto; transform: translate(-50%, -50%); width: min(461px, 84%);
+			padding: 17px; border-radius: 12px; border: 1px solid #c9ddf7; box-shadow: 0 16px 32px rgba(21,23,30,.1);
+		}
+		.dt8-research-callout-note-label { margin: 0 0 6px; font-size: 13px; font-weight: 700; color: var(--fi-blue); }
+		.dt8-research-callout-note { margin: 0; font-size: 13px; line-height: 1.7; color: var(--fi-500); }
+		@media (max-width: 640px) {
+			.dt8-research-compare--matrix .dt8-research-shot { aspect-ratio: 766 / 588; }
+			/* Neutralize the desktop centering transform -- without this the note keeps its
+			   translate(-50%,-50%) even after the base .dt8-research-callout rule switches it
+			   to position:static, so it shifts off its own box and overlaps the image above it. */
+			.dt8-research-callout--note { position: static; top: auto; left: auto; transform: none; width: auto; }
+		}
+
+		/* 認知走查 panel: 2x2 grid of real product screenshots (matches Figma "目前個股頁的問題" block) */
+		.dt8-research-shotgrid-title { font-size: 13px; font-weight: 700; color: var(--fi-500); margin-bottom: 14px; }
+		.dt8-research-shotgrid-body { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+		.dt8-research-shotcard { margin: 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--fi-border); background: #fff; display: flex; flex-direction: column; }
+		.dt8-research-shotcard img { width: 100%; aspect-ratio: 347 / 233; object-fit: cover; display: block; }
+		.dt8-research-shotcard figcaption { padding: 8px 12px; background: #c9ddf7; color: var(--fi-ink); font-size: 12px; font-weight: 600; line-height: 1.4; }
+		@media (max-width: 640px) { .dt8-research-shotgrid-body { grid-template-columns: 1fr; } }
+
+		/* 使用者訪談 panel: two persona cards (研究員 / 投資者) with their interview takeaways,
+		   plus a synthesis callout below (matches Figma "美股研究員 / 美股投資者" board) */
+		.dt8-interview { display: flex; flex-direction: column; gap: 16px; }
+		.dt8-interview-personas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; filter: blur(1.5px); }
+		.dt8-persona-card { background: #fff; border: 1px solid var(--fi-border); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; }
+		.dt8-persona-head { display: flex; align-items: center; gap: 12px; background: #f3f3f3; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; }
+		.dt8-persona-avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; border: 1px solid var(--fi-ink); flex-shrink: 0; background: #fff; }
+		.dt8-persona-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 12%; display: block; }
+		.dt8-persona-name { font-size: 14px; font-weight: 700; color: var(--fi-ink); }
+		.dt8-persona-role { font-size: 11px; color: var(--fi-500); margin-top: 2px; }
+		.dt8-persona-list { margin: 0; padding-left: 18px; font-size: 11.5px; line-height: 1.6; color: #373737; }
+		.dt8-persona-list li { margin-bottom: 8px; }
+		.dt8-persona-list li:last-child { margin-bottom: 0; }
+		.dt8-persona-list-more { color: var(--fi-300); list-style: none; margin-left: -18px; }
+		.dt8-interview-insight { background: #c9ddf7; border: 1px solid #a2c9fb; border-radius: 12px; padding: 17px; font-size: 13px; line-height: 1.7; color: var(--fi-ink); flex-shrink: 0; }
+		@media (max-width: 640px) { .dt8-interview-personas { grid-template-columns: 1fr; } }
 
 		/* Mobile: an absolute overlay would crush 7 bullet points into a sliver, so stack instead --
 		   comparison shot on top (short peek crop), callout becomes a plain full-width card below it */
@@ -350,6 +400,10 @@
 					<span class="dt8-tag-chip">使用者訪談</span>
 					<span class="dt8-tag-chip">資訊架構</span>
 					<span class="dt8-tag-chip">UI 設計</span>
+				</div>
+
+				<div class="fi-detail-cta">
+					<a href="https://www.forecastock.tw/" target="_blank" rel="noopener noreferrer" class="fi-btn-dark">Visit Website ↗</a>
 				</div>
 			</div>
 
@@ -495,7 +549,27 @@
 						<div class="dt8-research-inline">
 							<div class="dt8-research-inline-body">
 								<div class="dt8-research-inline-content">
-									<div class="dt8-research-placeholder" style="background:#c9ddf7">視覺呈現製作中</div>
+									<div class="dt8-research-shotgrid">
+										<p class="dt8-research-shotgrid-title">目前個股頁的問題（實際畫面）</p>
+										<div class="dt8-research-shotgrid-body">
+											<figure class="dt8-research-shotcard">
+												<img src="images/ui/ui8-cognitive-hook.png" alt="Hook Model 拆解使用者流失斷點示意圖" loading="lazy">
+												<figcaption>HOOK MODEL 解析流失的「斷點」並進行優化</figcaption>
+											</figure>
+											<figure class="dt8-research-shotcard">
+												<img src="images/ui/ui8-cognitive-chart-tabs.png" alt="個股頁圖表分頁切換截圖" loading="lazy">
+												<figcaption>圖表分頁切換方式，導致部分關鍵資料被隱藏</figcaption>
+											</figure>
+											<figure class="dt8-research-shotcard">
+												<img src="images/ui/ui8-cognitive-ai-chart.png" alt="AI 摘要區塊與走勢圖對應不足截圖" loading="lazy">
+												<figcaption>AI 區塊與圖表對應不足</figcaption>
+											</figure>
+											<figure class="dt8-research-shotcard">
+												<img src="images/ui/ui8-cognitive-onepage.png" alt="財報資料一頁式展開導致頁面過長截圖" loading="lazy">
+												<figcaption>一頁式展開所有資訊，頁面非常長</figcaption>
+											</figure>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -545,7 +619,13 @@
 						<div class="dt8-research-inline">
 							<div class="dt8-research-inline-body">
 								<div class="dt8-research-inline-content">
-									<div class="dt8-research-placeholder" style="background:#f7f1d8">視覺呈現製作中</div>
+									<div class="dt8-research-compare dt8-research-compare--matrix">
+										<img class="dt8-research-shot" src="images/ui/ui8-priority-matrix.png" alt="功能優先級矩陣：以「別人有／別人沒有」與「我們有／我們沒有」分類待開發功能">
+										<div class="dt8-research-callout dt8-research-callout--note">
+											<p class="dt8-research-callout-note-label">優先方向</p>
+											<p class="dt8-research-callout-note">根據站內可取得的資料，現階段優先補強基礎資料的完整性，完整財務報表內容、關鍵走勢數據。</p>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -563,7 +643,52 @@
 						<div class="dt8-research-inline">
 							<div class="dt8-research-inline-body">
 								<div class="dt8-research-inline-content">
-									<div class="dt8-research-placeholder" style="background:#e4ddf3">視覺呈現製作中</div>
+									<div class="dt8-interview">
+										<div class="dt8-interview-personas">
+											<div class="dt8-persona-card">
+												<div class="dt8-persona-head">
+													<span class="dt8-persona-avatar"><img src="images/ui/ui8-persona-writer.png" alt="美股研究員" loading="lazy"></span>
+													<div>
+														<p class="dt8-persona-name">美股研究員</p>
+														<p class="dt8-persona-role">寫美股分析的內容作者</p>
+													</div>
+												</div>
+												<ol class="dt8-persona-list">
+													<li>期望財務比率與預估EPS數據能夠清楚呈現</li>
+													<li>盈餘預估對用戶對公司表現的認知有顯著影響</li>
+													<li>新聞依時間順序顯示，提升使用體驗</li>
+													<li>會先看走勢/K線後，再看新聞是發生什麼事，對應到實際公司的獲利狀況或營收，往下看大家隨意討論的內容</li>
+													<li>常看 Seeking Alpha 的未來幾季營收與預估EPS，數值可以反映未來</li>
+													<li>一般數值會有年/季切換，多達5-10年或近8季的時間長度</li>
+													<li>除權在美股上沒這概念，通常稱呼股利，美股投資一般不看股息這塊，因為手續費高</li>
+													<li>關鍵數值上原殖利率改為本淨比比較好(營收也可以但屬於比較固定的值)</li>
+													<li>想看 non-GAAP 資料</li>
+													<li class="dt8-persona-list-more">…</li>
+												</ol>
+											</div>
+											<div class="dt8-persona-card">
+												<div class="dt8-persona-head">
+													<span class="dt8-persona-avatar"><img src="images/ui/ui8-persona-investor.png" alt="美股投資者" loading="lazy"></span>
+													<div>
+														<p class="dt8-persona-name">美股投資者</p>
+														<p class="dt8-persona-role">投資台股也研究美股的投資人</p>
+													</div>
+												</div>
+												<ol class="dt8-persona-list">
+													<li>台灣投資人只熟悉巴菲特(根據加上巴菲特字眼點擊率會較高來看)，其他大戶持股較不熟悉，至於管理層持股資料，公司目前沒有也覺得沒必要</li>
+													<li>走勢跟K線會互相比較，比較熟的股票會直接看K線也不特別研究財報</li>
+													<li>不認識的股票看完K線/走勢後對應新聞，再看一下基本介紹了解公司</li>
+													<li>希望K線圖能清楚標註現在2024/2025年區隔以及對應的重大新聞，例如財報公布等影響走勢的標註</li>
+													<li>台灣投資的慣性會查看股利，因為台股的關係，就算美股手續費高，也還是會習慣點擊，除權息是台股投資人習慣的名字</li>
+													<li>本益比可以用河流圖顯示</li>
+													<li class="dt8-persona-list-more">…</li>
+												</ol>
+											</div>
+										</div>
+										<div class="dt8-interview-insight">
+											<p>根據訪談回饋，美股研究員需產出文章內容，對數據的完整性與預測性有較高需求；而一般投資者則習慣以台股操作邏輯看待美股，較依賴K線圖與新聞摘要，多數僅關注少數熟悉的大型公司，對資料的研究深度相對較低</p>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -572,7 +697,27 @@
 
 				<div class="dt8-research-panel">
 					<div class="dt8-research-view is-active" data-view="cognitive">
-						<div class="dt8-research-placeholder" style="background:#c9ddf7">視覺呈現製作中</div>
+						<div class="dt8-research-shotgrid">
+							<p class="dt8-research-shotgrid-title">目前個股頁的問題（實際畫面）</p>
+							<div class="dt8-research-shotgrid-body">
+								<figure class="dt8-research-shotcard">
+									<img src="images/ui/ui8-cognitive-hook.png" alt="Hook Model 拆解使用者流失斷點示意圖" loading="lazy">
+									<figcaption>HOOK MODEL 解析流失的「斷點」並進行優化</figcaption>
+								</figure>
+								<figure class="dt8-research-shotcard">
+									<img src="images/ui/ui8-cognitive-chart-tabs.png" alt="個股頁圖表分頁切換截圖" loading="lazy">
+									<figcaption>圖表分頁切換方式，導致部分關鍵資料被隱藏</figcaption>
+								</figure>
+								<figure class="dt8-research-shotcard">
+									<img src="images/ui/ui8-cognitive-ai-chart.png" alt="AI 摘要區塊與走勢圖對應不足截圖" loading="lazy">
+									<figcaption>AI 區塊與圖表對應不足</figcaption>
+								</figure>
+								<figure class="dt8-research-shotcard">
+									<img src="images/ui/ui8-cognitive-onepage.png" alt="財報資料一頁式展開導致頁面過長截圖" loading="lazy">
+									<figcaption>一頁式展開所有資訊，頁面非常長</figcaption>
+								</figure>
+							</div>
+						</div>
 					</div>
 					<div class="dt8-research-view" data-view="competitor">
 						<div class="dt8-research-compare">
@@ -592,22 +737,63 @@
 						</div>
 					</div>
 					<div class="dt8-research-view" data-view="matrix">
-						<div class="dt8-research-placeholder" style="background:#f7f1d8">視覺呈現製作中</div>
+						<div class="dt8-research-compare dt8-research-compare--matrix">
+							<img class="dt8-research-shot" src="images/ui/ui8-priority-matrix.png" alt="功能優先級矩陣：以「別人有／別人沒有」與「我們有／我們沒有」分類待開發功能">
+							<div class="dt8-research-callout dt8-research-callout--note">
+								<p class="dt8-research-callout-note-label">優先方向</p>
+								<p class="dt8-research-callout-note">根據站內可取得的資料，現階段優先補強基礎資料的完整性，完整財務報表內容、關鍵走勢數據。</p>
+							</div>
+						</div>
 					</div>
 					<div class="dt8-research-view" data-view="interview">
-						<div class="dt8-research-placeholder" style="background:#e4ddf3">視覺呈現製作中</div>
+						<div class="dt8-interview">
+							<div class="dt8-interview-personas">
+								<div class="dt8-persona-card">
+									<div class="dt8-persona-head">
+										<span class="dt8-persona-avatar"><img src="images/ui/ui8-persona-writer.png" alt="美股研究員" loading="lazy"></span>
+										<div>
+											<p class="dt8-persona-name">美股研究員</p>
+											<p class="dt8-persona-role">寫美股分析的內容作者</p>
+										</div>
+									</div>
+									<ol class="dt8-persona-list">
+										<li>期望財務比率與預估EPS數據能夠清楚呈現</li>
+										<li>盈餘預估對用戶對公司表現的認知有顯著影響</li>
+										<li>新聞依時間順序顯示，提升使用體驗</li>
+										<li>會先看走勢/K線後，再看新聞是發生什麼事，對應到實際公司的獲利狀況或營收，往下看大家隨意討論的內容</li>
+										<li>常看 Seeking Alpha 的未來幾季營收與預估EPS，數值可以反映未來</li>
+										<li>一般數值會有年/季切換，多達5-10年或近8季的時間長度</li>
+										<li>除權在美股上沒這概念，通常稱呼股利，美股投資一般不看股息這塊，因為手續費高</li>
+										<li>關鍵數值上原殖利率改為本淨比比較好(營收也可以但屬於比較固定的值)</li>
+										<li>想看 non-GAAP 資料</li>
+										<li class="dt8-persona-list-more">…</li>
+									</ol>
+								</div>
+								<div class="dt8-persona-card">
+									<div class="dt8-persona-head">
+										<span class="dt8-persona-avatar"><img src="images/ui/ui8-persona-investor.png" alt="美股投資者" loading="lazy"></span>
+										<div>
+											<p class="dt8-persona-name">美股投資者</p>
+											<p class="dt8-persona-role">投資台股也研究美股的投資人</p>
+										</div>
+									</div>
+									<ol class="dt8-persona-list">
+										<li>台灣投資人只熟悉巴菲特(根據加上巴菲特字眼點擊率會較高來看)，其他大戶持股較不熟悉，至於管理層持股資料，公司目前沒有也覺得沒必要</li>
+										<li>走勢跟K線會互相比較，比較熟的股票會直接看K線也不特別研究財報</li>
+										<li>不認識的股票看完K線/走勢後對應新聞，再看一下基本介紹了解公司</li>
+										<li>希望K線圖能清楚標註現在2024/2025年區隔以及對應的重大新聞，例如財報公布等影響走勢的標註</li>
+										<li>台灣投資的慣性會查看股利，因為台股的關係，就算美股手續費高，也還是會習慣點擊，除權息是台股投資人習慣的名字</li>
+										<li>本益比可以用河流圖顯示</li>
+										<li class="dt8-persona-list-more">…</li>
+									</ol>
+								</div>
+							</div>
+							<div class="dt8-interview-insight">
+								<p>根據訪談回饋，美股研究員需產出文章內容，對數據的完整性與預測性有較高需求；而一般投資者則習慣以台股操作邏輯看待美股，較依賴K線圖與新聞摘要，多數僅關注少數熟悉的大型公司，對資料的研究深度相對較低</p>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="dt8-insight-box">
-				<span class="fi-detail-highlight-label">研究洞察</span>
-				<p class="dt8-lead" style="margin:8px 0 14px">深度訪談後，將目標族群從「美股投資小白」重新定位為「美股投資初學者」——具備基礎投資經驗、剛接觸美股的中文用戶，並確立「研究員為主、投資者為輔」的資訊架構原則。</p>
-				<ul class="dt8-insight-list">
-					<li>新增 EPS YoY、本淨比、估值與未來成長預估等關鍵財務數據</li>
-					<li>財務數據時間軸拉長至近 10 年或近 8 季</li>
-					<li>調整閱讀順序為：走勢／K 線 → 新聞 → 公司營收與獲利</li>
-				</ul>
 			</div>
 		</div>
 
@@ -833,11 +1019,13 @@
 			var card = item.querySelector('.dt8-research-card');
 			card.addEventListener('click', function () {
 				var target = item.getAttribute('data-target');
-				items.forEach(function (i) {
-					var match = i === item;
-					i.classList.toggle('is-active', match);
-					i.classList.toggle('is-open', match);
-				});
+				var wasOpen = item.classList.contains('is-open');
+				items.forEach(function (i) { i.classList.toggle('is-active', i === item); });
+				if (wasOpen) {
+					item.classList.remove('is-open');
+				} else {
+					items.forEach(function (i) { i.classList.toggle('is-open', i === item); });
+				}
 				views.forEach(function (v) { v.classList.toggle('is-active', v.getAttribute('data-view') === target); });
 			});
 		});
