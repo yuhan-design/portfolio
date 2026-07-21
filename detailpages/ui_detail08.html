@@ -90,42 +90,28 @@
 			.fi-detail-hero-grid { grid-template-columns: 1fr; }
 			.fi-detail-hero-visual { display: none; }
 		}
-		/* ── 改版成效 -- big-number result cards, hover lift + corner "+" reveal ── */
-		.fi-detail-results {
-			display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-			margin: 8px 0 64px;
-		}
-		@media (max-width: 900px) { .fi-detail-results { grid-template-columns: repeat(2, 1fr); } }
-		@media (max-width: 480px) { .fi-detail-results { grid-template-columns: 1fr; } }
+		/* ── 達到的效益 -- two summary cards (SEO ranking before/after + traffic stat trio),
+		   matches Figma "達到的效益" board */
+		.fi-detail-results { display: flex; flex-wrap: wrap; gap: 24px; margin: 8px 0 64px; align-items: stretch; }
 		.fi-result-card {
-			position: relative; overflow: hidden;
-			padding: 24px 22px; border-radius: 20px;
-			border: 1px solid var(--fi-border);
-			transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s cubic-bezier(.22,.61,.36,1);
+			flex: 1 1 320px;
+			background: #fbfcfe; border: 1px solid var(--fi-border); border-radius: 20px;
+			padding: 29px; display: flex; flex-direction: column; gap: 16px;
 		}
-		.fi-result-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(21,23,30,.12); }
-		.fi-result-card--a { background: linear-gradient(150deg, var(--fi-sky), #fbfcfe 70%); }
-		.fi-result-card--b { background: linear-gradient(150deg, var(--fi-sun), #fbfcfe 70%); }
-		.fi-result-card--c { background: linear-gradient(150deg, var(--fi-sage), #fbfcfe 70%); }
-		.fi-result-card--d { background: var(--fi-ink); }
-		.fi-result-num {
-			font-family: var(--fi-font); font-weight: 800;
-			font-size: clamp(1.7rem, 3.4vw, 2.2rem); letter-spacing: -.03em; color: var(--fi-ink);
-		}
-		.fi-result-card--d .fi-result-num { color: #fff; }
-		.fi-result-label { font-size: 13px; line-height: 1.5; color: var(--fi-500); margin-top: 8px; }
-		.fi-result-card--d .fi-result-label { color: rgba(255,255,255,.65); }
-		.fi-result-plus {
-			position: absolute; top: 14px; right: 14px;
-			width: 28px; height: 28px; border-radius: 50%;
-			background: var(--fi-ink); color: #fff;
-			display: flex; align-items: center; justify-content: center;
-			font-size: 15px; line-height: 1;
-			opacity: 0; transform: scale(.5) rotate(-45deg);
-			transition: opacity .3s cubic-bezier(.22,.61,.36,1), transform .3s cubic-bezier(.22,.61,.36,1);
-		}
-		.fi-result-card--d .fi-result-plus { background: #fff; color: var(--fi-ink); }
-		.fi-result-card:hover .fi-result-plus { opacity: 1; transform: scale(1) rotate(0deg); }
+		.fi-result-eyebrow { font-family: var(--fi-font); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--fi-300); margin: 0; }
+		.fi-result-desc { font-size: 13px; line-height: 1.6; color: var(--fi-500); margin: 0; }
+
+		.fi-result-seo { display: flex; align-items: flex-end; gap: 16px; }
+		.fi-result-seo-stat { display: flex; flex-direction: column; gap: 4px; }
+		.fi-result-seo-stat-label { font-size: 11px; color: var(--fi-300); }
+		.fi-result-seo-stat-num { font-family: var(--fi-font); font-weight: 800; font-size: clamp(1.9rem, 3.4vw, 2.5rem); letter-spacing: -.03em; line-height: 1; color: #c2c7d2; }
+		.fi-result-seo-stat-num--after { color: var(--fi-blue); }
+		.fi-result-seo-arrow { font-size: 24px; color: var(--fi-ink); padding-bottom: 8px; }
+
+		.fi-result-stats { display: flex; flex-wrap: wrap; gap: 20px 32px; }
+		.fi-result-stat { display: flex; flex-direction: column; gap: 4px; }
+		.fi-result-stat-num { font-family: var(--fi-font); font-weight: 800; font-size: clamp(1.3rem, 2vw, 1.6rem); letter-spacing: -.02em; color: var(--fi-blue); }
+		.fi-result-stat-label { font-size: 12px; color: var(--fi-500); }
 
 		.fi-detail-section-head { margin-bottom: 8px; }
 		.fi-detail-section-head .fi-h2 { margin-bottom: 0; }
@@ -143,24 +129,72 @@
 		.dt8-vtimeline-title { font-size: 15px; font-weight: 700; color: var(--fi-ink); margin-bottom: 4px; }
 		.dt8-vtimeline-desc { font-size: 13.5px; line-height: 1.7; color: var(--fi-500); }
 
-		/* Problem list: numbered items, blue-tint badge (same accent family as highlight labels) */
-		.dt8-issue-list { display: flex; flex-direction: column; gap: 18px; max-width: 640px; }
-		.dt8-issue-item { display: flex; gap: 16px; align-items: flex-start; }
-		.dt8-issue-num {
-			flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px;
-			background: var(--fi-sky); color: var(--fi-ink);
-			font-family: var(--fi-font); font-weight: 800; font-size: 13px;
+		/* Problem list: bordered cards with a ghost numeral, matches Figma "發現問題" board */
+		.dt8-issue-list { display: flex; flex-direction: column; gap: 20px; }
+		.dt8-issue-item {
+			display: flex; gap: 40px; align-items: flex-start;
+			background: #fbfcfe; border: 1px solid var(--fi-border); border-radius: 20px; padding: 24px 28px;
+		}
+		.dt8-issue-num { flex-shrink: 0; font-family: var(--fi-font); font-weight: 800; font-size: 32px; line-height: 1; letter-spacing: -.03em; color: var(--fi-border); }
+		.dt8-issue-body { flex: 1; min-width: 0; }
+		.dt8-issue-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 8px; }
+		.dt8-issue-title { font-size: 17px; font-weight: 700; color: var(--fi-ink); margin: 0; }
+		.dt8-badge { font-family: var(--fi-font); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px; letter-spacing: .02em; white-space: nowrap; }
+		.dt8-badge--high { background: #fde8e8; color: #b91c1c; }
+		.dt8-badge--mid { background: #fef3c7; color: #92400e; }
+		.dt8-badge--cat { background: #eef2fb; color: #3a3f4c; }
+		.dt8-issue-text { font-size: 14.5px; line-height: 1.75; color: var(--fi-500); margin: 0; }
+		@media (max-width: 640px) {
+			.dt8-issue-item { flex-direction: column; gap: 12px; padding: 20px; }
+			.dt8-issue-num { font-size: 26px; }
+		}
+
+		/* Findings quote band: a true top-level section (sibling of .fi-container, not nested inside
+		   it) so it reaches the viewport edges exactly like .dt8-goal-dark -- a vw/negative-margin
+		   breakout here would have to fight .fi-container's own responsive side padding. */
+		.dt8-quote-band {
+			position: relative; overflow: hidden;
+			background: #c9ddf7;
+			padding: 40px 16px;
+			margin: 40px 0;
 			display: flex; align-items: center; justify-content: center;
 		}
-		.dt8-issue-text { font-size: 14.5px; line-height: 1.75; color: var(--fi-500); padding-top: 4px; }
-		.dt8-issue-item { align-items: flex-start; }
-		.dt8-issue-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
-		.dt8-badge { font-family: var(--fi-font); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px; letter-spacing: .02em; }
-		.dt8-badge--high { background: var(--fi-ink); color: #fff; }
-		.dt8-badge--mid { background: var(--fi-border-s); color: var(--fi-500); }
-		.dt8-badge--cat { background: var(--fi-sky); color: var(--fi-ink); }
-		.dt8-issue-title { font-size: 15px; font-weight: 800; color: var(--fi-ink); margin-bottom: 6px; }
-		.dt8-issue-item .dt8-issue-text { padding-top: 0; }
+		.dt8-quote-band-bg { position: absolute; inset: 0; background: url(images/ui/ui8-quote-pattern.jpg) center / cover no-repeat; opacity: .2; }
+		.dt8-quote-text { position: relative; max-width: 900px; margin: 0; text-align: center; font-size: 14px; line-height: 1.58; color: var(--fi-ink); }
+		@media (max-width: 640px) { .dt8-quote-band { padding: 24px 20px; } .dt8-quote-text { font-size: 13px; } }
+
+		/* 訪談結論: two synthesis cards + a dark feedback-tally card (matches Figma "訪談結論" board) */
+		.dt8-subsection-title { font-size: 22px; font-weight: 600; letter-spacing: -.02em; color: var(--fi-ink); margin: 0 0 24px; }
+		.dt8-conclusion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+		@media (max-width: 900px) { .dt8-conclusion-grid { grid-template-columns: 1fr; } }
+		.dt8-conclusion-card { background: #fbfcfe; border: 1px solid var(--fi-border); border-radius: 16px; padding: 25px; display: flex; flex-direction: column; gap: 12px; }
+		.dt8-conclusion-label { font-size: 13px; font-weight: 700; color: var(--fi-blue); margin: 0; }
+		.dt8-conclusion-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+		.dt8-conclusion-list li { position: relative; padding-left: 14px; font-size: 13px; line-height: 1.6; color: var(--fi-500); }
+		.dt8-conclusion-list li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--fi-blue); }
+		.dt8-ta-shift { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+		.dt8-ta-pill { display: flex; flex-direction: column; padding: 8px 12px; border-radius: 8px; }
+		.dt8-ta-pill--old { background: #fde8e8; }
+		.dt8-ta-pill--old .dt8-ta-pill-title { color: #b91c1c; text-decoration: line-through; font-size: 12px; }
+		.dt8-ta-pill--new { background: #d8ecdf; }
+		.dt8-ta-pill--new .dt8-ta-pill-title { color: #2c4d3a; font-weight: 600; font-size: 12px; }
+		.dt8-ta-pill-sub { font-size: 11px; color: var(--fi-400); margin-top: 2px; }
+		.dt8-ta-arrow { color: var(--fi-400); font-size: 14px; transform: rotate(-90deg); }
+		.dt8-conclusion-personas { display: flex; align-items: center; gap: 12px; background: #f3f3f3; border-radius: 10px; padding: 12px; }
+		.dt8-conclusion-avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; border: 1px solid var(--fi-ink); background: #fff; flex-shrink: 0; }
+		.dt8-conclusion-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 12%; display: block; }
+		.dt8-conclusion-plus { font-size: 14px; color: var(--fi-400); }
+		.dt8-conclusion-text { font-size: 13px; line-height: 1.7; color: var(--fi-500); margin: 0; }
+		.dt8-conclusion-note { font-size: 12px; line-height: 1.6; color: var(--fi-300); margin: 0; }
+
+		.dt8-feedback-summary { background: var(--fi-ink); border-radius: 20px; padding: 28px; margin-top: 32px; }
+		.dt8-feedback-summary-label { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #f2d96b; margin: 0 0 16px; }
+		.dt8-feedback-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+		@media (max-width: 900px) { .dt8-feedback-grid { grid-template-columns: repeat(2, 1fr); } }
+		@media (max-width: 560px) { .dt8-feedback-grid { grid-template-columns: 1fr; } }
+		.dt8-feedback-item { background: rgba(255,255,255,.06); border-radius: 12px; padding: 16px; display: flex; gap: 12px; align-items: flex-start; }
+		.dt8-feedback-num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: #59b2ff; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+		.dt8-feedback-item p { margin: 0; font-size: 13px; line-height: 1.65; color: #d4dae6; }
 
 		/* Research methods: clickable cards that swap a preview panel (matches Figma "研究方法" node) */
 		.dt8-research { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: stretch; margin: 24px 0 8px; }
@@ -309,36 +343,55 @@
 		.dt8-insight-box { background: #fff; border: 1px solid var(--fi-border); border-radius: 20px; padding: 28px 30px; margin-top: 8px; }
 		.dt8-insight-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; line-height: 1.7; color: var(--fi-500); }
 
-		/* Solution cards -- numbered, icon + bullet list (replaces flat highlight grid for this section) */
+		/* Solution cards -- ghost numeral + bullet list, matches Figma "解決方案" board (same
+		   card language as the 發現問題 findings cards) */
 		.dt8-solution-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 32px; }
 		@media (max-width: 900px) { .dt8-solution-grid { grid-template-columns: 1fr; } }
-		.dt8-solution-card { background: #fff; border: 1px solid var(--fi-border); border-radius: 20px; padding: 26px 24px; }
-		.dt8-solution-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-		.dt8-solution-icon { font-size: 22px; }
-		.dt8-solution-index { font-family: var(--fi-font); font-weight: 800; font-size: 13px; color: var(--fi-300); }
-		.dt8-solution-title { font-size: 16px; font-weight: 800; color: var(--fi-ink); margin-bottom: 12px; }
-		.dt8-solution-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; line-height: 1.7; color: var(--fi-500); }
+		.dt8-solution-card { background: #fbfcfe; border: 1px solid var(--fi-border); border-radius: 20px; padding: 25px; display: flex; flex-direction: column; gap: 20px; }
+		.dt8-solution-index { font-family: var(--fi-font); font-weight: 800; font-size: 28px; line-height: 1; color: var(--fi-border); }
+		.dt8-solution-title { font-size: 15.5px; font-weight: 700; color: var(--fi-ink); margin: 0; }
+		.dt8-solution-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; line-height: 1.7; color: var(--fi-500); }
+		.dt8-solution-list li { position: relative; padding-left: 16px; }
+		.dt8-solution-list li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--fi-blue); }
 
-		/* ── Case-study body placeholder frame (swap for a real screenshot later) ── */
-		.dt8-frame-mock {
-			aspect-ratio: 16 / 9; background: #fbfcfe;
-			display: grid; grid-template-columns: 200px 1fr;
-		}
-		.dt8-frame-side { border-right: 1px solid var(--fi-border); padding: 28px 20px; display: flex; flex-direction: column; gap: 12px; }
-		.dt8-frame-side span { height: 10px; border-radius: 5px; background: var(--fi-border-s); }
-		.dt8-frame-side span:nth-child(2) { width: 70%; }
-		.dt8-frame-side span:nth-child(3) { width: 55%; }
-		.dt8-frame-side span:nth-child(4) { width: 65%; }
-		.dt8-frame-main { padding: 32px; display: flex; flex-direction: column; gap: 22px; }
-		.dt8-frame-chart { flex: 1; display: flex; align-items: flex-end; gap: 10px; }
-		.dt8-frame-chart span { flex: 1; border-radius: 6px 6px 0 0; }
-		.dt8-frame-rows { display: flex; flex-direction: column; gap: 10px; }
-		.dt8-frame-rows span { height: 14px; border-radius: 7px; background: var(--fi-border-s); }
-		.dt8-frame-rows span:last-child { width: 70%; }
-		@media (max-width: 640px) {
-			.dt8-frame-mock { grid-template-columns: 1fr; aspect-ratio: 4 / 5; }
-			.dt8-frame-side { display: none; }
-		}
+		/* Solution screenshots -- slow, seamless-loop marquee of real design-review slides */
+		.dt8-solution-marquee { overflow: hidden; background: #fbfcfe; padding: 20px 0; mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+		.dt8-solution-marquee-track { display: flex; align-items: center; gap: 14px; width: max-content; animation: dt8-marquee 55s linear infinite; }
+		.dt8-solution-marquee-track img { height: 200px; width: auto; flex-shrink: 0; border-radius: 12px; display: block; border: 1px solid var(--fi-border); }
+		.dt8-solution-marquee:hover .dt8-solution-marquee-track { animation-play-state: paused; }
+		@keyframes dt8-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+		@media (max-width: 640px) { .dt8-solution-marquee-track img { height: 130px; } }
+		@media (prefers-reduced-motion: reduce) { .dt8-solution-marquee-track { animation: none; } }
+
+		/* 訪談回饋後統整架構: click-data/new-structure stacked comparison + a two-tile sitemap
+		   (matches Figma "訪談回饋後統整架構" board) */
+		.dt8-arch-question { font-size: 16px; font-weight: 600; color: var(--fi-ink); margin: 18px 0 0; }
+		.dt8-lead strong { color: var(--fi-ink); font-weight: 700; }
+		.dt8-lead--full { max-width: none; }
+		.dt8-arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 28px; align-items: start; }
+		@media (max-width: 900px) { .dt8-arch-grid { grid-template-columns: 1fr; gap: 40px; } }
+		.dt8-arch-col-label { font-size: 13px; font-weight: 600; color: var(--fi-500); margin: 0 0 16px; }
+		.dt8-arch-stack { position: relative; padding-top: 28px; }
+		.dt8-arch-stack-back { position: absolute; top: 0; right: 0; width: 92%; border-radius: 12px; filter: blur(1.5px); opacity: .85; display: block; }
+		.dt8-arch-stack-front { position: relative; width: 94%; border-radius: 12px; border: 1px solid var(--fi-border); box-shadow: 0 20px 48px rgba(21,23,30,.18); display: block; }
+		.dt8-arch-sitemap { border-radius: 12px; overflow: hidden; border: 1px solid var(--fi-border); }
+		.dt8-arch-sitemap img { width: 100%; display: block; }
+		.dt8-arch-sitemap img + img { border-top: 1px solid var(--fi-border); }
+
+		/* 最終設計畫面: per-page old/new comparison shots (matches Figma "最終設計畫面" board) */
+		.dt8-final-group { margin-bottom: 48px; }
+		.dt8-final-group:last-child { margin-bottom: 0; }
+		.dt8-final-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+		.dt8-final-title { font-size: 22px; font-weight: 700; color: var(--fi-ink); margin: 0; }
+		.dt8-final-link-icon { display: inline-flex; color: var(--fi-400); flex-shrink: 0; transition: color .2s; }
+		.dt8-final-link-icon:hover { color: var(--fi-blue); }
+		.dt8-final-desc { font-size: 13.5px; line-height: 1.8; color: var(--fi-500); max-width: 900px; margin: 0 0 20px; }
+		.dt8-final-desc strong { color: var(--fi-ink); font-weight: 700; }
+		.dt8-final-desc-line { display: block; }
+		.dt8-final-tabs { display: flex; align-items: center; gap: 14px; margin: 0 0 20px; font-size: 13px; font-weight: 600; color: var(--fi-500); flex-wrap: wrap; }
+		.dt8-final-tabs-divider { width: 1px; height: 12px; background: var(--fi-border-s); }
+		.dt8-final-frame { margin-bottom: 0; }
+		.dt8-final-frame img { width: 100%; display: block; }
 
 		/* Case study body continues the rounded panel's white surface (no color seam).
 		   position:relative (z-index left auto) so it still paints above the sticky hero. */
@@ -798,45 +851,99 @@
 		</div>
 
 		<!-- ── 發現的問題 ── -->
-		<div class="dt8-section">
+		<div class="dt8-section dt8-section--bleed-host">
 			<div class="fi-detail-section-head">
-				<span class="fi-eyebrow">Problem</span>
-				<h2 class="fi-h2" style="margin-bottom:24px">發現的問題</h2>
+				<span class="fi-eyebrow">Findings</span>
+				<h2 class="fi-h2" style="margin-bottom:24px">發現問題</h2>
 			</div>
 			<p class="dt8-lead">研究收斂後，識別出三個根本性設計問題，彼此相互強化，共同造成用戶高跳出率。</p>
 			<div class="dt8-issue-list">
 				<div class="dt8-issue-item">
-					<span class="dt8-issue-num">1</span>
-					<div>
-						<div class="dt8-issue-tags">
+					<span class="dt8-issue-num">01</span>
+					<div class="dt8-issue-body">
+						<div class="dt8-issue-head">
+							<p class="dt8-issue-title">個股頁資訊量嚴重不足</p>
 							<span class="dt8-badge dt8-badge--high">高衝擊</span>
 							<span class="dt8-badge dt8-badge--cat">資料完整性</span>
 						</div>
-						<p class="dt8-issue-title">個股頁資訊量嚴重不足</p>
-						<p class="dt8-issue-text">財報圖表存在大量缺值，三大財報（損益表、資產負債表、現金流量表）資料不完整，即時行情關鍵指標（昨收、開高低收）完全缺席，導致投資人無法在站內完成基礎研究決策。</p>
+						<p class="dt8-issue-text">財報圖表存在大量缺值（null），三大財報（損益表、資產負債表、現金流量表）資料不完整，即時行情關鍵指標（昨收、開高低收）完全缺席，導致投資人無法在站內完成基礎研究決策。</p>
 					</div>
 				</div>
 				<div class="dt8-issue-item">
-					<span class="dt8-issue-num">2</span>
-					<div>
-						<div class="dt8-issue-tags">
+					<span class="dt8-issue-num">02</span>
+					<div class="dt8-issue-body">
+						<div class="dt8-issue-head">
+							<p class="dt8-issue-title">閱讀結構混亂，資訊優先序錯位</p>
 							<span class="dt8-badge dt8-badge--mid">中衝擊</span>
 							<span class="dt8-badge dt8-badge--cat">資訊架構</span>
 						</div>
-						<p class="dt8-issue-title">閱讀結構混亂，資訊優先序錯位</p>
 						<p class="dt8-issue-text">AI 摘要區塊被置於財報圖表之前，破壞使用者由「基本面 → 輔助解讀」的自然閱讀流。區塊排列缺乏層次，散戶在尚未建立基本認知的情況下先接收 AI 結論，反而增加困惑感。</p>
 					</div>
 				</div>
 				<div class="dt8-issue-item">
-					<span class="dt8-issue-num">3</span>
-					<div>
-						<div class="dt8-issue-tags">
+					<span class="dt8-issue-num">03</span>
+					<div class="dt8-issue-body">
+						<div class="dt8-issue-head">
+							<p class="dt8-issue-title">展開式佈局不利資訊擴充</p>
 							<span class="dt8-badge dt8-badge--mid">中衝擊</span>
 							<span class="dt8-badge dt8-badge--cat">可擴充性</span>
 						</div>
-						<p class="dt8-issue-title">展開式佈局不利資訊擴充</p>
 						<p class="dt8-issue-text">初期為填滿畫面，所有區塊一律採展開式排列（accordion always-open）。隨資料量成長，頁面長度急遽增加，導致滾動體驗惡化，且無法為新增資訊類型建立合理的視覺容器。</p>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="dt8-quote-band">
+		<div class="dt8-quote-band-bg" aria-hidden="true"></div>
+		<p class="dt8-quote-text">「透過認知走查發現介面與資料架構的缺口後，我們嘗試繪製了 V1 架構，然而為了釐清資料調整的優先順序與商業推廣策略，我們進一步與內部美股研究員與美股投資者進行訪談，訪談後帶來了專案最關鍵的轉折：將核心用戶定義為『美股投資初學者』，並決定先補齊最核心的財務與預估數值，而非一次複製競品的所有功能。」</p>
+	</div>
+
+	<div class="fi-container">
+		<div class="dt8-section" style="margin-top:40px">
+			<h3 class="dt8-subsection-title">美股研究員／投資者訪談結論</h3>
+			<div class="dt8-conclusion-grid">
+				<div class="dt8-conclusion-card">
+					<p class="dt8-conclusion-label">站內數據洞察</p>
+					<ul class="dt8-conclusion-list">
+						<li>站內數據顯示使用者多為約 45 歲左右</li>
+						<li>多數台灣投資者是熟悉台股後延伸學習美股</li>
+						<li>熟悉美股的進階用戶傾向使用國外網站</li>
+					</ul>
+					<p class="dt8-conclusion-label">訪談過程中重新調整 TA</p>
+					<div class="dt8-ta-shift">
+						<span class="dt8-ta-pill dt8-ta-pill--old">
+							<span class="dt8-ta-pill-title">美股投資小白</span>
+							<span class="dt8-ta-pill-sub">定位不夠明確</span>
+						</span>
+						<span class="dt8-ta-arrow" aria-hidden="true">↓</span>
+						<span class="dt8-ta-pill dt8-ta-pill--new">
+							<span class="dt8-ta-pill-title">美股投資初學者</span>
+							<span class="dt8-ta-pill-sub">具投資經驗、剛接觸美股的中文用戶</span>
+						</span>
+					</div>
+				</div>
+				<div class="dt8-conclusion-card">
+					<div class="dt8-conclusion-personas">
+						<span class="dt8-conclusion-avatar"><img src="images/ui/ui8-persona-writer.png" alt="美股研究員" loading="lazy"></span>
+						<span class="dt8-conclusion-plus" aria-hidden="true">+</span>
+						<span class="dt8-conclusion-avatar"><img src="images/ui/ui8-persona-investor.png" alt="美股投資者" loading="lazy"></span>
+					</div>
+					<p class="dt8-conclusion-label">結論：研究員為主，投資者為輔</p>
+					<p class="dt8-conclusion-text">美股研究員在放大鏡使用率高，優先以研究員的需求為核心設計對象，進行功能與資訊架構優化，提高研究員使用個股頁的意願，進而推廣。</p>
+					<p class="dt8-conclusion-note">以資料變動頻率和會幫你推廣的人為主來決定頁籤順序，提高內部人員的使用率</p>
+				</div>
+			</div>
+
+			<div class="dt8-feedback-summary">
+				<p class="dt8-feedback-summary-label">兩者訪談回饋總結</p>
+				<div class="dt8-feedback-grid">
+					<div class="dt8-feedback-item"><span class="dt8-feedback-num">01</span><p>新增 EPS YOY、本淨比、估值、未來估值/成長數據（預估EPS、EV/EBITDA 等）</p></div>
+					<div class="dt8-feedback-item"><span class="dt8-feedback-num">02</span><p>數值時間拉長至 10 年或八季</p></div>
+					<div class="dt8-feedback-item"><span class="dt8-feedback-num">03</span><p>美股無除權概念，命名為股利</p></div>
+					<div class="dt8-feedback-item"><span class="dt8-feedback-num">04</span><p>期待K線/走勢在第一屏就能直接切換</p></div>
+					<div class="dt8-feedback-item"><span class="dt8-feedback-num">05</span><p>畫面順序：走勢/K線 &gt; 新聞 &gt; 公司營收獲利狀況 &gt; 討論內容</p></div>
 				</div>
 			</div>
 		</div>
@@ -850,22 +957,16 @@
 			<p class="dt8-lead">三個解決方向對應三個問題根源，優先處理資料完整性，再逐步重構架構與強化效能。</p>
 			<div class="dt8-solution-grid">
 				<div class="dt8-solution-card">
-					<div class="dt8-solution-top">
-						<span class="dt8-solution-icon">📈</span>
-						<span class="dt8-solution-index">01</span>
-					</div>
-					<h3 class="dt8-solution-title">補全三大財報＋即時行情</h3>
+					<span class="dt8-solution-index">01</span>
+					<h3 class="dt8-solution-title">補全三大財報 + 即時行情</h3>
 					<ul class="dt8-solution-list">
-						<li>完整實作損益表、資產負債表、現金流量表三大財報的資料串接與視覺化</li>
+						<li>完整實作損益表、資產負債表、現金流量表三大報表的資料串接與視覺化</li>
 						<li>新增即時行情欄位：昨收、開盤、最高、最低、收盤等關鍵走勢指標</li>
-						<li>依站內可取得資料排列優先補強順序，確保基礎資料完整性先行</li>
+						<li>依據站內可取得資料排列優先補強順序，確保基礎資料完整性先行</li>
 					</ul>
 				</div>
 				<div class="dt8-solution-card">
-					<div class="dt8-solution-top">
-						<span class="dt8-solution-icon">🗂️</span>
-						<span class="dt8-solution-index">02</span>
-					</div>
+					<span class="dt8-solution-index">02</span>
 					<h3 class="dt8-solution-title">重構資訊架構與閱讀優先序</h3>
 					<ul class="dt8-solution-list">
 						<li>將財報數據與走勢圖表前置，AI 摘要移至「解讀輔助」層，符合投資人自然決策流程</li>
@@ -874,40 +975,128 @@
 					</ul>
 				</div>
 				<div class="dt8-solution-card">
-					<div class="dt8-solution-top">
-						<span class="dt8-solution-icon">⚡</span>
-						<span class="dt8-solution-index">03</span>
-					</div>
-					<h3 class="dt8-solution-title">前端效能優化・QPS 1,200</h3>
+					<span class="dt8-solution-index">03</span>
+					<h3 class="dt8-solution-title">前端效能優化 · QPS 1,200</h3>
 					<ul class="dt8-solution-list">
-						<li>優化前端渲染效能與 API 呼叫策略，使個股頁承載力從現況提升至 QPS 1,200</li>
+						<li>優化前端渲染效能與 API 呼叫策略，使個股頁放大鏡承載力從現況提升至 QPS 1,200</li>
 						<li>搭配 SEO 結構化資料（Schema Markup）優化，讓財報數據被搜尋引擎正確索引</li>
 						<li>頁面載入速度提升間接改善 Core Web Vitals，進一步強化 SEO 排名訊號</li>
 					</ul>
 				</div>
 			</div>
 
-			<!-- TODO: 換成真實截圖時，把下面的 .dt8-frame-mock 換成 <img src="images/ui/ui8-1.jpg" alt="美股放大鏡個股頁改版後畫面"> -->
 			<div class="fi-detail-frame">
-				<div class="dt8-frame-mock" aria-hidden="true">
-					<div class="dt8-frame-side">
-						<span></span><span></span><span></span><span></span>
+				<div class="dt8-solution-marquee">
+					<div class="dt8-solution-marquee-track">
+						<img src="images/ui/ui8-solution-shot1.jpg" alt="個股頁 UI 視角設計檢討投影片：多欄式佈局與 AI 總結強化" loading="lazy">
+						<img src="images/ui/ui8-solution-shot2.jpg" alt="網站首頁 UI 視角設計檢討投影片：核心內容聚焦與引導登入" loading="lazy">
+						<img src="images/ui/ui8-solution-shot3.jpg" alt="文章首頁 UI 視角設計檢討投影片：主頁籤分類機制" loading="lazy">
+						<img src="images/ui/ui8-solution-shot4.jpg" alt="自選股 UI 視角設計檢討投影片：加入探索股票與互動性強化" loading="lazy">
+						<img src="images/ui/ui8-solution-shot5.jpg" alt="文章內頁 UI 視角設計檢討投影片：提升易讀性與內頁空白運用" loading="lazy">
+						<img src="images/ui/ui8-solution-shot6.jpg" alt="文章列表 UI 視角設計檢討投影片：主題式包裝" loading="lazy">
+						<img src="images/ui/ui8-solution-shot1.jpg" alt="" aria-hidden="true" loading="lazy">
+						<img src="images/ui/ui8-solution-shot2.jpg" alt="" aria-hidden="true" loading="lazy">
+						<img src="images/ui/ui8-solution-shot3.jpg" alt="" aria-hidden="true" loading="lazy">
+						<img src="images/ui/ui8-solution-shot4.jpg" alt="" aria-hidden="true" loading="lazy">
+						<img src="images/ui/ui8-solution-shot5.jpg" alt="" aria-hidden="true" loading="lazy">
+						<img src="images/ui/ui8-solution-shot6.jpg" alt="" aria-hidden="true" loading="lazy">
 					</div>
-					<div class="dt8-frame-main">
-						<div class="dt8-frame-chart">
-							<span style="height:40%;background:var(--fi-sky)"></span>
-							<span style="height:66%;background:var(--fi-blue)"></span>
-							<span style="height:52%;background:var(--fi-sky)"></span>
-							<span style="height:84%;background:var(--fi-blue)"></span>
-							<span style="height:60%;background:var(--fi-sky)"></span>
-							<span style="height:74%;background:var(--fi-blue)"></span>
-							<span style="height:46%;background:var(--fi-sky)"></span>
-							<span style="height:90%;background:var(--fi-blue)"></span>
-						</div>
-						<div class="dt8-frame-rows">
-							<span></span><span></span><span></span>
-						</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ── 訪談回饋後統整架構 ── -->
+		<div class="dt8-section">
+			<div class="fi-detail-section-head">
+				<span class="fi-eyebrow">Structure</span>
+				<h2 class="fi-h2" style="margin-bottom:8px">訪談回饋後統整架構</h2>
+				<p class="dt8-arch-question">如何兼顧「研究員的專業數據需求」與「散戶的台股習慣」？</p>
+			</div>
+			<p class="dt8-lead dt8-lead--full">根據站內美股網站點擊數據顯示，使用者偏好瀏覽<strong>走勢圖／技術分析與股利</strong>相關資訊，結合研究員對使用架構的實際操作回饋，進一步整理出新版個股頁的最終資訊架構與目標使用者定位，以更貼合實際使用行為與內容維運需求。</p>
+
+			<div class="dt8-arch-grid">
+				<div class="dt8-arch-col">
+					<p class="dt8-arch-col-label">比較站內美股網站點擊數與訪談回饋後統整架構</p>
+					<div class="dt8-arch-stack">
+						<img class="dt8-arch-stack-back" src="images/ui/ui8-arch-clickdata.jpg" alt="站內「放大鏡」與「美股股市」頁籤點擊數比較表" loading="lazy">
+						<img class="dt8-arch-stack-front" src="images/ui/ui8-arch-newstructure.jpg" alt="與研究員討論後統整的新版資訊架構表" loading="lazy">
 					</div>
+				</div>
+				<div class="dt8-arch-col">
+					<p class="dt8-arch-col-label">優化整體網站架構</p>
+					<div class="dt8-arch-sitemap">
+						<img src="images/ui/ui8-arch-sitemap-top.jpg" alt="優化後美股放大鏡個股架構圖（即時股價、個股概要、個股速覽、技術分析、新聞、未來成長/估值）" loading="lazy">
+						<img src="images/ui/ui8-arch-sitemap-bottom.jpg" alt="優化後美股放大鏡個股架構圖（基本分析財務數據、除權息股利、基本資料、財報會議法說會、大戶持股、熱門討論）" loading="lazy">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ── 最終設計畫面 ── -->
+		<div class="dt8-section">
+			<div class="fi-detail-section-head">
+				<span class="fi-eyebrow">Final Screens</span>
+				<h2 class="fi-h2" style="margin-bottom:24px">最終設計畫面</h2>
+			</div>
+
+			<div class="dt8-final-group">
+				<div class="dt8-final-head">
+					<h3 class="dt8-final-title">首頁</h3>
+					<a class="dt8-final-link-icon" href="https://www.forecastock.tw/" target="_blank" rel="noopener" aria-label="開啟美股放大鏡首頁（開新分頁）">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+					</a>
+				</div>
+				<p class="dt8-final-desc">
+					<span class="dt8-final-desc-line"><strong>背景與痛點：</strong>因應美股新手缺乏明確目標，首頁將原本強導向的搜尋框弱化並置於導覽列，同時提升四大指數權重以即時呈現大盤趨勢。</span>
+					<span class="dt8-final-desc-line"><strong>行動與目標：</strong>透過強化「熱門推薦、個股導引與加入自選」等動線，降低新手探索門檻、提高選股效率，進而提升頁面瀏覽與用戶留存。</span>
+				</p>
+				<div class="fi-detail-frame dt8-final-frame">
+					<img src="images/ui/ui8-final-home.jpg" alt="首頁改版前後對照：舊畫面與新畫面" loading="lazy">
+				</div>
+			</div>
+
+			<div class="dt8-final-group">
+				<div class="dt8-final-head">
+					<h3 class="dt8-final-title">文章頁</h3>
+					<a class="dt8-final-link-icon" href="https://www.forecastock.tw/article" target="_blank" rel="noopener" aria-label="開啟美股放大鏡文章頁（開新分頁）">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+					</a>
+				</div>
+				<p class="dt8-final-desc">
+					<span class="dt8-final-desc-line"><strong>背景與痛點：</strong>為提升用戶閱讀體驗，針對版面高低不一、純文字負擔高，以及 AI 自動產文易造成洗版等問題進行畫面優化。</span>
+					<span class="dt8-final-desc-line"><strong>行動與目標：</strong>透過統一文章卡片高度、行動端補全文章縮圖，並將 AI 文章做視覺區隔，降低探索門檻並提升閱讀品質。</span>
+				</p>
+				<div class="fi-detail-frame dt8-final-frame">
+					<img src="images/ui/ui8-final-article.jpg" alt="文章頁改版前後對照：舊畫面與新畫面" loading="lazy">
+				</div>
+			</div>
+
+			<div class="dt8-final-group">
+				<div class="dt8-final-head">
+					<h3 class="dt8-final-title">個股頁</h3>
+					<a class="dt8-final-link-icon" href="https://www.forecastock.tw/stock/NVDA/info" target="_blank" rel="noopener" aria-label="開啟美股放大鏡個股頁（開新分頁）">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+					</a>
+				</div>
+				<p class="dt8-final-desc">
+					<span class="dt8-final-desc-line"><strong>背景與目標：</strong>為建立專業形象並提升瀏覽量與停留時間，針對個股頁進行跨裝置體驗與資訊架構的全面優化。</span>
+					<span class="dt8-final-desc-line"><strong>行動與做法：</strong>依據回饋重組導覽順序，並透過排版調整過長訊息及釐清 AI 重點區塊的上下文關聯，大幅降低閱讀與理解成本。</span>
+				</p>
+				<div class="dt8-final-tabs">
+					<span>個股概要</span>
+					<span class="dt8-final-tabs-divider" aria-hidden="true"></span>
+					<span>技術分析</span>
+					<span class="dt8-final-tabs-divider" aria-hidden="true"></span>
+					<span>新聞</span>
+					<span class="dt8-final-tabs-divider" aria-hidden="true"></span>
+					<span>財務數據</span>
+					<span class="dt8-final-tabs-divider" aria-hidden="true"></span>
+					<span>股利</span>
+					<span class="dt8-final-tabs-divider" aria-hidden="true"></span>
+					<span>法說會</span>
+				</div>
+				<div class="fi-detail-frame dt8-final-frame">
+					<img src="images/ui/ui8-final-stock.jpg" alt="個股頁改版前後對照：舊畫面與新畫面" loading="lazy">
 				</div>
 			</div>
 		</div>
@@ -915,33 +1104,44 @@
 		<!-- ── 達到的效益 ── -->
 		<div class="dt8-section" style="margin-bottom:8px">
 			<div class="fi-detail-section-head">
-				<span class="fi-eyebrow">Results</span>
+				<span class="fi-eyebrow">Impact</span>
 				<h2 class="fi-h2" style="margin-bottom:24px">達到的效益</h2>
 			</div>
-			<p class="dt8-lead">改版上線後，個股頁的搜尋排名與流量表現皆有明顯提升：</p>
 			<div class="fi-detail-results">
-				<div class="fi-result-card fi-result-card--a">
-					<div class="fi-result-plus">+</div>
-					<div class="fi-result-num">6–7名</div>
-					<p class="fi-result-label">重點站台 SEO 排名（原 13.8 名）</p>
+				<div class="fi-result-card">
+					<p class="fi-result-eyebrow">SEO 排名變化</p>
+					<div class="fi-result-seo">
+						<div class="fi-result-seo-stat">
+							<span class="fi-result-seo-stat-label">優化前</span>
+							<span class="fi-result-seo-stat-num">13.8</span>
+						</div>
+						<span class="fi-result-seo-arrow" aria-hidden="true">→</span>
+						<div class="fi-result-seo-stat">
+							<span class="fi-result-seo-stat-label">優化後</span>
+							<span class="fi-result-seo-stat-num fi-result-seo-stat-num--after">6–7</span>
+						</div>
+					</div>
+					<p class="fi-result-desc">個股頁進入搜尋結果前 10 名，顯著提升自然流量來源比例</p>
 				</div>
-				<div class="fi-result-card fi-result-card--b">
-					<div class="fi-result-plus">+</div>
-					<div class="fi-result-num">+2k</div>
-					<p class="fi-result-label">個股頁 PV 每週成長</p>
-				</div>
-				<div class="fi-result-card fi-result-card--c">
-					<div class="fi-result-plus">+</div>
-					<div class="fi-result-num">22–36%</div>
-					<p class="fi-result-label">週流量成長區間</p>
-				</div>
-				<div class="fi-result-card fi-result-card--d">
-					<div class="fi-result-plus">+</div>
-					<div class="fi-result-num">+38%</div>
-					<p class="fi-result-label">曝光成長</p>
+				<div class="fi-result-card">
+					<p class="fi-result-eyebrow">流量指標</p>
+					<div class="fi-result-stats">
+						<div class="fi-result-stat">
+							<span class="fi-result-stat-num">+2k</span>
+							<span class="fi-result-stat-label">PV / 週</span>
+						</div>
+						<div class="fi-result-stat">
+							<span class="fi-result-stat-num">+22–36%</span>
+							<span class="fi-result-stat-label">週流量</span>
+						</div>
+						<div class="fi-result-stat">
+							<span class="fi-result-stat-num">+38%</span>
+							<span class="fi-result-stat-label">曝光次數</span>
+						</div>
+					</div>
+					<p class="fi-result-desc">優化上線後連續四週觀測數據，流量成長趨勢穩定，無反彈跡象</p>
 				</div>
 			</div>
-			<p class="dt8-lead" style="margin-bottom:0">個股頁進入搜尋結果前 10 名，顯著提升自然流量來源比例；優化上線後連續四週觀測數據，流量成長趨勢穩定，無反彈跡象。</p>
 		</div>
 
 		<div class="fi-detail-navbar">
