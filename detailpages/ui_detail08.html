@@ -90,28 +90,42 @@
 			.fi-detail-hero-grid { grid-template-columns: 1fr; }
 			.fi-detail-hero-visual { display: none; }
 		}
-		/* ── 達到的效益 -- two summary cards (SEO ranking before/after + traffic stat trio),
-		   matches Figma "達到的效益" board */
-		.fi-detail-results { display: flex; flex-wrap: wrap; gap: 24px; margin: 8px 0 64px; align-items: stretch; }
-		.fi-result-card {
-			flex: 1 1 320px;
-			background: #fbfcfe; border: 1px solid var(--fi-border); border-radius: 20px;
-			padding: 29px; display: flex; flex-direction: column; gap: 16px;
+		/* ── 達到的效益 -- one unified card split into two flush halves (SEO ranking before/after
+		   + traffic stat trio), matches Figma "達到的效益" board */
+		.fi-detail-results {
+			display: flex; align-items: stretch; margin: 8px 0 64px;
+			background: #fbfcfe; border: 1px solid var(--fi-border); border-radius: 20px; overflow: hidden;
 		}
-		.fi-result-eyebrow { font-family: var(--fi-font); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--fi-300); margin: 0; }
-		.fi-result-desc { font-size: 13px; line-height: 1.6; color: var(--fi-500); margin: 0; }
+		@media (max-width: 900px) { .fi-detail-results { flex-direction: column; } }
+		.fi-result-card { flex: 1 1 0; min-width: 0; width: 100%; padding: 48px 40px; display: flex; flex-direction: column; gap: 28px; position: relative; box-sizing: border-box; }
+		@media (max-width: 640px) { .fi-result-card { padding: 32px 24px; } }
+		/* flex:1 1 0 makes flexbox equalize both cards' heights on the column (height) axis once
+		   stacked, which clips the taller traffic card's content under overflow:hidden. Let each
+		   card size to its own content instead. Must come after the base rule above to win the cascade. */
+		@media (max-width: 900px) { .fi-result-card { flex: 1 1 auto; } }
+		.fi-result-card--seo { background: #f3f7fd; }
+		.fi-result-card--traffic { overflow: hidden; }
+		.fi-result-eyebrow { font-family: var(--fi-font); font-size: 16px; font-weight: 700; letter-spacing: .096em; color: #39455e; margin: 0; }
+		.fi-result-desc { position: relative; z-index: 1; font-size: 13px; line-height: 1.6; color: var(--fi-500); margin: 0; }
 
 		.fi-result-seo { display: flex; align-items: flex-end; gap: 16px; }
 		.fi-result-seo-stat { display: flex; flex-direction: column; gap: 4px; }
-		.fi-result-seo-stat-label { font-size: 11px; color: var(--fi-300); }
-		.fi-result-seo-stat-num { font-family: var(--fi-font); font-weight: 800; font-size: clamp(1.9rem, 3.4vw, 2.5rem); letter-spacing: -.03em; line-height: 1; color: #c2c7d2; }
-		.fi-result-seo-stat-num--after { color: var(--fi-blue); }
-		.fi-result-seo-arrow { font-size: 24px; color: var(--fi-ink); padding-bottom: 8px; }
+		.fi-result-seo-stat-label { font-size: 11px; }
+		.fi-result-seo-stat-label--before { color: #9aa0ad; }
+		.fi-result-seo-stat-label--after { color: #5b8de0; }
+		.fi-result-seo-stat-num { font-family: var(--fi-font); font-weight: 800; font-size: clamp(2rem, 3.6vw, 3rem); letter-spacing: -.03em; line-height: 1; }
+		.fi-result-seo-stat-num--before { color: #c2c7d2; }
+		.fi-result-seo-stat-num--after { color: #5b8de0; }
+		.fi-result-seo-arrow { font-size: 24px; color: #808080; padding-bottom: 8px; }
 
-		.fi-result-stats { display: flex; flex-wrap: wrap; gap: 20px 32px; }
-		.fi-result-stat { display: flex; flex-direction: column; gap: 4px; }
-		.fi-result-stat-num { font-family: var(--fi-font); font-weight: 800; font-size: clamp(1.3rem, 2vw, 1.6rem); letter-spacing: -.02em; color: var(--fi-blue); }
-		.fi-result-stat-label { font-size: 12px; color: var(--fi-500); }
+		.fi-result-stats { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+		@media (max-width: 560px) { .fi-result-stats { grid-template-columns: 1fr; } }
+		.fi-result-stat { min-width: 0; background: #fff; border: 1px solid var(--fi-border); border-radius: 8px; padding: 17px; display: flex; flex-direction: column; gap: 8px; }
+		.fi-result-stat-num, .fi-result-stat-label, .fi-result-stat-note { overflow-wrap: break-word; }
+		.fi-result-stat-num { font-family: var(--fi-font); font-weight: 800; font-size: 24px; letter-spacing: -.02em; color: #5b8de0; }
+		.fi-result-stat-label { font-size: 12px; color: #55617c; }
+		.fi-result-stat-note { font-size: 11px; color: #9aa0ad; }
+		.fi-result-watermark { position: absolute; bottom: -13px; right: -12px; width: 195px; height: 173px; pointer-events: none; }
 
 		.fi-detail-section-head { margin-bottom: 8px; }
 		.fi-detail-section-head .fi-h2 { margin-bottom: 0; }
@@ -378,7 +392,10 @@
 		.dt8-arch-sitemap img { width: 100%; display: block; }
 		.dt8-arch-sitemap img + img { border-top: 1px solid var(--fi-border); }
 
-		/* 最終設計畫面: per-page old/new comparison shots (matches Figma "最終設計畫面" board) */
+		/* 最終設計畫面: per-page old/new comparison shots (matches Figma "最終設計畫面" board).
+		   A true top-level section (sibling of .fi-container, not nested inside it) so the tint
+		   reaches the viewport edges exactly -- same reasoning as .dt8-goal-dark / .dt8-quote-band. */
+		.dt8-final-band { background: #eef4fc; padding: 64px 0; }
 		.dt8-final-group { margin-bottom: 48px; }
 		.dt8-final-group:last-child { margin-bottom: 0; }
 		.dt8-final-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
@@ -389,9 +406,16 @@
 		.dt8-final-desc strong { color: var(--fi-ink); font-weight: 700; }
 		.dt8-final-desc-line { display: block; }
 		.dt8-final-tabs { display: flex; align-items: center; gap: 14px; margin: 0 0 20px; font-size: 13px; font-weight: 600; color: var(--fi-500); flex-wrap: wrap; }
-		.dt8-final-tabs-divider { width: 1px; height: 12px; background: var(--fi-border-s); }
+		.dt8-final-tabs-divider { width: 1.5px; height: 14px; background: var(--fi-300); }
 		.dt8-final-frame { margin-bottom: 0; }
 		.dt8-final-frame img { width: 100%; display: block; }
+		.dt8-final-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+		@media (max-width: 640px) { .dt8-final-compare { grid-template-columns: 1fr; } }
+		.dt8-final-shot { margin: 0; }
+		.dt8-final-shot-label { font-size: 13px; font-weight: 600; margin: 0 0 10px; }
+		.dt8-final-shot-label--old { color: #9aa8bd; }
+		.dt8-final-shot-label--new { color: #1c3f66; }
+		.dt8-final-shot img { width: 100%; height: auto; display: block; }
 
 		/* Case study body continues the rounded panel's white surface (no color seam).
 		   position:relative (z-index left auto) so it still paints above the sticky hero. */
@@ -1031,9 +1055,12 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
+	<section class="dt8-final-band">
+		<div class="fi-container">
 		<!-- ── 最終設計畫面 ── -->
-		<div class="dt8-section">
+		<div class="dt8-section" style="margin-bottom:0">
 			<div class="fi-detail-section-head">
 				<span class="fi-eyebrow">Final Screens</span>
 				<h2 class="fi-h2" style="margin-bottom:24px">最終設計畫面</h2>
@@ -1050,8 +1077,15 @@
 					<span class="dt8-final-desc-line"><strong>背景與痛點：</strong>因應美股新手缺乏明確目標，首頁將原本強導向的搜尋框弱化並置於導覽列，同時提升四大指數權重以即時呈現大盤趨勢。</span>
 					<span class="dt8-final-desc-line"><strong>行動與目標：</strong>透過強化「熱門推薦、個股導引與加入自選」等動線，降低新手探索門檻、提高選股效率，進而提升頁面瀏覽與用戶留存。</span>
 				</p>
-				<div class="fi-detail-frame dt8-final-frame">
-					<img src="images/ui/ui8-final-home.jpg" alt="首頁改版前後對照：舊畫面與新畫面" loading="lazy">
+				<div class="dt8-final-compare">
+					<figure class="dt8-final-shot">
+						<figcaption class="dt8-final-shot-label dt8-final-shot-label--old">舊畫面</figcaption>
+						<img src="images/ui/ui8-final-home-old.jpg" width="590" height="1206" alt="首頁舊畫面" loading="lazy">
+					</figure>
+					<figure class="dt8-final-shot">
+						<figcaption class="dt8-final-shot-label dt8-final-shot-label--new">新畫面</figcaption>
+						<img src="images/ui/ui8-final-home-new.jpg" width="615" height="1206" alt="首頁新畫面" loading="lazy">
+					</figure>
 				</div>
 			</div>
 
@@ -1066,8 +1100,15 @@
 					<span class="dt8-final-desc-line"><strong>背景與痛點：</strong>為提升用戶閱讀體驗，針對版面高低不一、純文字負擔高，以及 AI 自動產文易造成洗版等問題進行畫面優化。</span>
 					<span class="dt8-final-desc-line"><strong>行動與目標：</strong>透過統一文章卡片高度、行動端補全文章縮圖，並將 AI 文章做視覺區隔，降低探索門檻並提升閱讀品質。</span>
 				</p>
-				<div class="fi-detail-frame dt8-final-frame">
-					<img src="images/ui/ui8-final-article.jpg" alt="文章頁改版前後對照：舊畫面與新畫面" loading="lazy">
+				<div class="dt8-final-compare">
+					<figure class="dt8-final-shot">
+						<figcaption class="dt8-final-shot-label dt8-final-shot-label--old">舊畫面</figcaption>
+						<img src="images/ui/ui8-final-article-old.jpg" width="590" height="843" alt="文章頁舊畫面" loading="lazy">
+					</figure>
+					<figure class="dt8-final-shot">
+						<figcaption class="dt8-final-shot-label dt8-final-shot-label--new">新畫面</figcaption>
+						<img src="images/ui/ui8-final-article-new.jpg" width="615" height="843" alt="文章頁新畫面" loading="lazy">
+					</figure>
 				</div>
 			</div>
 
@@ -1095,51 +1136,65 @@
 					<span class="dt8-final-tabs-divider" aria-hidden="true"></span>
 					<span>法說會</span>
 				</div>
-				<div class="fi-detail-frame dt8-final-frame">
-					<img src="images/ui/ui8-final-stock.jpg" alt="個股頁改版前後對照：舊畫面與新畫面" loading="lazy">
+				<div class="dt8-final-compare">
+					<figure class="dt8-final-shot">
+						<figcaption class="dt8-final-shot-label dt8-final-shot-label--old">舊畫面</figcaption>
+						<img src="images/ui/ui8-final-stock-old.jpg" width="590" height="1223" alt="個股頁舊畫面" loading="lazy">
+					</figure>
+					<figure class="dt8-final-shot">
+						<figcaption class="dt8-final-shot-label dt8-final-shot-label--new">新畫面</figcaption>
+						<img src="images/ui/ui8-final-stock-new.jpg" width="620" height="1223" alt="個股頁新畫面" loading="lazy">
+					</figure>
 				</div>
 			</div>
 		</div>
+		</div>
+	</section>
 
+	<div class="fi-container">
 		<!-- ── 達到的效益 ── -->
-		<div class="dt8-section" style="margin-bottom:8px">
+		<div class="dt8-section" style="margin-bottom:8px;margin-top:40px">
 			<div class="fi-detail-section-head">
 				<span class="fi-eyebrow">Impact</span>
 				<h2 class="fi-h2" style="margin-bottom:24px">達到的效益</h2>
 			</div>
 			<div class="fi-detail-results">
-				<div class="fi-result-card">
+				<div class="fi-result-card fi-result-card--seo">
 					<p class="fi-result-eyebrow">SEO 排名變化</p>
 					<div class="fi-result-seo">
 						<div class="fi-result-seo-stat">
-							<span class="fi-result-seo-stat-label">優化前</span>
-							<span class="fi-result-seo-stat-num">13.8</span>
+							<span class="fi-result-seo-stat-label fi-result-seo-stat-label--before">優化前</span>
+							<span class="fi-result-seo-stat-num fi-result-seo-stat-num--before">13.8</span>
 						</div>
 						<span class="fi-result-seo-arrow" aria-hidden="true">→</span>
 						<div class="fi-result-seo-stat">
-							<span class="fi-result-seo-stat-label">優化後</span>
-							<span class="fi-result-seo-stat-num fi-result-seo-stat-num--after">6–7</span>
+							<span class="fi-result-seo-stat-label fi-result-seo-stat-label--after">優化後</span>
+							<span class="fi-result-seo-stat-num fi-result-seo-stat-num--after">6 – 7</span>
 						</div>
 					</div>
 					<p class="fi-result-desc">個股頁進入搜尋結果前 10 名，顯著提升自然流量來源比例</p>
 				</div>
-				<div class="fi-result-card">
+				<div class="fi-result-card fi-result-card--traffic">
+					<img class="fi-result-watermark" src="images/ui/ui8-results-icon.svg" alt="" aria-hidden="true">
 					<p class="fi-result-eyebrow">流量指標</p>
 					<div class="fi-result-stats">
 						<div class="fi-result-stat">
-							<span class="fi-result-stat-num">+2k</span>
+							<span class="fi-result-stat-num">+ 2k</span>
 							<span class="fi-result-stat-label">PV / 週</span>
+							<span class="fi-result-stat-note">頁面瀏覽量</span>
 						</div>
 						<div class="fi-result-stat">
-							<span class="fi-result-stat-num">+22–36%</span>
+							<span class="fi-result-stat-num">+22 – 36%</span>
 							<span class="fi-result-stat-label">週流量</span>
+							<span class="fi-result-stat-note">穩定無反彈</span>
 						</div>
 						<div class="fi-result-stat">
-							<span class="fi-result-stat-num">+38%</span>
+							<span class="fi-result-stat-num">+ 38%</span>
 							<span class="fi-result-stat-label">曝光次數</span>
+							<span class="fi-result-stat-note">搜尋結果曝光</span>
 						</div>
 					</div>
-					<p class="fi-result-desc">優化上線後連續四週觀測數據，流量成長趨勢穩定，無反彈跡象</p>
+					<p class="fi-result-desc">優化上線後流量成長趨勢穩定，無反彈跡象</p>
 				</div>
 			</div>
 		</div>
