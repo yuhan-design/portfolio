@@ -129,25 +129,6 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
   z-index: 1;
 }
 
-.fi-hero-gradient {
-  position: absolute; inset: 0;
-  z-index: 0;
-  background: linear-gradient(135deg, rgba(242,217,107,.24), rgba(108,149,228,.12) 38%, rgba(230,240,230,.22) 100%);
-  background-size: 200% 200%;
-  animation: gradient-shift 8s ease-in-out infinite;
-  pointer-events: none;
-}
-.fi-hero-gradient canvas {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  opacity: 0.95;
-  mix-blend-mode: screen;
-}
-.fi-hero-gradient--fallback {
-  background: radial-gradient(circle at top left, rgba(242,217,107,.32), transparent 28%),
-              linear-gradient(125deg, rgba(91,141,224,.08), rgba(216,236,223,.2) 45%, rgba(242,217,107,.16) 100%);
-}
-
 /* Dot grid texture — full-bleed, bleeds past hero into the next section, fades out gradually */
 .fi-dot-grid {
   position: absolute;
@@ -201,12 +182,6 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
   50% {
     box-shadow: 0 0 16px rgba(242,217,107,.6), 0 4px 16px rgba(21,23,30,.12);
   }
-}
-
-/* Enhanced gradient animation */
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
 }
 
 .fi-pill {
@@ -351,23 +326,6 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
   box-shadow: 0 8px 24px rgba(21,23,30,.12);
   border-color: var(--fi-sky);
 }
-.fi-rotating-text {
-  overflow: hidden;
-}
-.fi-chip-text {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.2;
-  white-space: nowrap;
-  color: var(--fi-ink);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.fi-chip-text--hidden {
-  opacity: 0;
-  transform: translateY(-10%);
-}
-
 /* Rotating label styles */
 .fi-chip-num {
   font-weight: 700;
@@ -485,12 +443,8 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 }
 .fi-card:hover { box-shadow: 0 12px 48px rgba(21,23,30,.10); }
 .fi-card--wide { grid-column: span 2; }
-.fi-card--full { grid-column: span 3; }
-@media (max-width: 900px) {
-  .fi-card--full { grid-column: span 2; }
-}
 @media (max-width: 640px) {
-  .fi-card--wide, .fi-card--full { grid-column: span 1; }
+  .fi-card--wide { grid-column: span 1; }
 }
 
 .fi-card::before {
@@ -523,12 +477,10 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 .fi-card:hover .fi-card-img { transform: scale(1.04); }
 .fi-card-img img { width: 100%; display: block; object-fit: cover; object-position: top; }
 .fi-card--wide  .fi-card-img img { height: 320px; }
-.fi-card--full  .fi-card-img img { height: 320px; }
-.fi-card:not(.fi-card--wide):not(.fi-card--full) .fi-card-img img { height: 320px; }
+.fi-card:not(.fi-card--wide) .fi-card-img img { height: 320px; }
 @media (max-width: 640px) {
-  .fi-card--wide .fi-card-img img,
-  .fi-card--full .fi-card-img img { height: 240px; }
-  .fi-card:not(.fi-card--wide):not(.fi-card--full) .fi-card-img img { height: 240px; }
+  .fi-card--wide .fi-card-img img { height: 240px; }
+  .fi-card:not(.fi-card--wide) .fi-card-img img { height: 240px; }
 }
 
 .fi-card-hover {
@@ -692,13 +644,6 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 .fi-bio { display: flex; flex-direction: column; gap: 14px; }
 .fi-bio p { font-size: 14.5px; line-height: 1.75; color: var(--fi-500); }
 .fi-bio strong { font-weight: 700; color: var(--fi-ink); }
-
-.fi-skills { display: flex; flex-direction: column; gap: 16px; }
-.fi-skill-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
-.fi-skill-name { font-size: 13px; font-weight: 600; color: var(--fi-ink); }
-.fi-skill-pct  { font-size: 12px; color: var(--fi-300); }
-.fi-skill-bar  { height: 5px; border-radius: 999px; background: var(--fi-border-s); overflow: hidden; }
-.fi-skill-fill { height: 100%; border-radius: 999px; background: var(--fi-blue); }
 
 .fi-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .fi-tag {
