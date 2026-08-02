@@ -1,0 +1,920 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>股市爆料同學會網站優化 — Portfolio of Yuhan</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Yuhan">
+	<meta name="description" content="全台最大股市討論社群的網站體驗改版，透過 1,668 份深度問卷調查找出流量瓶頸的根本原因，重構資訊架構與沉浸式互動設計，將核心 SEO 排名提升至前 5 名，單季 PV 突破 1.5 億。">
+	<link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/figma-index.css">
+
+	<style>
+		/* ── HERO ── */
+		.fi-detail-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+		@media (max-width: 1024px) {
+			.fi-detail-hero-grid { grid-template-columns: 1fr; }
+			.fi-detail-hero-visual { display: none; }
+		}
+		.fi-detail-hero-visual {
+			position: relative;
+			padding: 24px;
+			max-width: 480px; width: 100%; margin-left: auto;
+		}
+		.fi-detail-visual-main { position: relative; z-index: 2; }
+		.dt9-hero-shot {
+			display: block; width: 100%; height: auto;
+			filter: drop-shadow(0 24px 48px rgba(21,23,30,.16));
+		}
+		.dt9-meta-row { display: flex; flex-wrap: wrap; gap: 20px 32px; margin-top: 32px; }
+		.dt9-meta-item { flex: 1 1 200px; min-width: 180px; }
+		.dt9-meta-label {
+			display: block; font-family: var(--fi-font); font-weight: 700; font-size: 10.5px;
+			letter-spacing: .11em; text-transform: uppercase; color: var(--fi-300); margin-bottom: 4px;
+		}
+		.dt9-meta-value { font-size: 13.5px; font-weight: 600; color: var(--fi-ink); line-height: 1.5; }
+
+		.fi-detail-breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 28px; }
+		.fi-detail-breadcrumb .fi-detail-back { margin-bottom: 0; }
+		.fi-detail-breadcrumb-sep { color: var(--fi-300); font-size: 12px; }
+		.fi-detail-breadcrumb-current { font-size: 13px; color: var(--fi-500); font-family: var(--fi-font); }
+
+		.dt9-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 4px; }
+		.fi-detail-cta { margin-top: 24px; }
+		.dt9-tag-chip {
+			font-family: var(--fi-font); font-size: 12px; font-weight: 600;
+			padding: 7px 15px; border-radius: 999px;
+			background: #eef2fb; border: 1px solid #dfe9fb; color: #3a3f4c;
+		}
+
+		/* Goal & Solution -- dark full-bleed section, rounded top corners overlapping the hero */
+		.dt9-goal-dark {
+			position: relative; z-index: 2;
+			background: var(--fi-ink);
+			border-radius: 32px 32px 0 0;
+			margin-top: -32px;
+			padding: 64px 0 72px;
+		}
+		.dt9-goal-dark .fi-h2 { color: #fff; }
+		.dt9-goal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+		@media (max-width: 900px) { .dt9-goal-grid { grid-template-columns: 1fr; } }
+		.dt9-goal-desc { font-size: 15px; line-height: 1.8; color: var(--fi-400); max-width: 560px; }
+		.dt9-goal-desc + .dt9-goal-desc { margin-top: 16px; }
+		.dt9-goal-cards { display: flex; flex-direction: column; gap: 28px; }
+		.dt9-goal-card { display: flex; flex-direction: column; gap: 12px; }
+		.dt9-goal-tag {
+			display: inline-flex; align-self: flex-start;
+			font-family: var(--fi-font); font-weight: 700; font-size: 10.5px;
+			letter-spacing: .16em; text-transform: uppercase;
+			padding: 4px 10px; border-radius: 999px;
+		}
+		.dt9-goal-tag--objective { background: rgba(108,149,228,.2); color: var(--fi-blue); }
+		.dt9-goal-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+		.dt9-goal-list li {
+			position: relative; padding-left: 20px;
+			font-family: var(--fi-font); font-weight: 600; font-size: 15px; line-height: 1.6; color: #fbfcfe;
+		}
+		.dt9-goal-list li::before {
+			content: ""; position: absolute; left: 0; top: 8px;
+			width: 6px; height: 6px; border-radius: 50%; background: var(--fi-blue);
+		}
+
+		.fi-detail-section-head { margin-bottom: 8px; }
+		.fi-detail-section-head .fi-h2 { margin-bottom: 0; }
+		.dt9-section { margin-bottom: 64px; }
+		.dt9-lead { font-size: 14.5px; line-height: 1.8; color: var(--fi-500); max-width: 640px; margin-bottom: 24px; }
+		.dt9-lead strong { color: var(--fi-ink); font-weight: 700; }
+		.dt9-lead--full { max-width: none; }
+
+		/* 研究與發現 -- two-column layout (core-user photo + insight callout on the left,
+		   Three Pain Points on the right), matching the Figma frame's actual side-by-side layout */
+		.dt9-research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin: 12px 0 40px; }
+		@media (max-width: 900px) { .dt9-research-grid { grid-template-columns: 1fr; gap: 32px; } }
+		.dt9-research-photo { width: 100%; height: auto; display: block; border-radius: 16px; border: 1px solid var(--fi-border); margin-bottom: 20px; }
+		.dt9-pain-points-label { font-size: 13px; font-weight: 600; color: var(--fi-300); margin: 0 0 20px; }
+		.dt9-insight-card { background: #eef4fc; border: 1px solid #c9ddf7; border-radius: 16px; padding: 22px 26px; }
+		.dt9-insight-label { font-size: 13px; font-weight: 700; color: var(--fi-blue); margin: 0 0 8px; }
+		.dt9-insight-text { font-size: 14px; line-height: 1.7; color: var(--fi-ink); margin: 0; }
+
+		/* Research slide marquee -- slow, seamless-loop scroll of the real research-deck slides,
+		   same pattern as ui_detail08's 解決辦法 solution marquee */
+		.dt9-research-marquee { margin-top: 32px; overflow: hidden; background: #fbfcfe; padding: 20px 0; mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+		.dt9-research-marquee-track { display: flex; align-items: center; gap: 14px; width: max-content; animation: dt9-marquee 55s linear infinite; }
+		.dt9-research-marquee-track img { height: 200px; width: auto; flex-shrink: 0; border-radius: 12px; display: block; border: 1px solid var(--fi-border); }
+		.dt9-research-marquee:hover .dt9-research-marquee-track { animation-play-state: paused; }
+		@keyframes dt9-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+		@media (max-width: 640px) { .dt9-research-marquee-track img { height: 130px; } }
+		@media (prefers-reduced-motion: reduce) { .dt9-research-marquee-track { animation: none; } }
+
+		/* Problem list: bordered cards with a ghost numeral */
+		.dt9-issue-list { display: flex; flex-direction: column; gap: 20px; }
+		.dt9-issue-item {
+			display: flex; gap: 40px; align-items: flex-start;
+			background: #fbfcfe; border: 1px solid var(--fi-border); border-radius: 20px; padding: 24px 28px;
+		}
+		.dt9-issue-num { flex-shrink: 0; font-family: var(--fi-font); font-weight: 800; font-size: 32px; line-height: 1; letter-spacing: -.03em; color: var(--fi-border); }
+		.dt9-issue-body { flex: 1; min-width: 0; }
+		.dt9-issue-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 8px; }
+		.dt9-issue-title { font-size: 17px; font-weight: 700; color: var(--fi-ink); margin: 0; }
+		.dt9-badge { font-family: var(--fi-font); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px; letter-spacing: .02em; white-space: nowrap; }
+		.dt9-badge--high { background: #fde8e8; color: #b91c1c; }
+		.dt9-badge--mid { background: #fef3c7; color: #92400e; }
+		.dt9-badge--cat { background: #eef2fb; color: #3a3f4c; }
+		.dt9-issue-text { font-size: 14.5px; line-height: 1.75; color: var(--fi-500); margin: 0; }
+		@media (max-width: 640px) {
+			.dt9-issue-item { flex-direction: column; gap: 12px; padding: 20px; }
+			.dt9-issue-num { font-size: 26px; }
+		}
+
+		/* Findings quote band -- dark full-bleed band, quote + subtext on the left, promo-card
+		   illustration on the right (flattened export of the Figma group -- too many nested
+		   rotated/shadowed decorative layers to hand-author faithfully in CSS) */
+		.dt9-quote-band { position: relative; background: #0e1117; padding: 48px 0 0; overflow: hidden; }
+		.dt9-quote-bg { position: absolute; top: -15%; right: -8%; width: 55%; max-width: 640px; height: auto; opacity: .08; pointer-events: none; }
+		.dt9-quote-band-inner { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 49px; flex-wrap: wrap; }
+		.dt9-quote-col { flex: 1 1 320px; min-width: 260px; padding-bottom: 48px; }
+		.dt9-quote-text { margin: 0 0 16px; font-family: var(--fi-font); font-weight: 800; font-size: 20px; line-height: 1.4; color: #77a8e8; }
+		.dt9-quote-sub { margin: 0; font-size: 14px; line-height: 1.8; color: var(--fi-400); }
+		.dt9-quote-cards { flex: 0 0 auto; width: 200px; align-self: flex-end; }
+		.dt9-quote-cards img { width: 100%; height: auto; display: block; }
+		@media (max-width: 760px) {
+			.dt9-quote-band-inner { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+			.dt9-quote-col { flex: 0 1 auto; padding-bottom: 0; }
+			.dt9-quote-cards { width: 160px; align-self: center; }
+		}
+
+		/* Solution cards -- three stacked cards (01/02/03), each a split two-panel layout
+		   per Figma nodes 11:6083 / 11:6181 / 11:6293. */
+		.dt9-comment-card { display: flex; border: 1px solid var(--fi-border); border-radius: 24px; overflow: hidden; margin-bottom: 24px; }
+		.dt9-comment-left { flex: 1 1 0; min-width: 0; background: #fbfcfe; padding: 40px; display: flex; flex-direction: column; gap: 20px; }
+		.dt9-comment-right { flex: 1 1 0; min-width: 0; background: #f8f9fb; border-left: 1px solid var(--fi-border); padding: 40px 40px 40px 41px; display: flex; flex-direction: column; gap: 16px; }
+		@media (max-width: 768px) {
+			.dt9-comment-card { flex-direction: column; }
+			.dt9-comment-right { border-left: none; border-top: 1px solid var(--fi-border); padding: 32px; }
+			.dt9-comment-left { padding: 32px; }
+		}
+
+		.dt9-comment-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+		.dt9-comment-num { font-family: var(--fi-font); font-weight: 800; font-size: 28px; line-height: 1; letter-spacing: -1.12px; color: var(--fi-border); }
+		.dt9-comment-tag { display: inline-flex; font-family: var(--fi-font); font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; background: #ffeded; color: #c2292e; }
+		.dt9-comment-title { font-size: 28px; font-weight: 800; line-height: 1.2; color: var(--fi-ink); margin: 0; }
+		.dt9-comment-desc { font-size: 14px; line-height: 1.85; color: #7a808d; margin: 0; }
+		@media (max-width: 640px) { .dt9-comment-title { font-size: 22px; } }
+
+		.dt9-comment-label { font-size: 11px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: #9aa0ad; margin: 0; }
+		.dt9-comment-list { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+		.dt9-comment-item { display: flex; gap: 12px; align-items: flex-start; background: #fff; border: 1px solid var(--fi-border); border-radius: 12px; padding: 15px; }
+		.dt9-comment-dot { flex-shrink: 0; width: 6px; height: 6px; margin-top: 7px; border-radius: 50%; background: var(--dot-color, #c2292e); }
+		.dt9-comment-item-title { font-size: 13px; font-weight: 700; color: #15171e; margin: 0 0 2px; }
+		.dt9-comment-item-desc { font-size: 12px; color: #9aa0ad; margin: 0; }
+
+		.dt9-comment-stats { display: flex; gap: 12px; flex-wrap: wrap; padding-top: 8px; }
+		.dt9-comment-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; background: #ffe8e8; border-radius: 10px; padding: 10px 24px; }
+		.dt9-comment-stat-label { font-size: 11px; font-weight: 700; color: #847878; }
+		.dt9-comment-stat-num { font-family: var(--fi-font); font-weight: 800; font-size: 24px; letter-spacing: -1.024px; color: #15171e; }
+
+		/* Before/after screens under card 01 -- same left-right compare pattern as
+		   ui_detail08's 最終設計畫面 (.dt8-final-compare), namespaced for this page. */
+		.dt9-final-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; margin: -4px 0 24px; }
+		@media (max-width: 640px) { .dt9-final-compare { grid-template-columns: 1fr; } }
+		.dt9-final-shot { margin: 0; }
+		.dt9-final-shot-label { font-size: 13px; font-weight: 600; margin: 0 0 10px; }
+		.dt9-final-shot-label--old { color: #9aa0ad; }
+		.dt9-final-shot-label--new { color: #c2292e; }
+		.dt9-final-shot img { width: 100%; height: auto; display: block; }
+		.dt9-final-shot-solo { margin: -4px 0 24px; }
+
+		/* Fund Roadmap sub-section under Solution card 03, per Figma node 11:6292.
+		   Reuses .dt9-tag-row/.dt9-tag-chip (hero) and .dt9-final-compare (image pairs above);
+		   the compare images below already have their captions baked into the export, so no figcaption. */
+		.dt9-roadmap { margin: 40px 0 32px; }
+		.dt9-roadmap-title { font-size: 24px; font-weight: 800; color: var(--fi-ink); margin: 0 0 16px; }
+		.dt9-roadmap-list { margin: 16px 0 0; padding-left: 21px; display: flex; flex-direction: column; gap: 6px; }
+		.dt9-roadmap-list li { font-size: 14.5px; line-height: 1.8; color: var(--fi-500); }
+		.dt9-roadmap-list strong { color: var(--fi-ink); font-weight: 700; }
+		.dt9-roadmap .dt9-tag-chip { border-radius: 8px; }
+
+		/* 最終成效與商業影響 -- dark full-bleed closing section per Figma node 22:19219.
+		   Cards fade/rise into view on scroll and the headline numbers count up; both respect
+		   prefers-reduced-motion via the .no-anim fallback set by the script below. */
+		.dt9-impact-band { position: relative; background: #0e1117; padding: 64px 0; margin-bottom: 56px; overflow: hidden; }
+		.dt9-impact-band .fi-eyebrow { color: #7d8497; }
+		.dt9-impact-band .fi-h2 { color: #f5f6fa; margin: 10px 0 36px; }
+
+		.dt9-impact-stats { display: flex; gap: 24px; margin-bottom: 32px; }
+		@media (max-width: 900px) { .dt9-impact-stats { flex-direction: column; } }
+
+		.dt9-impact-card {
+			border: 1px solid var(--fi-border); border-radius: 18px; min-height: 130px;
+			opacity: 0; transform: translateY(18px);
+			transition: opacity .6s cubic-bezier(.16,.8,.3,1), transform .6s cubic-bezier(.16,.8,.3,1), box-shadow .3s ease, border-color .3s ease;
+		}
+		.dt9-impact-band.is-visible .dt9-impact-card { opacity: 1; transform: translateY(0); }
+		.dt9-impact-band.is-visible .dt9-impact-card--hero { transition-delay: 0s; }
+		.dt9-impact-band.is-visible .dt9-impact-card--pink { transition-delay: .1s; }
+		.dt9-impact-band.is-visible .dt9-impact-card--red { transition-delay: .2s; }
+		.dt9-impact-band.is-visible .dt9-impact-insights .dt9-impact-card:nth-child(1) { transition-delay: .28s; }
+		.dt9-impact-band.is-visible .dt9-impact-insights .dt9-impact-card:nth-child(2) { transition-delay: .36s; }
+		.dt9-impact-card:hover { transform: translateY(-3px); border-color: rgba(234,237,242,.4); }
+		.dt9-impact-band.is-visible .dt9-impact-card:hover { transform: translateY(-3px); }
+		.no-anim .dt9-impact-card { opacity: 1; transform: none; transition: none; }
+
+		.dt9-impact-card--hero {
+			flex: 1 1 0; min-width: 280px; display: flex; align-items: center; gap: 36px; padding: 21px;
+			background: linear-gradient(25deg, #0a0806 62%, #c2292e 118%);
+		}
+		.dt9-impact-illus { position: relative; width: 121px; height: 90px; flex-shrink: 0; }
+		.dt9-impact-illus-logo { position: absolute; left: 0; top: 0; width: 71px; height: 71px; border-radius: 15.8px; display: block; }
+		.dt9-impact-illus-girl { position: absolute; left: 52.95px; top: 26.92px; width: 32.66px; height: 62.63px; }
+		.dt9-impact-illus-boy { position: absolute; left: 81.17px; top: 24.31px; width: 39.36px; height: 64.69px; }
+		.dt9-impact-illus-girl img, .dt9-impact-illus-boy img { display: block; width: 100%; height: 100%; }
+
+		.dt9-impact-hero-num { display: flex; align-items: flex-end; gap: 8px; }
+		.dt9-impact-hero-num-current { font-family: var(--fi-font); font-weight: 800; font-size: 50px; line-height: 1; letter-spacing: -.024em; color: #c2292e; }
+		.dt9-impact-hero-num-old { font-size: 16px; color: #828282; text-decoration: line-through; }
+		.dt9-impact-hero-label { font-family: var(--fi-font); font-weight: 600; font-size: 14px; color: #fff; margin: 12px 0 0; }
+
+		/* Pink+red share their own row so they can stay side-by-side even once the hero card
+		   (which needs more room for its illustration) has already dropped to a full-width row
+		   of its own -- they only stack to one-per-row at the narrowest sizes. */
+		.dt9-impact-stats-pair { display: flex; gap: 24px; flex: 1 1 0; min-width: 0; }
+		.dt9-impact-card--pink, .dt9-impact-card--red {
+			width: 220px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 41px 21px;
+		}
+		.dt9-impact-card--pink { background: #ffeeec; }
+		.dt9-impact-card--red { background: #c2292e; }
+		.dt9-impact-num { font-family: var(--fi-font); font-weight: 800; font-size: 50px; line-height: 1; letter-spacing: -.024em; }
+		.dt9-impact-card--pink .dt9-impact-num { color: #c2292e; }
+		.dt9-impact-card--red .dt9-impact-num { color: #fff; }
+		.dt9-impact-card-label { font-family: var(--fi-font); font-weight: 600; font-size: 14px; margin: 0; }
+		.dt9-impact-card--pink .dt9-impact-card-label { color: #383838; }
+		.dt9-impact-card--red .dt9-impact-card-label { color: #fff; }
+		@media (max-width: 900px) {
+			/* flex:1 1 0 above only makes sense sizing columns in the row layout -- once the
+			   parent stacks (.dt9-impact-stats goes column at this width), flex-basis:0 clamps
+			   a stacked item to min-height and lets its content overflow past the box instead
+			   of growing it, so both the hero card and the pair need flex:none here. */
+			.dt9-impact-card--hero { flex: none; min-width: 0; width: 100%; }
+			.dt9-impact-stats-pair { flex: none; width: 100%; }
+			.dt9-impact-card--pink, .dt9-impact-card--red { width: auto; flex: 1 1 0; min-width: 0; }
+		}
+		@media (max-width: 480px) {
+			.dt9-impact-card--hero { flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 20px; }
+			.dt9-impact-card--hero .dt9-impact-hero-num { justify-content: center; }
+			.dt9-impact-stats-pair { flex-direction: column; }
+			.dt9-impact-card--pink, .dt9-impact-card--red { flex: none; width: 100%; }
+		}
+
+		.dt9-impact-insights { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+		@media (max-width: 900px) { .dt9-impact-insights { grid-template-columns: 1fr; } }
+		.dt9-impact-card--insight { background: #f8f9fb; padding: 29px; display: flex; flex-direction: column; gap: 16px; }
+		.dt9-impact-insight-label { font-family: var(--fi-font); font-weight: 800; font-size: 13px; color: #c2292e; margin: 0; }
+		.dt9-impact-insight-text { font-size: 14px; line-height: 1.85; color: #565c6b; margin: 0; }
+
+		/* Case study body continues the rounded panel's white surface (no color seam). */
+		.fi-detail-body { position: relative; background: #fbfcfe; padding-top: 64px; }
+		.fi-detail-hero { position: sticky; top: 0; }
+	</style>
+</head>
+<body class="fi-page">
+
+<!-- ============ NAV ============ -->
+<nav class="fi-nav" id="fi-nav">
+	<div class="fi-container fi-nav-inner">
+		<a href="../index.html" class="fi-logo">
+			<img src="../images/logo-yuhan.svg" alt="YUHAN" class="fi-logo-img">
+		</a>
+
+		<div class="fi-nav-links">
+			<a href="../works.html" class="fi-nav-link">Works</a>
+			<a href="../about.html" class="fi-nav-link">About</a>
+			<a href="mailto:sky13146@gmail.com" class="fi-nav-cta">Contact</a>
+		</div>
+
+		<button class="fi-mobile-btn" id="fi-mobile-btn">
+			<span></span><span></span><span></span>
+		</button>
+	</div>
+
+	<div class="fi-drawer" id="fi-drawer">
+		<div class="fi-drawer-inner">
+			<a href="../works.html" class="fi-nav-link">Works</a>
+			<a href="../about.html" class="fi-nav-link">About</a>
+			<a href="mailto:sky13146@gmail.com" class="fi-nav-link">Contact</a>
+		</div>
+	</div>
+</nav>
+
+<!-- ============ CASE STUDY HEADER ============ -->
+<section class="fi-detail-hero">
+	<div class="fi-dot-grid" aria-hidden="true"></div>
+	<div class="fi-container">
+		<div class="fi-detail-hero-grid">
+			<div class="fi-detail-inner">
+				<div class="fi-detail-breadcrumb">
+					<a href="../works.html" class="fi-detail-back">← 作品集</a>
+					<span class="fi-detail-breadcrumb-sep">/</span>
+					<span class="fi-detail-breadcrumb-current">股市爆料同學會網站優化</span>
+				</div>
+				<span class="fi-detail-tag" style="background:#c9ddf7;color:#1c2a44">UI/UX · Web Design</span>
+				<h1 class="fi-detail-title" style="font-weight:800;">股市爆料同學會<span style="color:var(--fi-blue)">網站優化</span></h1>
+				<p class="fi-detail-desc">全台最大股市討論社群的網站體驗改版，發起涵蓋 1,668 位用戶的深度問卷調查，找出流量瓶頸的根本原因，主導三大核心頁面改版，透過資訊架構重構、UGC 引導與沉浸式互動設計，成功將核心 SEO 排名從 5.5 名提升至 5.1 名，單季 PV 突破 1.5 億（QoQ +18%）。</p>
+				<div class="dt9-tag-row">
+					<span class="dt9-tag-chip">SEO 優化</span>
+					<span class="dt9-tag-chip">A/B Testing</span>
+					<span class="dt9-tag-chip">問卷調查</span>
+					<span class="dt9-tag-chip">UGC 設計</span>
+					<span class="dt9-tag-chip">UI 設計</span>
+				</div>
+
+				<div class="fi-detail-cta">
+					<a href="https://www.cmoney.tw/forum/popular/buzz?tab=popular" target="_blank" rel="noopener noreferrer" class="fi-btn-dark">Visit Website ↗</a>
+				</div>
+			</div>
+
+			<div class="fi-detail-hero-visual">
+				<div class="fi-detail-visual-main">
+					<img class="dt9-hero-shot" src="images/ui/ui9.png" alt="股市爆料同學會 App 畫面，手機顯示台積電個股頁走勢圖，左側可見台積電、鴻海、台新金的自選股搜尋紀錄">
+				</div>
+			</div>
+		</div>
+
+		<div class="dt9-meta-row">
+			<div class="dt9-meta-item">
+				<span class="dt9-meta-label">產品類型</span>
+				<p class="dt9-meta-value">股票資訊社群討論網站</p>
+			</div>
+			<div class="dt9-meta-item">
+				<span class="dt9-meta-label">專案週期</span>
+				<p class="dt9-meta-value">2025/07–10</p>
+			</div>
+			<div class="dt9-meta-item">
+				<span class="dt9-meta-label">目標用戶</span>
+				<p class="dt9-meta-value">台灣散戶投資人</p>
+			</div>
+			<div class="dt9-meta-item">
+				<span class="dt9-meta-label">研究方法</span>
+				<p class="dt9-meta-value">問卷調查、競品分析、資訊架構重整</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- ============ GOAL & SOLUTION (dark, full-bleed) ============ -->
+<section class="dt9-goal-dark">
+	<div class="fi-container">
+		<div class="dt9-goal-grid">
+			<div>
+				<div class="fi-detail-section-head">
+					<span class="fi-eyebrow">Goal</span>
+					<h2 class="fi-h2" style="margin-bottom:24px">目標與背景</h2>
+				</div>
+				<p class="dt9-goal-desc">股市爆料同學會為全台最大股市討論社群，但舊版體驗過時、資訊架構凌亂，用戶停留時間短、跨頁瀏覽率低，嚴重影響 Google 爬蟲評估。</p>
+				<p class="dt9-goal-desc">為打破流量瓶頸並解決「76% 用戶輪廓未知」的數據盲區，團隊發起深度問卷調研，精準確立本次優化方向。</p>
+			</div>
+			<div class="dt9-goal-cards">
+				<div class="dt9-goal-card">
+					<span class="dt9-goal-tag dt9-goal-tag--objective">Objective</span>
+					<ul class="dt9-goal-list">
+						<li>提升 SEO 排名：關鍵字排名由 5.5 名提升至前 5 名</li>
+						<li>提升季 PV 至 1.45 億以上，達成年度全站 QoQ +20% 成長指標</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- ============ CASE STUDY BODY ============ -->
+<section class="fi-detail-body">
+	<div class="fi-container">
+
+		<!-- ── 研究與發現 ── -->
+		<div class="dt9-section">
+			<div class="fi-detail-section-head">
+				<span class="fi-eyebrow">Research</span>
+				<h2 class="fi-h2" style="margin-bottom:24px">研究與發現</h2>
+			</div>
+			<p class="dt9-lead dt9-lead--full">找出「股市爆料同學會」網站的用戶輪廓，了解他們偏好的資訊與使用動機，為提升網站停留時間與站台排名找出優化突破口，團隊發起一項涵蓋 1,668 位用戶的深度問卷調查，挖掘出阻礙網站成長的核心矛盾。</p>
+
+			<div class="dt9-research-grid">
+				<div>
+					<img class="dt9-research-photo" src="images/ui/ui9-insight-photo.png" alt="核心用戶輪廓投影片：40 歲以上資深投資族為主，職業以製造、服務、自由業居多，附年齡與性別、職業、投資經驗長條圖">
+					<div class="dt9-insight-card">
+						<p class="dt9-insight-label">核心洞察</p>
+						<p class="dt9-insight-text">93% 訪客、75% 會員進站首要動機都是「高效獲取資訊」，但創造長期留存且最有價值的核心資產卻是「高品質社群交流」。</p>
+					</div>
+				</div>
+				<div>
+					<p class="dt9-pain-points-label">Three Pain Points</p>
+					<div class="dt9-issue-list">
+						<div class="dt9-issue-item">
+							<span class="dt9-issue-num">01</span>
+							<div class="dt9-issue-body">
+								<div class="dt9-issue-head">
+									<p class="dt9-issue-title">資訊效率與社群互動的「體驗衝突」</p>
+									<span class="dt9-badge dt9-badge--high">高衝擊</span>
+									<span class="dt9-badge dt9-badge--cat">體驗設計</span>
+								</div>
+								<p class="dt9-issue-text">個股頁佔全站六成流量，但無限下拉的留言區強佔首屏，效率型訪客被社群雜訊干擾，跨頁瀏覽率降低，加上整頁資訊繁雜，側邊欄與個股討論都無法第一時間清晰了解。</p>
+							</div>
+						</div>
+						<div class="dt9-issue-item">
+							<span class="dt9-issue-num">02</span>
+							<div class="dt9-issue-body">
+								<div class="dt9-issue-head">
+									<p class="dt9-issue-title">缺乏註冊誘因，轉換斷點高</p>
+									<span class="dt9-badge dt9-badge--high">高衝擊</span>
+									<span class="dt9-badge dt9-badge--cat">會員轉換</span>
+								</div>
+								<p class="dt9-issue-text">34% 訪客認為不需要註冊，28% 不清楚註冊能解鎖什麼功能，網站停留在「查詢工具」而非「社群平台」，需要放大專業資訊之外的價值點。</p>
+							</div>
+						</div>
+						<div class="dt9-issue-item">
+							<span class="dt9-issue-num">03</span>
+							<div class="dt9-issue-body">
+								<div class="dt9-issue-head">
+									<p class="dt9-issue-title">UGC 缺乏 SEO 友善度，長尾流量流失</p>
+									<span class="dt9-badge dt9-badge--mid">中衝擊</span>
+									<span class="dt9-badge dt9-badge--cat">SEO／內容策略</span>
+								</div>
+								<p class="dt9-issue-text">發文不加標題導致 Google 無法收錄，市場對相關資訊的龐大需求也因缺乏專屬頁面而未能承接流量。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="dt9-research-marquee">
+				<div class="dt9-research-marquee-track">
+					<img src="images/ui/ui9-research-slide1.png" alt="研究簡報：用戶輪廓——網站與 APP 高度相似，多數為會員填答，會員多數使用 APP" loading="lazy">
+					<img src="images/ui/ui9-research-slide2.png" alt="研究簡報：NPS 與滿意度——37% 用戶對產品無感，因社群雜訊過多與缺乏獨特價值導致推薦意願低落" loading="lazy">
+					<img src="images/ui/ui9-research-slide3.png" alt="研究簡報：行動建議——找出資訊導向訪客留下來的理由，提高 PV 並提升用戶停留" loading="lazy">
+					<img src="images/ui/ui9-research-slide4.png" alt="研究簡報：行動建議——使會員成為黏著度高的忠誠會員" loading="lazy">
+					<img src="images/ui/ui9-research-slide5.png" alt="研究簡報：行動建議——使訪客成為會員的一步，從路過到留下" loading="lazy">
+					<img src="images/ui/ui9-research-slide6.png" alt="研究簡報：問卷統計——用戶來同學會的動機與資訊關注優先序" loading="lazy">
+					<img src="images/ui/ui9-research-slide1.png" alt="" aria-hidden="true" loading="lazy">
+					<img src="images/ui/ui9-research-slide2.png" alt="" aria-hidden="true" loading="lazy">
+					<img src="images/ui/ui9-research-slide3.png" alt="" aria-hidden="true" loading="lazy">
+					<img src="images/ui/ui9-research-slide4.png" alt="" aria-hidden="true" loading="lazy">
+					<img src="images/ui/ui9-research-slide5.png" alt="" aria-hidden="true" loading="lazy">
+					<img src="images/ui/ui9-research-slide6.png" alt="" aria-hidden="true" loading="lazy">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="dt9-quote-band">
+		<img class="dt9-quote-bg" src="images/ui/ui9-quote-bg.jpg" alt="" aria-hidden="true">
+		<div class="fi-container dt9-quote-band-inner">
+			<div class="dt9-quote-col">
+				<p class="dt9-quote-text">「 訪客進站靠資訊，會員留存靠社群 」</p>
+				<p class="dt9-quote-sub">平衡不同生命週期的用戶需求——讓找答案的效率型訪客能無干擾地快速瀏覽，同時為渴望深度交流的創作者打造沉浸式空間，兩者並行不悖，共同推動流量成長。</p>
+			</div>
+			<div class="dt9-quote-cards">
+				<img src="images/ui/ui9-quote-cards.png" alt="「使用體驗小調查」問卷推廣卡片示意圖，提供 7-11 禮物卡誘因鼓勵用戶填寫問卷">
+			</div>
+		</div>
+	</div>
+
+	<div class="fi-container">
+		<!-- ── 解決辦法 ── -->
+		<div class="dt9-section" style="margin-top:56px">
+			<div class="fi-detail-section-head">
+				<span class="fi-eyebrow">Solution</span>
+				<h2 class="fi-h2" style="margin-bottom:24px">三大核心產品改版</h2>
+			</div>
+
+			<div class="dt9-comment-card">
+				<div class="dt9-comment-left">
+					<div class="dt9-comment-head">
+						<span class="dt9-comment-num">01</span>
+						<span class="dt9-comment-tag">資訊與社群分層</span>
+					</div>
+					<h3 class="dt9-comment-title">沉浸式留言彈窗體驗</h3>
+					<p class="dt9-comment-desc">重構頁面佈局，區隔「淺層資訊獲取」與「深層社群互動」。訪客可無干擾地瀏覽貼文列表，會員渴望深度交流時點擊即可開啟沉浸式彈窗，看完關閉後仍停留在清晰的貼文列表頁。</p>
+				</div>
+				<div class="dt9-comment-right">
+					<p class="dt9-comment-label">需求與效益</p>
+					<ul class="dt9-comment-list">
+						<li class="dt9-comment-item">
+							<span class="dt9-comment-dot"></span>
+							<div>
+								<p class="dt9-comment-item-title">新增討論區快捷按鈕、首屏資訊排版優化</p>
+								<p class="dt9-comment-item-desc">縮短訪客尋找核心資訊的路徑</p>
+							</div>
+						</li>
+						<li class="dt9-comment-item">
+							<span class="dt9-comment-dot"></span>
+							<div>
+								<p class="dt9-comment-item-title">沉浸式彈窗取代長展留言</p>
+								<p class="dt9-comment-item-desc">體驗與 IG 一致，首屏版位完全釋放</p>
+							</div>
+						</li>
+						<li class="dt9-comment-item">
+							<span class="dt9-comment-dot"></span>
+							<div>
+								<p class="dt9-comment-item-title">跨頁瀏覽率大幅提升</p>
+								<p class="dt9-comment-item-desc">更多優質貼文得以曝光，拉動整體 SEO</p>
+							</div>
+						</li>
+					</ul>
+					<div class="dt9-comment-stats">
+						<div class="dt9-comment-stat">
+							<span class="dt9-comment-stat-label">Pages / Session</span>
+							<span class="dt9-comment-stat-num">+16.4%</span>
+						</div>
+						<div class="dt9-comment-stat">
+							<span class="dt9-comment-stat-label">單週額外瀏覽</span>
+							<span class="dt9-comment-stat-num">+270萬</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="dt9-final-compare">
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--old">改版前 — 首頁舊版佈局</figcaption>
+					<img src="images/ui/ui9-final-home-old.png" alt="首頁舊版佈局" loading="lazy">
+				</figure>
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">改版後 — 首屏樣式優化</figcaption>
+					<img src="images/ui/ui9-final-home-new.png" alt="首屏樣式優化" loading="lazy">
+				</figure>
+			</div>
+
+			<div class="dt9-final-compare">
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--old">改版前 — 個股頁舊版佈局</figcaption>
+					<img src="images/ui/ui9-final-stockpages-old.png" alt="個股頁舊版佈局" loading="lazy">
+				</figure>
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">改版後 —  個股頁資訊優先序整理</figcaption>
+					<img src="images/ui/ui9-final-stockpages-new.png" alt="改版後 —  個股頁資訊優先序整理" loading="lazy">
+				</figure>
+			</div>
+
+			<div class="dt9-final-compare">
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--old">改版前 — 留言頁舊版佈局</figcaption>
+					<img src="images/ui/ui9-final-posts-old.png" alt="留言頁舊版佈局" loading="lazy">
+				</figure>
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">改版後 —  留言頁優化並延伸產業新聞</figcaption>
+					<img src="images/ui/ui9-final-posts-new.png" alt="留言頁優化並延伸產業新聞" loading="lazy">
+				</figure>
+			</div>
+
+			<div class="dt9-final-compare">
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">沉浸式彈窗設計</figcaption>
+					<img src="images/ui/ui9-final-model-new.png" alt="沉浸式彈窗設計" loading="lazy">
+				</figure>
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">404、空值頁</figcaption>
+					<img src="images/ui/ui9-final-404-new.png" alt="404、空值頁" loading="lazy">
+				</figure>
+			</div>
+
+			<div class="dt9-comment-card">
+				<div class="dt9-comment-left">
+					<div class="dt9-comment-head">
+						<span class="dt9-comment-num">02</span>
+						<span class="dt9-comment-tag">發文體驗優化</span>
+					</div>
+					<h3 class="dt9-comment-title">驅動 SEO 友善的高質量 UGC</h3>
+					<p class="dt9-comment-desc">全面梳理全站發文入口，降低創作摩擦力；同時透過介面引導產出帶有 H1 標題的優質文章，搭配 AI 自動標籤讓社群內容精準關聯至對應個股頁面，打造爬蟲友善的 UGC 生態。</p>
+				</div>
+				<div class="dt9-comment-right" style="--dot-color:#e8521a">
+					<p class="dt9-comment-label">需求與效益</p>
+					<ul class="dt9-comment-list">
+						<li class="dt9-comment-item">
+							<span class="dt9-comment-dot"></span>
+							<div>
+								<p class="dt9-comment-item-title">發文入口視覺強化</p>
+								<p class="dt9-comment-item-desc">Header 與側邊欄按鈕升級，提升發文意願</p>
+							</div>
+						</li>
+						<li class="dt9-comment-item">
+							<span class="dt9-comment-dot"></span>
+							<div>
+								<p class="dt9-comment-item-title">圖片上傳體驗升級</p>
+								<p class="dt9-comment-item-desc">新增放大縮小編輯，上限擴增至 20 張</p>
+							</div>
+						</li>
+						<li class="dt9-comment-item">
+							<span class="dt9-comment-dot"></span>
+							<div>
+								<p class="dt9-comment-item-title">預設選填標題 + AI 股票 Tag</p>
+								<p class="dt9-comment-item-desc">引導帶 H1 內容，精準關聯個股頁</p>
+							</div>
+						</li>
+					</ul>
+					<div class="dt9-comment-stats">
+						<div class="dt9-comment-stat">
+							<span class="dt9-comment-stat-label">帶標題文章比例</span>
+							<span class="dt9-comment-stat-num">×12倍</span>
+						</div>
+						<div class="dt9-comment-stat">
+							<span class="dt9-comment-stat-label">探索流量比上週</span>
+							<span class="dt9-comment-stat-num">×7倍</span>
+						</div>
+						<div class="dt9-comment-stat">
+							<span class="dt9-comment-stat-label">單周PV增量</span>
+							<span class="dt9-comment-stat-num">+2.3萬</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<figure class="dt9-final-shot dt9-final-shot-solo">
+				<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">新增並預設開啟標題選項</figcaption>
+				<img src="images/ui/ui9-ugc-flow.png" alt="新增並預設開啟標題選項" loading="lazy">
+			</figure>
+
+			<div class="dt9-final-compare">
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">圖片操作便捷，能仔細查看其中股票數值資訊</figcaption>
+					<img src="images/ui/ui9-ugc-image-edit.png" alt="圖片操作便捷，能仔細查看其中股票數值資訊" loading="lazy">
+				</figure>
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">AI 偵測標記股票：經多方案評估，採用雙重小彈窗，後方內容保持可見，有效減輕操作時的心理負擔</figcaption>
+					<img src="images/ui/ui9-ugc-ai-tag.png" alt="AI 偵測標記股票" loading="lazy">
+				</figure>
+			</div>
+
+			<div class="dt9-comment-card">
+				<div class="dt9-comment-left">
+					<div class="dt9-comment-head">
+						<span class="dt9-comment-num">03</span>
+						<span class="dt9-comment-tag">基金專區擴充</span>
+					</div>
+					<h3 class="dt9-comment-title">開拓高意圖搜尋流量</h3>
+					<p class="dt9-comment-desc">從 0 到 1 建立基金專屬板塊，直接命中用戶對進階數據的強烈渴求，並以精準的 SEO Schema 結構化標記確保搜尋引擎高效索引，開拓全新流量來源。</p>
+				</div>
+				<div class="dt9-comment-right" style="--dot-color:#e8521a">
+					<p class="dt9-comment-label">需求與效益</p>
+					<ul class="dt9-comment-list">
+						<li class="dt9-comment-item">
+							<span class="dt9-comment-dot"></span>
+							<div>
+								<p class="dt9-comment-item-title">基金總覽 + 熱門排行榜</p>
+								<p class="dt9-comment-item-desc">覆蓋用戶對基金篩選與比較的核心需求</p>
+							</div>
+						</li>
+						<li class="dt9-comment-item">
+							<span class="dt9-comment-dot"></span>
+							<div>
+								<p class="dt9-comment-item-title">單一基金深度頁</p>
+								<p class="dt9-comment-item-desc">淨值走勢、績效表現、配息紀錄完整呈現</p>
+							</div>
+						</li>
+						<li class="dt9-comment-item">
+							<span class="dt9-comment-dot"></span>
+							<div>
+								<p class="dt9-comment-item-title">Schema 標記 + Meta 精準設定</p>
+								<p class="dt9-comment-item-desc">@type: InvestmentFund，確保 Google 高效索引</p>
+							</div>
+						</li>
+					</ul>
+					<div class="dt9-comment-stats">
+						<div class="dt9-comment-stat">
+							<span class="dt9-comment-stat-label">關鍵字平均排名</span>
+							<span class="dt9-comment-stat-num">10.6名</span>
+						</div>
+						<div class="dt9-comment-stat">
+							<span class="dt9-comment-stat-label">每週流量</span>
+							<span class="dt9-comment-stat-num">+1k</span>
+						</div>
+						<div class="dt9-comment-stat">
+							<span class="dt9-comment-stat-label">索引數量</span>
+							<span class="dt9-comment-stat-num">40% ⭡</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="dt9-roadmap">
+				<h3 class="dt9-roadmap-title">基金開發的 Roadmap</h3>
+				<p class="dt9-lead dt9-lead--full">為提升同學會個股頁的搜尋可見性，第一步新增資料以承接搜尋意圖，於頁面中補齊基礎資訊內容，作為 SEO 建立索引，在資訊有限的前提下，提升基金頁面的理解效率與使用價值。</p>
+				<ul class="dt9-roadmap-list">
+					<li><strong>使用者目標：</strong>快速、有效取得「判斷是否值得投資」的關鍵資訊</li>
+					<li><strong>核心問題：</strong>在目前資料量有限的情況下，將高度相關的指標拆成多個頁籤，無法提供額外判斷價值，反而增加切換與記憶成本，降低整體理解效率</li>
+					<li><strong>解法：</strong>在既有架構下考量資料多寡，制定「第一期合併核心資訊、長期漸進擴充」的 Roadmap 呈現策略</li>
+				</ul>
+				<div class="dt9-tag-row">
+					<span class="dt9-tag-chip">基本資料 X 總覽</span>
+					<span class="dt9-tag-chip">持股明細</span>
+					<span class="dt9-tag-chip">淨值 X 績效</span>
+					<span class="dt9-tag-chip">配息</span>
+					<span class="dt9-tag-chip">風險 X 績效</span>
+				</div>
+			</div>
+
+			<div class="dt9-final-compare">
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label">基金開發的 Roadmap：分期漸進策略與「高效率資訊整合」</figcaption>
+					<img src="images/ui/ui9-fund-roadmap-diagram.png" alt="基金開發的 Roadmap：分期漸進策略與「高效率資訊整合」" loading="lazy">
+				</figure>
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label">整理競品並拉出理想的資訊架構，也需考量無資料的情境</figcaption>
+					<img src="images/ui/ui9-fund-competitor-research.png" alt="整理競品並拉出理想的資訊架構，也需考量無資料的情境" loading="lazy">
+				</figure>
+			</div>
+
+			<div class="dt9-final-compare">
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">基金首頁</figcaption>
+					<img src="images/ui/ui9-fund-home.png" alt="基金首頁" loading="lazy">
+				</figure>
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">基金熱門排行榜</figcaption>
+					<img src="images/ui/ui9-fund-ranking.png" alt="基金熱門排行榜" loading="lazy">
+				</figure>
+			</div>
+
+			<div class="dt9-final-compare">
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">精選熱門基金公司</figcaption>
+					<img src="images/ui/ui9-fund-companies.png" alt="精選熱門基金公司" loading="lazy">
+				</figure>
+				<figure class="dt9-final-shot">
+					<figcaption class="dt9-final-shot-label dt9-final-shot-label--new">基金公司基金排行</figcaption>
+					<img src="images/ui/ui9-fund-company-rank.png" alt="基金公司基金排行" loading="lazy">
+				</figure>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="dt9-impact-band" id="dt9-impact">
+		<div class="fi-container">
+			<span class="fi-eyebrow">Impact</span>
+			<h2 class="fi-h2">最終成效與商業影響</h2>
+
+			<div class="dt9-impact-stats">
+				<div class="dt9-impact-card dt9-impact-card--hero">
+					<div class="dt9-impact-illus">
+						<img class="dt9-impact-illus-logo" src="images/ui/ui9-impact-logo.png" alt="">
+						<div class="dt9-impact-illus-girl"><img src="images/ui/ui9-impact-girl.svg" alt=""></div>
+						<div class="dt9-impact-illus-boy"><img src="images/ui/ui9-impact-boy.svg" alt=""></div>
+					</div>
+					<div>
+						<div class="dt9-impact-hero-num">
+							<span class="dt9-impact-hero-num-current" data-count-to="5.1" data-decimals="1">0.0</span>
+							<span class="dt9-impact-hero-num-old">5.5</span>
+						</div>
+						<p class="dt9-impact-hero-label">核心 SEO 排名</p>
+					</div>
+				</div>
+				<div class="dt9-impact-stats-pair">
+					<div class="dt9-impact-card dt9-impact-card--pink">
+						<span class="dt9-impact-num" data-count-to="20" data-prefix="+" data-suffix="%">+0%</span>
+						<p class="dt9-impact-card-label">季 PV 成長</p>
+					</div>
+					<div class="dt9-impact-card dt9-impact-card--red">
+						<span class="dt9-impact-num" data-count-to="16.4" data-decimals="1" data-prefix="+" data-suffix="%">+0.0%</span>
+						<p class="dt9-impact-card-label">Pages / Session</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="dt9-impact-insights">
+				<div class="dt9-impact-card dt9-impact-card--insight">
+					<p class="dt9-impact-insight-label">核心設計洞察</p>
+					<p class="dt9-impact-insight-text">「用戶進站的動機是高效獲取資訊，但創造產品長期留存與護城河的，卻是深度的社群互動」。舊版介面將兩者強硬綁在一起，社群雜訊成了趕走訪客的毒藥，也扼殺了會員交流的品質。</p>
+				</div>
+				<div class="dt9-impact-card dt9-impact-card--insight">
+					<p class="dt9-impact-insight-label">分眾需求平衡</p>
+					<p class="dt9-impact-insight-text">透過「沉浸式留言」與「發文體驗重構」，將「淺層資訊獲取」與「深度社群互動」分層，精準洞察並尊重用戶在不同階段的真實需求，能在解決體驗痛點的同時，順勢釋放出巨大的 SEO 流量潛能。</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="fi-container">
+		<div class="fi-detail-navbar">
+			<a href="ui_detail08.html" class="fi-btn-ghost">← 上一則</a>
+			<a href="../works.html" class="fi-btn-dark">查看全部作品</a>
+			<a href="ui_detail01.html" class="fi-btn-ghost">下一則 →</a>
+		</div>
+	</div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="fi-footer">
+	<svg class="fi-footer-deco" viewBox="0 0 281 293" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M181.067 4.99281C194.222 1.21922 207.824 -0.390941 221.439 0.0797271C230.213 0.389805 239.016 1.54331 247.66 3.76332C255.698 5.82979 263.184 9.74425 270.52 13.6901C271.006 13.9514 271.493 14.2133 271.98 14.4752C274.777 15.9739 277.513 17.616 280.173 19.3903V65.4606C278.407 64.4002 276.828 63.0231 275.526 61.3766C270.175 54.6016 263.422 49.02 255.645 44.8424C255.32 44.6678 254.991 44.4986 254.66 44.3366C249.61 41.8725 243.947 40.8779 238.483 39.4752C232.566 37.9543 226.392 37.0282 220.145 36.8082C210.456 36.4666 200.612 37.7276 191.376 40.4538C191.248 40.4917 191.12 40.5311 190.991 40.5709C187.112 41.7641 182.899 43.8904 178.587 46.5934C173.167 49.9822 167.646 54.278 161.848 59.0084C161.795 59.0514 161.742 59.0953 161.69 59.1383C157.077 62.9164 152.835 66.9875 149.076 71.3444C145.207 75.826 141.882 80.6233 139.078 85.6491C139.389 85.6714 139.701 85.6934 140.013 85.7204C140.792 85.7849 141.567 85.8637 142.35 85.9567C154.284 87.4693 165.898 91.6412 176.302 100.268C191.042 111.492 196.821 134.702 192.867 150.246C192.765 150.77 192.655 151.292 192.536 151.808C187.375 171.585 173.875 183.269 158.246 190.06C147.054 194.711 132.286 196.83 118.421 190.461C118.298 190.404 118.173 190.346 118.049 190.288C107.118 185.404 94.9768 175.268 89.6225 161.805C87.5255 156.641 86.303 151.618 85.6684 146.779C82.8068 149.692 80.1103 152.717 77.5151 155.779C72.4072 161.8 67.8924 168.171 63.8618 174.967C59.3788 182.512 55.5381 190.641 51.9428 199.273C51.8731 199.44 51.8035 199.609 51.7339 199.776C47.984 208.751 44.3568 217.65 43.1128 224.115C43.0976 224.194 43.082 224.274 43.0669 224.353C41.7509 231.292 41.0173 238.562 40.5796 245.816C40.179 252.502 40.1162 259.198 40.4399 265.814C40.5281 267.611 40.6446 269.401 40.7915 271.179C41.3773 278.267 42.4153 285.222 44.0063 291.862C44.0824 292.179 44.1522 292.498 44.2182 292.818H3.33152C2.15536 286.737 1.3315 280.662 0.795384 274.611C0.59818 272.378 0.439633 270.146 0.316869 267.915C-0.133168 259.702 -0.0988687 251.545 0.388158 243.403C0.92668 234.55 2.06358 225.794 3.75144 216.873C3.77099 216.77 3.79038 216.666 3.81003 216.564C6.52696 203.408 10.8365 193.798 14.6811 184.331C14.7526 184.159 14.8247 183.988 14.896 183.817C19.0003 173.975 23.8253 164 29.6762 154.393C34.9291 145.743 41.0477 137.472 47.7827 129.901C53.0139 124.01 58.7125 118.658 64.4507 113.527C64.7482 113.261 65.0476 112.995 65.3481 112.729C73.7112 105.431 82.7693 99.1123 93.5766 94.401C96.8686 85.4072 100.502 76.9297 105.241 68.1413C105.257 68.1107 105.275 68.0799 105.291 68.0495C109.572 60.216 114.802 52.9812 120.594 46.4284C125.987 40.3229 131.886 34.8098 138.092 29.8668C138.163 29.8107 138.234 29.7539 138.304 29.6979C144.571 24.7375 151.349 19.5486 159.139 14.8395C165.364 11.0953 172.301 7.63626 180.267 5.22914C180.533 5.14931 180.799 5.06984 181.067 4.99281ZM136.832 124.096C133.093 123.771 129.045 124.156 124.33 125.124C124.234 125.673 124.142 126.225 124.056 126.779C124.035 126.911 124.015 127.045 123.995 127.177C122.655 135.594 123.124 143.033 124.921 147.033C126.438 150.567 128.89 153.204 134.381 155.948C134.399 155.957 134.417 155.965 134.434 155.973C136.111 156.905 139.754 157.544 144.153 155.724C150.207 153.452 155.807 146.997 156.302 143.492C156.322 143.403 156.34 143.315 156.355 143.231C157.505 135.776 156.118 132.995 152.019 129.449C148.854 126.867 143.29 124.784 137.864 124.199C137.522 124.16 137.18 124.125 136.832 124.096Z" fill="#ffffff"/>
+	</svg>
+	<div class="fi-container fi-footer-inner">
+		<div class="fi-footer-grid">
+			<div>
+				<div class="fi-f-logo">
+					<img src="../images/logo-yuhan-white.svg" alt="YUHAN" class="fi-f-logo-img">
+				</div>
+				<p class="fi-f-desc">UI/UX Designer based in Taiwan.<br>打造有溫度的數位體驗。</p>
+			</div>
+
+			<div>
+				<span class="fi-f-col-title">Navigation</span>
+				<div class="fi-f-links">
+					<a href="../index.html" class="fi-f-link">Home</a>
+					<a href="../works.html" class="fi-f-link">Works</a>
+					<a href="../about.html" class="fi-f-link">About</a>
+				</div>
+			</div>
+
+			<div>
+				<span class="fi-f-col-title">Contact</span>
+				<div class="fi-f-links">
+					<a href="mailto:sky13146@gmail.com" class="fi-f-link">sky13146@gmail.com</a>
+					<a href="https://www.linkedin.com/in/yuhan-lin-hana/" class="fi-f-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="fi-footer-bottom">
+			<span class="fi-f-copy">© 2026 YUHAN. All rights reserved.</span>
+			<div class="fi-f-status">
+				<span class="fi-dot"></span>
+				Available for work
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script>
+(function () {
+	var nav = document.getElementById('fi-nav');
+	window.addEventListener('scroll', function () {
+		nav.classList.toggle('scrolled', window.scrollY > 32);
+	}, { passive: true });
+
+	var btn = document.getElementById('fi-mobile-btn');
+	var drawer = document.getElementById('fi-drawer');
+	btn.addEventListener('click', function () {
+		btn.classList.toggle('open');
+		drawer.classList.toggle('open');
+	});
+})();
+
+(function () {
+	var band = document.getElementById('dt9-impact');
+	if (!band) return;
+	var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	function animateCount(el) {
+		var to = parseFloat(el.dataset.countTo);
+		var decimals = parseInt(el.dataset.decimals || '0', 10);
+		var prefix = el.dataset.prefix || '';
+		var suffix = el.dataset.suffix || '';
+		var duration = 900;
+		var start = null;
+		function tick(now) {
+			if (start === null) start = now;
+			var p = Math.min((now - start) / duration, 1);
+			var eased = 1 - Math.pow(1 - p, 3);
+			el.textContent = prefix + (to * eased).toFixed(decimals) + suffix;
+			if (p < 1) requestAnimationFrame(tick);
+		}
+		requestAnimationFrame(tick);
+	}
+
+	function reveal() {
+		band.classList.add('is-visible');
+		var nums = band.querySelectorAll('[data-count-to]');
+		for (var i = 0; i < nums.length; i++) {
+			if (reduceMotion) {
+				var el = nums[i];
+				el.textContent = (el.dataset.prefix || '') + parseFloat(el.dataset.countTo).toFixed(parseInt(el.dataset.decimals || '0', 10)) + (el.dataset.suffix || '');
+			} else {
+				animateCount(nums[i]);
+			}
+		}
+	}
+
+	if (reduceMotion) {
+		band.classList.add('no-anim');
+		reveal();
+	} else if ('IntersectionObserver' in window) {
+		var observer = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (entry.isIntersecting) {
+					reveal();
+					observer.disconnect();
+				}
+			});
+		}, { threshold: 0.25 });
+		observer.observe(band);
+	} else {
+		reveal();
+	}
+})();
+</script>
+
+</body>
+</html>
