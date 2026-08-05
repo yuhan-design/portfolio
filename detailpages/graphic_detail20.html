@@ -50,6 +50,13 @@
 		.fi-detail-caption { font-size: 13px; font-weight: 600; color: var(--fi-400); margin-bottom: 8px; }
 		/* This gallery has no prev/next -- centre the single "view all" button */
 		.fi-detail-navbar { justify-content: center; }
+
+		/* 抽籤過程／抽籤結果 sit side by side as one row instead of stacking */
+		.fi-detail-row { display: flex; gap: 24px; margin-bottom: 40px; }
+		.fi-detail-row .fi-detail-frame { flex: 1; margin-bottom: 0; }
+		@media (max-width: 640px) {
+			.fi-detail-row { flex-direction: column; gap: 40px; }
+		}
 	</style>
 </head>
 <body class="fi-page">
@@ -102,17 +109,22 @@
 	<div class="fi-container">
 		<p class="fi-detail-caption">LINE互動遊戲廣告推播</p>
 		<div class="fi-detail-frame">
-			<img src="images/graphic/graphic23-1.jpg" alt="互動遊戲">
+			<img src="images/graphic/graphic20-1.jpg" alt="互動遊戲">
 		</div>
 
-		<p class="fi-detail-caption">抽籤過程</p>
-		<div class="fi-detail-frame">
-			<img src="images/graphic/graphic23-2.png" alt="互動遊戲">
-		</div>
-
-		<p class="fi-detail-caption">抽籤結果</p>
-		<div class="fi-detail-frame">
-			<img src="images/graphic/graphic23-3.jpg" alt="互動遊戲">
+		<div class="fi-detail-row">
+			<div>
+				<p class="fi-detail-caption">抽籤過程</p>
+				<div class="fi-detail-frame">
+					<img src="images/graphic/graphic20-2.png" alt="互動遊戲">
+				</div>
+			</div>
+			<div>
+				<p class="fi-detail-caption">抽籤結果</p>
+				<div class="fi-detail-frame">
+					<img src="images/graphic/graphic20-3.jpg" alt="互動遊戲">
+				</div>
+			</div>
 		</div>
 		<div class="fi-detail-navbar">
 			<a href="../works.html" class="fi-btn-dark">查看全部作品</a>
