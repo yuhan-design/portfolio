@@ -31,7 +31,7 @@ body.fi-page {
 }
 body.fi-page a { text-decoration: none; }
 a { color: inherit; }
-body.fi-page img { display: block; max-width: 100%; }
+body.fi-page img { display: block; max-width: 100%; margin-left: auto; margin-right: auto; }
 body.fi-page ::-webkit-scrollbar { width: 5px; }
 body.fi-page ::-webkit-scrollbar-track { background: transparent; }
 body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-radius: 3px; }
