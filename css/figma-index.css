@@ -31,7 +31,7 @@ body.fi-page {
 }
 body.fi-page a { text-decoration: none; }
 a { color: inherit; }
-body.fi-page img { display: block; max-width: 100%; margin-left: auto; margin-right: auto; }
+body.fi-page img { display: block; max-width: 100%;}
 body.fi-page ::-webkit-scrollbar { width: 5px; }
 body.fi-page ::-webkit-scrollbar-track { background: transparent; }
 body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-radius: 3px; }
@@ -705,7 +705,7 @@ body.fi-page ::-webkit-scrollbar-thumb { background: var(--fi-border-s); border-
 @media (max-width: 640px) { .fi-footer-grid { grid-template-columns: 1fr; gap: 28px; } }
 
 .fi-f-logo { display: flex; align-items: center; margin-bottom: 16px; }
-.fi-f-logo-img { height: 30px; width: auto; display: block; }
+.fi-f-logo-img { height: 30px; width: auto; display: block; margin-left: 0; margin-right: 0; }
 .fi-f-desc { font-size: 13.5px; line-height: 1.7; color: #7a808d; }
 
 .fi-f-col-title {
