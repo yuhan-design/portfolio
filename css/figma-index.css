@@ -20,6 +20,8 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { overflow-x: hidden; }
+
 body.fi-page {
   font-family: var(--fi-font);
   background: var(--fi-bg);
