@@ -121,6 +121,7 @@
 		.dt9-insight-card { background: #eef4fc; border: 1px solid #c9ddf7; border-radius: 16px; padding: 22px 26px; }
 		.dt9-insight-label { font-size: 13px; font-weight: 700; color: var(--fi-blue); margin: 0 0 8px; }
 		.dt9-insight-text { font-size: 14px; line-height: 1.7; color: var(--fi-ink); margin: 0; }
+		.dt9-insight-note { font-size: 12.5px; line-height: 1.7; color: var(--fi-400); margin: 12px 0 0; }
 
 		/* Research slide marquee -- slow, seamless-loop scroll of the real research-deck slides,
 		   same pattern as ui_detail08's 解決辦法 solution marquee */
@@ -225,10 +226,11 @@
 		   prefers-reduced-motion via the .no-anim fallback set by the script below. */
 		.dt9-impact-band { position: relative; background: #0e1117; padding: 64px 0; margin-bottom: 56px; overflow: hidden; }
 		.dt9-impact-band .fi-eyebrow { color: #7d8497; }
-		.dt9-impact-band .fi-h2 { color: #f5f6fa; margin: 10px 0 36px; }
+		.dt9-impact-band .fi-h2 { color: #f5f6fa; margin: 10px 0 24px; }
+		.dt9-impact-lead { font-size: 14.5px; line-height: 1.8; color: var(--fi-400); margin: 0 0 32px; }
 
 		.dt9-impact-stats { display: flex; gap: 24px; margin-bottom: 32px; }
-		@media (max-width: 900px) { .dt9-impact-stats { flex-direction: column; } }
+		@media (max-width: 1100px) { .dt9-impact-stats { flex-direction: column; } }
 
 		.dt9-impact-card {
 			border: 1px solid var(--fi-border); border-radius: 18px; min-height: 130px;
@@ -246,7 +248,7 @@
 		.no-anim .dt9-impact-card { opacity: 1; transform: none; transition: none; }
 
 		.dt9-impact-card--hero {
-			flex: 1 1 0; min-width: 280px; display: flex; align-items: center; gap: 36px; padding: 21px;
+			flex: 3 1 0; min-width: 280px; display: flex; align-items: center; gap: 36px; padding: 21px;
 			background: linear-gradient(25deg, #0a0806 62%, #c2292e 118%);
 		}
 		.dt9-impact-illus { position: relative; width: 121px; height: 90px; flex-shrink: 0; }
@@ -255,33 +257,32 @@
 		.dt9-impact-illus-clap img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 		.dt9-impact-hero-num { display: flex; align-items: flex-end; gap: 8px; }
-		.dt9-impact-hero-num-current { font-family: var(--fi-font); font-weight: 800; font-size: 50px; line-height: 1; letter-spacing: -.024em; color: #c2292e; }
+		.dt9-impact-hero-num-current { font-family: var(--fi-font); font-weight: 800; font-size: clamp(32px, 5vw, 50px); line-height: 1; letter-spacing: -.024em; color: #c2292e; }
 		.dt9-impact-hero-num-old { font-size: 16px; color: #828282; text-decoration: line-through; }
 		.dt9-impact-hero-label { font-family: var(--fi-font); font-weight: 600; font-size: 14px; color: #fff; margin: 12px 0 0; }
 
 		/* Pink+red share their own row so they can stay side-by-side even once the hero card
 		   (which needs more room for its illustration) has already dropped to a full-width row
 		   of its own -- they only stack to one-per-row at the narrowest sizes. */
-		.dt9-impact-stats-pair { display: flex; gap: 24px; flex: 1 1 0; min-width: 0; }
+		.dt9-impact-stats-pair { display: flex; gap: 24px; flex: 2 1 0; min-width: 0; }
 		.dt9-impact-card--pink, .dt9-impact-card--red {
-			width: 220px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 41px 21px;
+			flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 41px 21px;
 		}
 		.dt9-impact-card--pink { background: #ffeeec; }
 		.dt9-impact-card--red { background: #c2292e; }
-		.dt9-impact-num { font-family: var(--fi-font); font-weight: 800; font-size: 50px; line-height: 1; letter-spacing: -.024em; }
+		.dt9-impact-num { font-family: var(--fi-font); font-weight: 800; font-size: clamp(32px, 5vw, 50px); line-height: 1; letter-spacing: -.024em; }
 		.dt9-impact-card--pink .dt9-impact-num { color: #c2292e; }
 		.dt9-impact-card--red .dt9-impact-num { color: #fff; }
 		.dt9-impact-card-label { font-family: var(--fi-font); font-weight: 600; font-size: 14px; margin: 0; }
 		.dt9-impact-card--pink .dt9-impact-card-label { color: #383838; }
 		.dt9-impact-card--red .dt9-impact-card-label { color: #fff; }
-		@media (max-width: 900px) {
+		@media (max-width: 1100px) {
 			/* flex:1 1 0 above only makes sense sizing columns in the row layout -- once the
 			   parent stacks (.dt9-impact-stats goes column at this width), flex-basis:0 clamps
 			   a stacked item to min-height and lets its content overflow past the box instead
 			   of growing it, so both the hero card and the pair need flex:none here. */
 			.dt9-impact-card--hero { flex: none; min-width: 0; width: 100%; }
 			.dt9-impact-stats-pair { flex: none; width: 100%; }
-			.dt9-impact-card--pink, .dt9-impact-card--red { width: auto; flex: 1 1 0; min-width: 0; }
 		}
 		@media (max-width: 480px) {
 			.dt9-impact-card--hero { flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 20px; }
@@ -293,7 +294,7 @@
 		.dt9-impact-insights { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 		@media (max-width: 900px) { .dt9-impact-insights { grid-template-columns: 1fr; } }
 		.dt9-impact-card--insight { background: #f8f9fb; padding: 29px; display: flex; flex-direction: column; gap: 16px; }
-		.dt9-impact-insight-label { font-family: var(--fi-font); font-weight: 800; font-size: 13px; color: #c2292e; margin: 0; }
+		.dt9-impact-insight-label { font-family: var(--fi-font); font-weight: 800; font-size: 16px; color: #c2292e; margin: 0; }
 		.dt9-impact-insight-text { font-size: 14px; line-height: 1.85; color: #565c6b; margin: 0; }
 
 		/* Case study body continues the rounded panel's white surface (no color seam). */
@@ -394,8 +395,8 @@
 					<span class="fi-eyebrow">Goal</span>
 					<h2 class="fi-h2" style="margin-bottom:24px">目標與背景</h2>
 				</div>
-				<p class="dt9-goal-desc">股市爆料同學會為全台最大股市討論社群，但舊版體驗過時、資訊架構凌亂，用戶停留時間短、跨頁瀏覽率低，嚴重影響 Google 爬蟲評估。</p>
-				<p class="dt9-goal-desc">為打破流量瓶頸並解決「76% 用戶輪廓未知」的數據盲區，團隊發起深度問卷調研，精準確立本次優化方向。</p>
+				<p class="dt9-goal-desc">股市爆料同學會為全台最大股市討論社群，但 SEO 流量成長趨緩，核心頁面的 Pages / Session 與跨頁瀏覽表現不佳，我們推測舊版資訊架構使使用者難以持續探索內容，同時限制內部頁面導流與內容曝光，使網站在使用體驗與搜尋流量成長上都遇到瓶頸。</p>
+				<p class="dt9-goal-desc">為了瞭解使用者為什麼來到同學會？什麼內容讓他們留下、離開，或進一步成為會員？以打破流量瓶頸並解決「76% 用戶輪廓未知」的數據盲區，團隊發起深度問卷調研，精準確立本次優化方向。</p>
 			</div>
 			<div class="dt9-goal-cards">
 				<div class="dt9-goal-card">
@@ -429,6 +430,7 @@
 						<p class="dt9-insight-label">核心洞察</p>
 						<p class="dt9-insight-text">93% 訪客、75% 會員進站首要動機都是「高效獲取資訊」，但創造長期留存且最有價值的核心資產卻是「高品質社群交流」。</p>
 					</div>
+					<p class="dt9-insight-note">問卷主要透過既有產品渠道招募，因此樣本中的會員比例偏高；研究結果主要用於辨識使用動機與資訊偏好，並搭配 Web 行為數據驗證訪客問題，而非單獨作為網站決策依據。</p>
 				</div>
 				<div>
 					<p class="dt9-pain-points-label">Three Pain Points</p>
@@ -533,7 +535,7 @@
 							<span class="dt9-comment-dot"></span>
 							<div>
 								<p class="dt9-comment-item-title">沉浸式彈窗取代長展留言</p>
-								<p class="dt9-comment-item-desc">體驗與 IG 一致，首屏版位完全釋放</p>
+								<p class="dt9-comment-item-desc">將深度討論移至第二層互動，使用者無須離開原本列表，即可閱讀完整討論；關閉後能立即回到原先探索位置</p>
 							</div>
 						</li>
 						<li class="dt9-comment-item">
@@ -675,7 +677,7 @@
 						<span class="dt9-comment-tag">基金專區擴充</span>
 					</div>
 					<h3 class="dt9-comment-title">開拓高意圖搜尋流量</h3>
-					<p class="dt9-comment-desc">從 0 到 1 建立基金專屬板塊，直接命中用戶對進階數據的強烈渴求，並以精準的 SEO Schema 結構化標記確保搜尋引擎高效索引，開拓全新流量來源。</p>
+					<p class="dt9-comment-desc">前兩項優化著重提升既有使用者的瀏覽深度與內容產出，第三項則將目標延伸至新流量拓展-基金，透過擴充可被搜尋的內容範圍，承接更多潛在使用者的搜尋需求。</p>
 				</div>
 				<div class="dt9-comment-right" style="--dot-color:#e8521a">
 					<p class="dt9-comment-label">需求與效益</p>
@@ -775,6 +777,7 @@
 		<div class="fi-container">
 			<span class="fi-eyebrow">Impact</span>
 			<h2 class="fi-h2">最終成效與商業影響</h2>
+			<p class="dt9-impact-lead">季 PV 超額達標；核心 SEO 排名與 QoQ 成長則接近預定目標，驗證方向有效，但仍有進一步優化空間。</p>
 
 			<div class="dt9-impact-stats">
 				<div class="dt9-impact-card dt9-impact-card--hero">
