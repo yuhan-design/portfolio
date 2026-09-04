@@ -157,13 +157,13 @@
 
 		/* Card image */
 		.wk-card-img { position: relative; height: 220px; overflow: hidden; }
-		.wk-card-img img {
+		.wk-card-img img, .wk-card-img video {
 			width: 100%; height: 100%;
 			object-fit: cover; object-position: top;
 			display: block;
 			transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 		}
-		.wk-card:hover .wk-card-img img { transform: scale(1.05); }
+		.wk-card:hover .wk-card-img img, .wk-card:hover .wk-card-img video { transform: scale(1.05); }
 
 		/* Hover overlay */
 		.wk-overlay {
@@ -311,6 +311,17 @@
 		<div class="wk-grid" id="wk-grid">
 
 			<!-- ── UI/UX ── -->
+			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail10.html">
+				<div class="wk-card-img" style="background:#eef2fb">
+					<video src="images/uiux/ui10.mp4" autoplay loop muted playsinline></video>
+					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
+				</div>
+				<div class="wk-card-info">
+					<div class="wk-card-title">投資網誌成長體驗優化</div>
+					<span class="wk-pill wk-pill--uiux">UI/UX</span>
+				</div>
+			</a>
+
 			<a class="wk-card" data-cat="uiux" href="detailpages/ui_detail09.html">
 				<div class="wk-card-img" style="background:#eef2fb">
 					<img src="images/uiux/ui9.jpg" alt="股市爆料同學會網站優化" loading="lazy">
@@ -2362,11 +2373,11 @@
 
 			<a class="wk-card" data-cat="illustration" data-subcat="branding" href="detailpages/graphic_detail29.html">
 				<div class="wk-card-img" style="background:#eef2fb">
-					<img src="images/graphic/graphic2.jpg" alt="正合印刷品牌規劃" loading="lazy">
+					<img src="images/graphic/graphic2.jpg" alt="圓角印刷品牌規劃" loading="lazy">
 					<div class="wk-overlay"><div class="wk-overlay-arrow">↗</div></div>
 				</div>
 				<div class="wk-card-info">
-					<div class="wk-card-title">正合印刷品牌規劃</div>
+					<div class="wk-card-title">圓角印刷品牌規劃</div>
 					<span class="wk-pill wk-pill--illustration">平面與插畫設計</span>
 				</div>
 			</a>
